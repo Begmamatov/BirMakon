@@ -18,14 +18,14 @@ const CommentItem = ({
 	item: { name, image, shopName, price },
 }: ListRenderItemInfo<ProductItemProps>) => {
 	return (
-		<View style={styles.container}>
+		<View style={styles.containerComment}>
 			<View style={styles.boxes}>
 				<View style={styles.nameRow}>
 					<Text style={styles.name}>{STRINGS.name}</Text>
 					<View style={styles.stars}>
-						<MarkedStar fill={COLORS.blue} />
-						<MarkedStar fill={COLORS.blue} />
-						<MarkedStar fill={COLORS.blue} />
+						<MarkedStar fill={COLORS.red} />
+						<MarkedStar fill={COLORS.red} />
+						<MarkedStar fill={COLORS.red} />
 						<NotMarkedStar fill={COLORS.whiteGray} />
 						<NotMarkedStar fill={COLORS.whiteGray} />
 					</View>
@@ -34,7 +34,7 @@ const CommentItem = ({
 				<View style={styles.row}>
 					<Text>{STRINGS.date}</Text>
 					<View style={styles.row}>
-						<Checked fill={COLORS.blue} style={styles.icon} />
+						<Checked fill={COLORS.red} style={styles.icon} />
 						<Text>Я купил товар</Text>
 					</View>
 				</View>

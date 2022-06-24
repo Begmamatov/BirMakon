@@ -1,9 +1,11 @@
 import requests from "@novomarkt/api/requests";
+import AllButton from "@novomarkt/components/general/AllButton";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
 import React, { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { Dimensions, FlatList, StyleSheet, View } from "react-native";
+import Modal from "react-native-modal";
 import BrandItem, { BrandItemProps } from "./BrandItem";
 
 const BrandsList = () => {
@@ -17,9 +19,38 @@ const BrandsList = () => {
 	useEffect(() => {
 		effect();
 	}, []);
+	const [allModalVisible, setAllModalVisible] = useState(false);
+	const toggleAllModalVisible = () => {
+		setAllModalVisible(!allModalVisible);
+	};
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>{STRINGS.brands}</Text>
+			<View style={styles.allButtonsView}>
+				<Text style={styles.title}>{STRINGS.brands}</Text>
+				<Modal
+					isVisible={allModalVisible}
+					testID={"modal"}
+					swipeDirection={["right", "left", "down"]}
+					swipeThreshold={Dimensions.get("window").width / 2}
+					onSwipeComplete={() => {
+						setAllModalVisible(false);
+					}}
+					style={styles.modalStyle}
+				>
+					<View style={styles.modalInView}>
+						<Text style={styles.brandsText}>{STRINGS.brands}</Text>
+						<View style={styles.view}>
+							<FlatList
+								data={brands}
+								renderItem={({ item }) => (
+									<Text style={styles.brandsName}>{item.name}</Text>
+								)}
+							/>
+						</View>
+					</View>
+				</Modal>
+				<AllButton onPress={toggleAllModalVisible} />
+			</View>
 			<FlatList
 				horizontal
 				showsHorizontalScrollIndicator={false}
@@ -45,5 +76,35 @@ const styles = StyleSheet.create({
 	container: { marginBottom: 20 },
 	contentContainerStyle: {
 		paddingLeft: 12,
+	},
+	allButtonsView: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
+		paddingHorizontal: 15,
+	},
+	modalStyle: {
+		justifyContent: "center",
+		margin: 0,
+	},
+	modalInView: {
+		flex: 1,
+		backgroundColor: COLORS.white,
+		paddingHorizontal: 20,
+		alignItems: "flex-start",
+		paddingVertical: 50,
+	},
+	brandsText: {
+		color: COLORS.defaultBlack,
+		fontWeight: "600",
+		fontSize: 18,
+	},
+	view: {
+		marginTop: 20,
+	},
+	brandsName: {
+		color: COLORS.defaultBlack,
+		fontSize: 16,
+		marginTop: 15,
 	},
 });

@@ -26,9 +26,7 @@ const OrderDetails = ({
 					<Text style={styles.price}>{total.total} ₽</Text>
 				</View>
 				<View style={styles.row}>
-					<View
-						style={{ flexDirection: "row", alignItems: "center" }}
-					>
+					<View style={{ flexDirection: "row", alignItems: "center" }}>
 						<Text>{STRINGS.sale}</Text>
 						<Image source={MirImg} style={styles.image} />
 						<Image source={VisaImg} style={styles.image} />
@@ -36,9 +34,7 @@ const OrderDetails = ({
 					<Text>-500 ₽</Text>
 				</View>
 				<View style={styles.row}>
-					<View
-						style={{ flexDirection: "row", alignItems: "center" }}
-					>
+					<View style={{ flexDirection: "row", alignItems: "center" }}>
 						<Text>{STRINGS.sale}</Text>
 						<Image source={MastercardImg} style={styles.image} />
 					</View>
@@ -117,6 +113,6 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: "700",
 		letterSpacing: 0.5,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 });

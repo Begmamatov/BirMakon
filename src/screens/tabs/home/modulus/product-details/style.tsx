@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
 		fontSize: 15,
 		fontWeight: "700",
 		letterSpacing: 0.5,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
 	button: {
@@ -139,23 +139,23 @@ export const styles = StyleSheet.create({
 
 	blueText: {
 		borderBottomWidth: 1,
-		borderBottomColor: COLORS.blue,
+		borderBottomColor: COLORS.red,
 		marginLeft: 10,
 		fontSize: 14,
 	},
 
-	blueText2: {
+	redText2: {
 		fontSize: 14,
 		marginLeft: 10,
 	},
 
 	flexEnd: {
-		color: COLORS.blue,
+		color: COLORS.red,
 		marginHorizontal: 20,
 		marginTop: 10,
 		alignSelf: "flex-end",
 		textDecorationLine: "underline",
-		textDecorationColor: COLORS.blue,
+		textDecorationColor: COLORS.red,
 	},
 
 	buttonReview: {

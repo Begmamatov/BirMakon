@@ -13,12 +13,12 @@ import {
 } from "react-native";
 
 const ShopsItem = ({
-	item: { photo, id },
+	item: { photo, id, name },
 }: ListRenderItemInfo<ShopsItemResponse>): ReactElement => {
 	let navigation: any = useNavigation();
 	return (
 		<TouchableOpacity
-			onPress={() => navigation.navigate(ROUTES.CATALOG_PRODUCTS, { id })}
+			onPress={() => navigation.navigate(ROUTES.CATALOG_PRODUCTS, { id, name })}
 		>
 			<View style={styles.container}>
 				<Image source={{ uri: appendUrl(photo) }} style={styles.image} />
@@ -31,8 +31,8 @@ export default ShopsItem;
 
 const styles = StyleSheet.create({
 	container: {
-		width: 85,
-		height: 55,
+		width: 150,
+		height: 80,
 		elevation: 2,
 		shadowOpacity: 0.3,
 		shadowRadius: 3,
@@ -46,9 +46,10 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		margin: 10,
 		borderRadius: 8,
+		fontSize: 20,
 	},
 	image: {
-		width: 50,
-		height: 30,
+		width: 100,
+		height: 60,
 	},
 });

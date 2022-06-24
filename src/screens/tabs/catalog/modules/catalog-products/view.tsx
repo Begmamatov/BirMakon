@@ -47,7 +47,7 @@ const CatalogProductsView = ({}): ReactElement => {
 			<BackHeader hasSearch={true} style={styles.header} name={name} />
 			<ScrollView>
 				<Image source={{ uri: BannerURL }} style={styles.banner} />
-				<ScrollableMenu />
+				{/* <ScrollableMenu /> */}
 				<SelectableFlter />
 				<FlatList
 					showsVerticalScrollIndicator={false}

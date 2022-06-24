@@ -44,7 +44,7 @@ const ProfileView = () => {
 						style={{ marginTop: 20, marginHorizontal: 20 }}
 						hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
 					>
-						<Text style={{ color: COLORS.blue }}>Редактировать</Text>
+						<Text style={{ color: COLORS.red }}>Редактировать</Text>
 					</TouchableOpacity>
 				</View>
 				<View style={styles.userData}>

@@ -13,9 +13,12 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 const LocationBox = () => {
 	let navigation = useNavigation();
 	return (
-		<TouchableOpacity style={styles.container} onPress={() => navigation.navigate(ROUTES.LOCATION)} >
+		<TouchableOpacity
+			style={styles.container}
+			onPress={() => navigation.navigate(ROUTES.LOCATION)}
+		>
 			<View style={styles.row}>
-				<GeoIcon fill={COLORS.blue} />
+				<GeoIcon fill={COLORS.red} />
 				<Text style={styles.text}>Москва и московская област</Text>
 			</View>
 			<View>

@@ -54,11 +54,7 @@ const EditableInput = ({
 			<View style={styles.box}>
 				{isEditing ? (
 					<TextInput
-						style={[
-							styles.value,
-							bigger && { fontSize: 20, marginTop: 0 },
-							,
-						]}
+						style={[styles.value, bigger && { fontSize: 20, marginTop: 0 }, ,]}
 						ref={ref}
 						value={value}
 						onChangeText={onChange(name)}
@@ -69,10 +65,7 @@ const EditableInput = ({
 					/>
 				) : (
 					<Text
-						style={[
-							styles.textStyle,
-							bigger && { fontSize: 20, marginTop: 0 },
-						]}
+						style={[styles.textStyle, bigger && { fontSize: 20, marginTop: 0 }]}
 					>
 						{value || placeholder}
 					</Text>
@@ -80,7 +73,7 @@ const EditableInput = ({
 				<View style={styles.iconContainer}>
 					{isEditing ? (
 						<SaveIcon
-							stroke={COLORS.blue}
+							stroke={COLORS.red}
 							style={styles.icon}
 							onPress={onEditPress}
 						/>

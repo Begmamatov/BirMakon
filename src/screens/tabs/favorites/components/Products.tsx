@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
 
 	dscountText: {
 		fontSize: 12,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
 	discount: {
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
 
 	price: {
 		fontSize: 16,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
 	oldPrice: {

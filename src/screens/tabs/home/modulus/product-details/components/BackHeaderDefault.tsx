@@ -67,7 +67,7 @@ const BackHeaderDefault = ({}): ReactElement => {
 						<HeartIconBorder fill={COLORS.red} stroke={COLORS.red} />
 					)}
 				</TouchableOpacity>
-				<UploadIcon fill={COLORS.blue} />
+				<UploadIcon fill={COLORS.red} />
 			</View>
 		</View>
 	);

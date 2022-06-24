@@ -181,7 +181,7 @@ const ProductDetailsView = ({}): ReactElement => {
 				<View>
 					<View style={styles.compos}>
 						<Text style={styles.composition}>{STRINGS.composition}</Text>
-						<RightArrow fill={COLORS.blue} />
+						<RightArrow fill={COLORS.red} />
 					</View>
 					{item.options?.map((e: any) => {
 						return (
@@ -207,7 +207,7 @@ const ProductDetailsView = ({}): ReactElement => {
 						<Text style={styles.composition}>
 							{STRINGS.reviews} {reviewsList.length}
 						</Text>
-						<RightArrow fill={COLORS.blue} />
+						<RightArrow fill={COLORS.red} />
 					</View>
 				</TouchableOpacity>
 				<ReviewBox percent={per} />
@@ -221,7 +221,7 @@ const ProductDetailsView = ({}): ReactElement => {
 										<View style={styles.stars}>
 											{new Array(5).fill(1).map((e, i) => {
 												if (i < item.rate) {
-													return <MarkedStar fill={COLORS.blue} />;
+													return <MarkedStar fill={COLORS.red} />;
 												} else {
 													return <NotMarkedStar fill={COLORS.whiteGray} />;
 												}
@@ -232,7 +232,7 @@ const ProductDetailsView = ({}): ReactElement => {
 									<View style={styles.row}>
 										<Text>{item.date.split(" ")[0]}</Text>
 										<View style={styles.row}>
-											<Checked fill={COLORS.blue} style={styles.icon} />
+											<Checked fill={COLORS.red} style={styles.icon} />
 											<Text>Я купил товар</Text>
 										</View>
 									</View>

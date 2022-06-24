@@ -26,8 +26,7 @@ import { CardBox } from "../cardBox/cardBox";
 
 export const Assets = {
 	card: {
-		mastercard:
-			"https://kapital24.uz/upload/iblock/a3e/Mastercard_Gold.png",
+		mastercard: "https://kapital24.uz/upload/iblock/a3e/Mastercard_Gold.png",
 		visa: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Old_Visa_Logo.svg/1048px-Old_Visa_Logo.svg.png",
 		unionpay:
 			"https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.ipakyulibank.uz%2Fnews%2F2021-10-06-money-transfers-from-the-russian-federation-to-uzbekistan-via-unionpay-debit-cards&psig=AOvVaw3GhL-z9imhVUxp-qrwQxXY&ust=1644165293606000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMD5qpb_6PUCFQAAAAAdAAAAABAD",
@@ -123,7 +122,7 @@ const CartSelectItem = (props: ExampleProps) => {
 			<CardBox />
 			<TouchableOpacity style={styles.border} onPress={toggleModal}>
 				<View style={styles.round}>
-					<PlusIcon stroke={COLORS.blue} fill={COLORS.blue} />
+					<PlusIcon stroke={COLORS.red} fill={COLORS.red} />
 				</View>
 				<Text style={styles.blueText}>Добавить карту</Text>
 			</TouchableOpacity>
@@ -173,9 +172,7 @@ const CartSelectItem = (props: ExampleProps) => {
 						setActiveIndex={setActiveIndex}
 					/>
 					<View style={styles.modalItems}>
-						<Text style={styles.modalTitle}>
-							{STRINGS.cardNumber}
-						</Text>
+						<Text style={styles.modalTitle}>{STRINGS.cardNumber}</Text>
 						<TextInput
 							value={cardDetail?.cardNumber as string}
 							onChangeText={(e) => {
@@ -184,9 +181,7 @@ const CartSelectItem = (props: ExampleProps) => {
 							placeholder="Card Number"
 							style={styles.modalInput}
 						/>
-						<Text style={styles.modalTitle}>
-							{STRINGS.cardNumber}
-						</Text>
+						<Text style={styles.modalTitle}>{STRINGS.cardNumber}</Text>
 						<TextInput
 							value={cardDetail?.expiry as string}
 							onChangeText={(e) => {
@@ -195,9 +190,7 @@ const CartSelectItem = (props: ExampleProps) => {
 							placeholder="Expiration month"
 							style={styles.modalInput}
 						/>
-						<Text style={styles.modalTitle}>
-							{STRINGS.cardNumber}
-						</Text>
+						<Text style={styles.modalTitle}>{STRINGS.cardNumber}</Text>
 						<TextInput
 							value={cardDetail?.phone as string}
 							onChangeText={(e) => {
@@ -235,7 +228,7 @@ const styles = StyleSheet.create({
 	border: {
 		borderRadius: 8,
 		borderWidth: 2,
-		borderColor: COLORS.blue,
+		borderColor: COLORS.red,
 		alignItems: "center",
 		justifyContent: "center",
 		paddingHorizontal: 90,
@@ -243,7 +236,7 @@ const styles = StyleSheet.create({
 	},
 
 	blueText: {
-		color: COLORS.blue,
+		color: COLORS.red,
 		fontSize: 14,
 		marginTop: 10,
 	},
@@ -255,7 +248,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		borderWidth: 2,
 		borderRadius: 30,
-		borderColor: COLORS.blue,
+		borderColor: COLORS.red,
 	},
 
 	modal: {

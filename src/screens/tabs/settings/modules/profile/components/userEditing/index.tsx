@@ -79,7 +79,7 @@ export const UserEditingForm = () => {
 					onPress={changePhoto}
 					hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
 				>
-					<Text style={{ color: COLORS.blue }}>Изменить фото профиля</Text>
+					<Text style={{ color: COLORS.red }}>Изменить фото профиля</Text>
 				</TouchableOpacity>
 			</View>
 			<View style={{ flexDirection: "row", marginVertical: 10 }}>

@@ -10,9 +10,10 @@ import { ProductItemProps } from "@novomarkt/screens/tabs/home/components/Produc
 import React from "react";
 import {
 	Image,
-	ListRenderItemInfo, StyleSheet,
+	ListRenderItemInfo,
+	StyleSheet,
 	Text,
-	View
+	View,
 } from "react-native";
 
 const OrderItem = ({
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
 	},
 
 	name: {
-        marginTop: 10,
+		marginTop: 10,
 		marginBottom: 5,
 		fontSize: 13,
 		color: COLORS.defaultBlack,
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
 
 	price: {
 		fontSize: 20,
-		color: COLORS.blue,
+		color: COLORS.red,
 		fontFamily: "Montserrat-Bold",
 		alignSelf: "center",
 		padding: 10,

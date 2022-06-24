@@ -14,15 +14,16 @@ import {
 export type BrandItemProps = {
 	photo: string;
 	id: number;
+	name: string;
 };
 
 const BrandItem = ({
-	item: { photo, id },
+	item: { photo, id, name },
 }: ListRenderItemInfo<BrandItemProps>): ReactElement => {
 	let navigation: any = useNavigation();
 	return (
 		<TouchableOpacity
-			onPress={() => navigation.navigate(ROUTES.CATALOG_PRODUCTS, { id })}
+			onPress={() => navigation.navigate(ROUTES.CATALOG_PRODUCTS, { id, name })}
 		>
 			<View style={styles.container}>
 				<Image source={{ uri: appendUrl(photo) }} style={styles.image} />

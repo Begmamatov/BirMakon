@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
 	},
 
 	blueText: {
-		color: COLORS.blue,
+		color: COLORS.red,
 		fontSize: 14,
 		marginTop: 10,
 	},

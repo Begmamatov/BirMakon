@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 0,
 	},
 	price: {
-		color: COLORS.blue,
+		color: COLORS.red,
 		fontSize: 15,
 		marginVertical: 10,
 		fontWeight: "700",

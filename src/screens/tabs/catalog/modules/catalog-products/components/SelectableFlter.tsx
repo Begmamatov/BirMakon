@@ -10,11 +10,11 @@ const SelectableFlter = () => {
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.row}>
 				<Text style={styles.text}>Популярные</Text>
-				<BottomArrow fill={COLORS.blue} />
+				<BottomArrow fill={COLORS.red} />
 			</TouchableOpacity>
 			<TouchableOpacity style={styles.row}>
 				<Text style={styles.text}>Фильтры</Text>
-				<FilterIcon fill={COLORS.blue} />
+				<FilterIcon fill={COLORS.red} />
 			</TouchableOpacity>
 			{/* <Modal
 				style={styles.view}
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 	},
 	text: {
-		color: COLORS.blue,
+		color: COLORS.red,
 		marginRight: 5,
 		fontSize: 16,
 	},

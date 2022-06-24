@@ -25,8 +25,8 @@ const RecipientBox = () => {
 					<Text style={styles.notMe}>{STRINGS.itsNotMe}</Text>
 					<Switch
 						hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
-						trackColor={{ false: "#767577", true: COLORS.blue }}
-						thumbColor={isEnabled ? "rgba(0, 82, 255)" : COLORS.white}
+						trackColor={{ false: "#767577", true: COLORS.red }}
+						thumbColor={isEnabled ? COLORS.red : COLORS.white}
 						ios_backgroundColor="#3e3e3e"
 						onValueChange={toggleSwitch}
 						value={isEnabled}
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
 
 	underline: {
 		marginTop: 10,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
 	button: {

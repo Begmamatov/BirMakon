@@ -12,11 +12,11 @@ const ReviewBox = ({ percent }) => {
 				<Text style={styles.bigger}>{percent ? percent : 0}</Text>
 				<Text style={styles.reviewTxt}>{STRINGS.withReviews}</Text>
 				<View style={styles.stars}>
-					<MarkedStar fill={COLORS.blue} />
-					<MarkedStar fill={COLORS.blue} />
-					<MarkedStar fill={COLORS.blue} />
-					<MarkedStar fill={COLORS.blue} />
-					<MarkedStar fill={COLORS.blue} />
+					<MarkedStar fill={COLORS.red} />
+					<MarkedStar fill={COLORS.red} />
+					<MarkedStar fill={COLORS.red} />
+					<MarkedStar fill={COLORS.red} />
+					<MarkedStar fill={COLORS.red} />
 				</View>
 			</View>
 			<View>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
 		// width: 100,
 		paddingHorizontal: 50,
 		borderBottomWidth: 2,
-		borderColor: COLORS.blue,
+		borderColor: COLORS.red,
 	},
 
 	gray: {

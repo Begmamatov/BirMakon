@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
 
 	buttonTxt: {
 		fontSize: 16,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
 	box: {

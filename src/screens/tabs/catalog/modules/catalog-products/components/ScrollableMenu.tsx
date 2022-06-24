@@ -13,44 +13,26 @@ const ScrollableMenu = () => {
 			contentContainerStyle={{ alignItems: "center" }}
 		>
 			<TouchableOpacity
-				style={
-					activeIndex === 0
-						? styles.activeBorder
-						: styles.inactiveBorder
-				}
+				style={activeIndex === 0 ? styles.activeBorder : styles.inactiveBorder}
 				onPress={() => setIsActive(0)}
 			>
-				<Text
-					style={activeIndex === 0 ? styles.active : styles.inactive}
-				>
+				<Text style={activeIndex === 0 ? styles.active : styles.inactive}>
 					Получить сегодня
 				</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
-				style={
-					activeIndex === 1
-						? styles.activeBorder
-						: styles.inactiveBorder
-				}
+				style={activeIndex === 1 ? styles.activeBorder : styles.inactiveBorder}
 				onPress={() => setIsActive(1)}
 			>
-				<Text
-					style={activeIndex === 1 ? styles.active : styles.inactive}
-				>
+				<Text style={activeIndex === 1 ? styles.active : styles.inactive}>
 					распродажа
 				</Text>
 			</TouchableOpacity>
 			<TouchableOpacity
-				style={
-					activeIndex === 2
-						? styles.activeBorder
-						: styles.inactiveBorder
-				}
+				style={activeIndex === 2 ? styles.activeBorder : styles.inactiveBorder}
 				onPress={() => setIsActive(2)}
 			>
-				<Text
-					style={activeIndex === 2 ? styles.active : styles.inactive}
-				>
+				<Text style={activeIndex === 2 ? styles.active : styles.inactive}>
 					Свитшоты
 				</Text>
 			</TouchableOpacity>
@@ -90,7 +72,7 @@ const styles = StyleSheet.create({
 		// position: "absolute",
 		alignSelf: "center",
 		fontSize: 15,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
 	inactive: {
