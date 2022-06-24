@@ -7,7 +7,7 @@ import { ROUTES } from "@novomarkt/constants/routes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Text from "../../../components/general/Text";
 import useRegisterHook from "./hooks";
@@ -25,7 +25,16 @@ const RegisterView = () => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.logoText}>Novamarkt</Text>
+			<Image
+				style={{
+					width: 320,
+					height: 60,
+					marginHorizontal: 30,
+					marginBottom: 50,
+					justifyContent: "center",
+				}}
+				source={require("../../../assets/images/Logo.png")}
+			/>
 			<View style={[styles.inputBox, styles.elevation]}>
 				<DefaultInput
 					containerStyle={styles.input}
@@ -61,40 +70,6 @@ const RegisterView = () => {
 					onPress={onRegister}
 					loading={loading}
 				/>
-				<View style={styles.rowLogos}>
-					<LinearGradient
-						start={{ x: 0, y: 0 }}
-						end={{ x: 1.2, y: 1 }}
-						colors={GRADIENT_COLORS}
-						style={styles.logo}
-					>
-						<FbIcon />
-					</LinearGradient>
-					<LinearGradient
-						start={{ x: 0, y: 0 }}
-						end={{ x: 1.2, y: 1 }}
-						colors={GRADIENT_COLORS}
-						style={styles.logo}
-					>
-						<GmailIcon />
-					</LinearGradient>
-					<LinearGradient
-						start={{ x: 0, y: 0 }}
-						end={{ x: 1.2, y: 1 }}
-						colors={GRADIENT_COLORS}
-						style={styles.logo}
-					>
-						<GmailIcon />
-					</LinearGradient>
-					<LinearGradient
-						start={{ x: 0, y: 0 }}
-						end={{ x: 1.2, y: 1 }}
-						colors={GRADIENT_COLORS}
-						style={styles.logo}
-					>
-						<OkIcon stroke={COLORS.white} />
-					</LinearGradient>
-				</View>
 			</View>
 		</View>
 	);

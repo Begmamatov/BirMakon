@@ -4,7 +4,7 @@ import DefaultInputEye from "@novomarkt/components/general/DefaultInputEye";
 import Text from "@novomarkt/components/general/Text";
 import { STRINGS } from "@novomarkt/locales/strings";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 import useLoginHook from "./hooks";
 import { styles } from "./style";
 
@@ -21,7 +21,16 @@ const LoginView = () => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.logoText}>Novamarkt</Text>
+			<Image
+				style={{
+					width: 320,
+					height: 60,
+					marginHorizontal: 30,
+					marginBottom: 50,
+					justifyContent: "center",
+				}}
+				source={require("../../../assets/images/Logo.png")}
+			/>
 			<View style={styles.inputBox}>
 				<DefaultInput
 					containerStyle={styles.input}

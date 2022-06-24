@@ -35,12 +35,7 @@ const DefaultButton = ({
 }: DefaultButtonProps) => {
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
-			<LinearGradient
-				start={{ x: 0, y: 0 }}
-				end={{ x: 3, y: 0 }}
-				colors={GRADIENT_COLORS}
-				style={[styles.container, containerStyle]}
-			>
+			<View style={[styles.container, containerStyle]}>
 				<View style={[styles.content, secondary && styles.inactiveContainer]}>
 					{loading ? (
 						//TODO Check color
@@ -62,7 +57,7 @@ const DefaultButton = ({
 						)
 					)}
 				</View>
-			</LinearGradient>
+			</View>
 		</TouchableWithoutFeedback>
 	);
 };
@@ -86,7 +81,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		padding: 1,
 		justifyContent: "center",
-		// marginHorizontal: 25,
+		marginHorizontal: 25,
 		marginTop: 10,
 		borderRadius: 8,
 		shadowColor: "#000",
@@ -96,8 +91,8 @@ const styles = StyleSheet.create({
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 4.84,
-
 		elevation: 5,
+		backgroundColor: COLORS.darkBlue4,
 	},
 	text: {
 		color: COLORS.white,

@@ -2,7 +2,7 @@ import DefaultButton from "@novomarkt/components/general/DefaultButton";
 import DefaultInput from "@novomarkt/components/general/DefaultInput";
 import { STRINGS } from "@novomarkt/locales/strings";
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Image, TouchableOpacity, View } from "react-native";
 import Text from "../../../components/general/Text";
 import useVerificationHook from "./hooks";
 import { styles } from "./styles";
@@ -22,12 +22,21 @@ const VerificationView = () => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.logoText}>Novamarkt</Text>
+			<Image
+				style={{
+					width: 320,
+					height: 60,
+					marginHorizontal: 30,
+					marginBottom: 50,
+					justifyContent: "center",
+				}}
+				source={require("../../../assets/images/Logo.png")}
+			/>
 			<View style={styles.inputBox}>
 				<View style={styles.textView}>
 					<Text style={styles.endText}>
-						Мы отправили код на{" "}
-						<Text style={styles.txt}>{state.phone}</Text> номер
+						Мы отправили код на <Text style={styles.txt}>{state.phone}</Text>{" "}
+						номер
 					</Text>
 					<TouchableOpacity onPress={onChangePhoneNumber}>
 						<Text style={styles.blueEnd}>Изменить номер</Text>

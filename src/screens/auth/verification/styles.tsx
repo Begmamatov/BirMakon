@@ -1,3 +1,4 @@
+import { COLORS } from "@novomarkt/constants/colors";
 import { Platform, StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -18,11 +19,11 @@ export const styles = StyleSheet.create({
 	timer: {
 		marginHorizontal: 20,
 		marginTop: -15,
-		color: "#0052FF",
+		color: COLORS.red,
 	},
 
 	end: {
-		color: "#0052FF",
+		color: COLORS.red,
 		textDecorationLine: "underline",
 		textDecorationStyle: "solid",
 		marginVertical: 15,
@@ -40,7 +41,7 @@ export const styles = StyleSheet.create({
 	blueEnd: {
 		// alignSelf: "flex-end",
 		marginVertical: 10,
-		color: "#0057FF",
+		color: COLORS.red,
 	},
 
 	container: {
@@ -52,7 +53,6 @@ export const styles = StyleSheet.create({
 	logoText: {
 		alignSelf: "center",
 		fontSize: 40,
-		color: "#0057FF",
 		// fontFamily: "Montserrat-Bold",
 		fontWeight: "bold",
 		marginVertical: 20,
@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
 
 	blueText: {
 		fontSize: 14,
-		color: "#0052FF",
+		color: COLORS.red,
 		textDecorationLine: "underline",
 		textDecorationStyle: "solid",
 	},

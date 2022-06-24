@@ -38,9 +38,13 @@ const TabNavigation = () => {
 		<Tab.Navigator
 			screenOptions={{
 				headerShown: false,
-				tabBarActiveTintColor: COLORS.blue,
+				tabBarActiveTintColor: COLORS.red,
 				tabBarInactiveTintColor: COLORS.gray,
 				tabBarHideOnKeyboard: true,
+				tabBarStyle: {
+					height: 70,
+					paddingBottom: 15,
+				},
 			}}
 		>
 			<Tab.Screen
@@ -49,6 +53,7 @@ const TabNavigation = () => {
 				options={{
 					tabBarIcon: renderTabIcon(HomeIcon),
 					tabBarLabel: STRINGS.home,
+					tabBarLabelStyle: { fontSize: 14 },
 				}}
 			/>
 			<Tab.Screen
@@ -57,6 +62,7 @@ const TabNavigation = () => {
 				options={{
 					tabBarIcon: renderTabIcon(CatalogIcon),
 					tabBarLabel: STRINGS.categories,
+					tabBarLabelStyle: { fontSize: 14 },
 				}}
 			/>
 			<Tab.Screen
@@ -66,6 +72,7 @@ const TabNavigation = () => {
 					tabBarIcon: renderTabIcon(BasketIcon),
 					tabBarBadge: total.count == 0 ? undefined : total.count,
 					tabBarLabel: STRINGS.cart,
+					tabBarLabelStyle: { fontSize: 14 },
 				}}
 			/>
 			<Tab.Screen
@@ -75,6 +82,7 @@ const TabNavigation = () => {
 					tabBarIcon: renderTabIcon(HeartIcon),
 					tabBarLabel: STRINGS.favorites,
 					tabBarBadge: favs?.length == 0 ? undefined : favs.length,
+					tabBarLabelStyle: { fontSize: 14 },
 				}}
 			/>
 			<Tab.Screen
@@ -83,6 +91,7 @@ const TabNavigation = () => {
 				options={{
 					tabBarIcon: renderTabIcon(PersonIcon),
 					tabBarLabel: STRINGS.login,
+					tabBarLabelStyle: { fontSize: 14 },
 				}}
 			/>
 		</Tab.Navigator>
