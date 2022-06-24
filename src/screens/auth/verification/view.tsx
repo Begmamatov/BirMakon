@@ -1,0 +1,68 @@
+import DefaultButton from "@novomarkt/components/general/DefaultButton";
+import DefaultInput from "@novomarkt/components/general/DefaultInput";
+import { STRINGS } from "@novomarkt/locales/strings";
+import React from "react";
+import { TouchableOpacity, View } from "react-native";
+import Text from "../../../components/general/Text";
+import useVerificationHook from "./hooks";
+import { styles } from "./styles";
+
+const VerificationView = () => {
+	let {
+		timeLeft,
+		onChangePhoneNumber,
+		state,
+		onStateChange,
+		onVerificate,
+		loading,
+		resendCode,
+	} = useVerificationHook();
+
+	// let { state } = useLoginHook();
+
+	return (
+		<View style={styles.container}>
+			<Text style={styles.logoText}>Novamarkt</Text>
+			<View style={styles.inputBox}>
+				<View style={styles.textView}>
+					<Text style={styles.endText}>
+						Мы отправили код на{" "}
+						<Text style={styles.txt}>{state.phone}</Text> номер
+					</Text>
+					<TouchableOpacity onPress={onChangePhoneNumber}>
+						<Text style={styles.blueEnd}>Изменить номер</Text>
+					</TouchableOpacity>
+				</View>
+				<DefaultInput
+					containerStyle={styles.input}
+					inputStyle={styles.inputStyle}
+					title={STRINGS.code}
+					placeholder={STRINGS.yourCode}
+					titleStyle={styles.title}
+					onChange={onStateChange("code")}
+					value={state.code}
+				/>
+				<Text style={styles.timer}>-{timeLeft}</Text>
+				<DefaultButton
+					text={STRINGS.resend}
+					containerStyle={styles.btn}
+					textStyle={styles.buttonTxt}
+					secondary={timeLeft !== 0}
+					onPress={resendCode}
+				/>
+				<DefaultButton
+					text={STRINGS.registration}
+					textStyle={styles.buttonTxt}
+					containerStyle={styles.defButton}
+					loading={loading}
+					onPress={onVerificate}
+				/>
+				<TouchableOpacity onPress={onChangePhoneNumber}>
+					<Text style={styles.end}>Уже зарегистрирован?</Text>
+				</TouchableOpacity>
+			</View>
+		</View>
+	);
+};
+
+export default VerificationView;
