@@ -1,6 +1,7 @@
 import { LoginState } from "@novomarkt/screens/auth/login/hooks";
 import { RegisterState } from "@novomarkt/screens/auth/register/hooks";
 import { store } from "@novomarkt/store/configureStore";
+import { toggleLoading } from "@novomarkt/store/slices/appSettings";
 import { userLoggedOut } from "@novomarkt/store/slices/userSlice";
 import axios, { AxiosResponse } from "axios";
 import {
@@ -12,6 +13,7 @@ import {
 	DeliveryMethodResponse,
 	LoginResponse,
 	NewsItemResponse,
+	OrderItemResponse,
 	OrderSend,
 	ProductItemResponse,
 	QuestionsResponse,
@@ -43,6 +45,7 @@ axios.interceptors.response.use(
 		if (error && error.response && error.response.status == 401) {
 			//@ts-ignore
 			store.dispatch(userLoggedOut());
+			store.dispatch(toggleLoading());
 		}
 		return error;
 	}
@@ -102,6 +105,7 @@ let requests = {
 
 	brands: {
 		getBrands: () => axios.get(`${url}/category?type=brand`),
+		getAllBrands: () => axios.get(`${url}/brand`),
 	},
 
 	shops: {
@@ -121,6 +125,10 @@ let requests = {
 		getProductsWithID: (id: number) =>
 			axios.get<BaseResponse<ProductItemResponse>>(
 				`${url}/product/by-category?id=${id}`
+			),
+		getProductWithShopID: (id: number) =>
+			axios.get<BaseResponse<ProductItemResponse>>(
+				`${url}/product/by-shop?id=${id}`
 			),
 		getProductsWithBrand: (id: number) =>
 			axios.get<BaseResponse<ProductItemResponse>>(
@@ -186,6 +194,7 @@ let requests = {
 	order: {
 		sendOrder: (credentials: OrderSend) =>
 			axios.post(`${url}/order/send`, credentials),
+		getOrders: () => axios.get<BaseResponse<OrderItemResponse>>(`${url}/order`),
 	},
 };
 export default requests;

@@ -20,7 +20,7 @@ import {
 } from "@novomarkt/store/slices/favoriteSlice";
 import { useNavigation } from "@react-navigation/core";
 import { is } from "immer/dist/internal";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import {
 	Image,
 	ListRenderItemInfo,
@@ -40,6 +40,7 @@ const ProductItem = ({
 	let {
 		photo,
 		brand,
+		shop,
 		category,
 		name,
 		price,
@@ -58,11 +59,13 @@ const ProductItem = ({
 	const onCartPress = async () => {
 		try {
 			if (isInCart) {
+				console.log("onCartPress", product_id);
 				dispatch(toggleLoading());
 				let clear = await requests.products.removeItem({
 					product_id: id,
 				});
 				let cartGet = await requests.products.getCarts();
+				console.log("cartGet", cartGet);
 				dispatch(loadCart(cartGet.data.data));
 				dispatch(toggleLoading());
 			} else {
@@ -79,6 +82,10 @@ const ProductItem = ({
 			console.log(error);
 		}
 	};
+
+	// useEffect(() => {
+	// 	dispatch(toggleLoading());
+	// }, [5000]);
 
 	const onAddFavorite = async () => {
 		try {
@@ -124,18 +131,19 @@ const ProductItem = ({
 				<View style={styles.details}>
 					<View style={styles.row}>
 						<Text style={styles.brand}>{category?.name}</Text>
-						<Text style={styles.brand}>{brand?.name}</Text>
+						<Text style={styles.brand}>{shop?.name}</Text>
 					</View>
 					<Text style={styles.name}>{name}</Text>
 					<View
 						style={{
-							flexDirection: "row",
-							alignItems: "center",
+							flexDirection: "column",
+							alignItems: "flex-start",
 							justifyContent: "space-between",
+							height: 60,
 						}}
 					>
-						<Text style={styles.price}>{price} ₽</Text>
-						<Text style={styles.oldPrice}>{price_old} ₽</Text>
+						<Text style={styles.price}>{price} сум</Text>
+						{price_old && <Text style={styles.oldPrice}>{price_old} сум</Text>}
 					</View>
 					<DefaultButton
 						containerStyle={styles.button}
@@ -160,11 +168,11 @@ const ProductItem = ({
 export default ProductItem;
 
 const styles = StyleSheet.create({
-	dscountText: { fontSize: 12, color: COLORS.defaultBlack },
+	dscountText: { fontSize: 12, color: COLORS.defaultBlack, fontWeight: "700" },
 	discount: {
 		borderRadius: 8,
 		padding: 4,
-		backgroundColor: COLORS.white,
+		backgroundColor: COLORS.discountRed,
 	},
 	absolute: {
 		position: "absolute",

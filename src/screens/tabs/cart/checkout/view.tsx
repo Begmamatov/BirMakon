@@ -9,6 +9,7 @@ import { ROUTES } from "@novomarkt/constants/routes";
 import { WINDOW_WIDTH } from "@novomarkt/constants/sizes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { toggleLoading } from "@novomarkt/store/slices/appSettings";
+import { loadCart } from "@novomarkt/store/slices/cartSlice";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import {
@@ -26,7 +27,7 @@ import { styles } from "./style";
 
 const CheckoutView = () => {
 	const route = useRoute();
-	const item = route.params;
+	const item: any = route.params;
 	const dispatch = useDispatch();
 	const navigation = useNavigation();
 	const [activeIndex, setIsActive] = useState(0);
@@ -54,6 +55,9 @@ const CheckoutView = () => {
 		try {
 			let res = await requests.products.deliveryMethods();
 			setDelivery(res.data.data);
+			console.log("====================================");
+			console.log(delivery);
+			console.log("====================================");
 		} catch (error) {
 			console.log(error);
 		}
@@ -71,13 +75,17 @@ const CheckoutView = () => {
 		try {
 			dispatch(toggleLoading());
 			let res = await requests.order.sendOrder(state);
+			let ClearRes = await requests.products.clearCart();
+			let cartGet = await requests.products.getCarts();
+			dispatch(loadCart(cartGet.data.data));
 			toggleSnackbar();
 			setTimeout(() => {
 				navigation.goBack();
 			}, 1500);
-			dispatch(toggleLoading());
 		} catch (error) {
 			console.log(error);
+		} finally {
+			dispatch(toggleLoading());
 		}
 	};
 
@@ -92,7 +100,9 @@ const CheckoutView = () => {
 						<>
 							<TouchableOpacity
 								style={activeIndex == i ? styles.activeBox : styles.box}
-								onPress={() => setIsActive(i)}
+								onPress={() => {
+									setIsActive(i), setState({ ...state, delivery_id: item.id });
+								}}
 							>
 								<View
 									style={
@@ -124,13 +134,14 @@ const CheckoutView = () => {
 					<Text style={styles.boxTxt}>
 						Срок доставки будет расчитан после выбора пункт самовывоза
 					</Text>
-					<View
+					<ScrollView
+						horizontal={true}
 						style={{
 							flexDirection: "row",
 							flexWrap: "wrap",
 						}}
 					>
-						{item?.map((e) => {
+						{item?.map((e: any) => {
 							return (
 								<View style={styles.boxNum}>
 									<Image
@@ -145,7 +156,7 @@ const CheckoutView = () => {
 								</View>
 							);
 						})}
-					</View>
+					</ScrollView>
 				</View>
 			</View>
 			{/* <PickupPoint items={item} /> */}

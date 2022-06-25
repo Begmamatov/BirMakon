@@ -7,7 +7,7 @@ import {
 	cartTotalSelector,
 } from "@novomarkt/store/slices/cartSlice";
 import { useNavigation } from "@react-navigation/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { ScrollView, View } from "react-native";
 import { useSelector } from "react-redux";
 import DefaultHeader from "../favorites/components/DefaultHeader";
@@ -18,7 +18,7 @@ import { useCartScreenHooks } from "./hooks";
 import { styles } from "./style";
 
 const CartView = () => {
-	let navigation = useNavigation();
+	let navigation: any = useNavigation();
 
 	let cart = useSelector(cartArraySelector);
 

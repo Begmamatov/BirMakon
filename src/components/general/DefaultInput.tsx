@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		width: WINDOW_WIDTH - 80,
 		fontFamily: "Montserrat-Medium",
+		color: COLORS.defaultBlack,
 	},
 	container: {
 		alignSelf: "center",

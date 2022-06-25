@@ -32,6 +32,20 @@ export function TrashIcon(props: SvgProps) {
 		</Svg>
 	);
 }
+export function RoundIcon(props: SvgProps) {
+	return (
+		<Svg
+			width={15}
+			height={15}
+			viewBox="0 0 15 15"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			{...props}
+		>
+			<Circle cx={7.5} cy={7.5} r={6.75} stroke="#0074D1" strokeWidth={1.5} />
+		</Svg>
+	);
+}
 
 export function ChatIcon(props: SvgProps) {
 	return (
@@ -443,6 +457,27 @@ export function PhoneIcon(props: SvgProps) {
 				d="M4.384.48l-.859.258A4.2 4.2 0 00.58 4.163c-.356 2.482.44 5.383 2.362 8.711 1.916 3.32 4.026 5.458 6.348 6.394a4.2 4.2 0 004.458-.846l.651-.617a2.4 2.4 0 00.296-3.148l-1.628-2.256a1.8 1.8 0 00-1.986-.667l-2.46.752-.064.012c-.272.04-.897-.547-1.677-1.898-.816-1.414-.986-2.24-.76-2.454L7.37 6.978a2.996 2.996 0 00.689-3.42l-.792-1.765A2.4 2.4 0 004.386.48h-.002zm1.788 1.805l.794 1.765a1.796 1.796 0 01-.413 2.052l-1.255 1.17c-.804.759-.538 2.058.54 3.928 1.017 1.76 1.944 2.628 2.938 2.477l.15-.031 2.505-.765a.6.6 0 01.662.222l1.627 2.256a1.2 1.2 0 01-.147 1.575l-.652.616a3 3 0 01-3.183.604c-2.038-.82-3.964-2.773-5.758-5.88-1.798-3.114-2.525-5.762-2.213-7.94a3 3 0 012.105-2.447l.86-.26a1.2 1.2 0 011.44.658z"
 				fill={props?.stroke}
 			/>
+		</Svg>
+	);
+}
+export function LanguageIcon(props: SvgProps) {
+	return (
+		<Svg
+			xmlns="http://www.w3.org/2000/svg"
+			width={24}
+			height={24}
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth={2}
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			className="feather feather-globe"
+			{...props}
+		>
+			<Circle cx={12} cy={12} r={10} />
+			<Path d="M2 12L22 12" />
+			<Path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
 		</Svg>
 	);
 }

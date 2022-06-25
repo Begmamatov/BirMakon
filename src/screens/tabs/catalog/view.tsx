@@ -24,8 +24,8 @@ const CatalogView = () => {
 			<SearchHeader />
 			<Image source={{ uri: BannerURL }} style={styles.banner} />
 			<FlatList
-				renderItem={(props) => <CategoryItem {...props} />}
 				data={categories}
+				renderItem={(props) => <CategoryItem {...props} />}
 				numColumns={2}
 				style={styles.box}
 				contentContainerStyle={{

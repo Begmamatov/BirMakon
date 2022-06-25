@@ -16,7 +16,7 @@ const CatalogProductsView = ({}): ReactElement => {
 	const [products, setProducts] = useState<ProductItemResponse[]>();
 
 	let {
-		params: { id, name },
+		params: { id, name, type },
 	}: any = useRoute();
 
 	let effect = async () => {
@@ -36,10 +36,25 @@ const CatalogProductsView = ({}): ReactElement => {
 			console.log(error);
 		}
 	};
+	let shopEffect = async () => {
+		try {
+			let res = await requests.products.getProductWithShopID(id);
+			setProducts(res.data.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
-		effect();
-		brandsEffect();
+		if (type === "brand") {
+			brandsEffect();
+		}
+		if (type === "category") {
+			effect();
+		}
+		if (type === "shop") {
+			shopEffect();
+		}
 	}, []);
 
 	return (

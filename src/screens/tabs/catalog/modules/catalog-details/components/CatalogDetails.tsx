@@ -27,7 +27,7 @@ const CatalogDetails = ({ item }: ListRenderItemInfo<CatalogDetailsProps>) => {
 			onPress={() =>
 				navigation.navigate(
 					ROUTES.CATALOG_PRODUCTS as never,
-					{ id, name } as never
+					{ id, name, type: "category" } as never
 				)
 			}
 		>

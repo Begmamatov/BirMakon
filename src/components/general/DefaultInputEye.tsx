@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
 		// borderWidth: 1,
 		width: "90%",
 		fontFamily: "Montserrat-Medium",
+		color: COLORS.defaultBlack,
 	},
 	container: {
 		alignSelf: "center",

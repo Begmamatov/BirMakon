@@ -19,14 +19,14 @@ const appSettingsSlice = createSlice({
 	name: "appSettings",
 	initialState,
 	reducers: {
-		setQuery: (state, { payload }) => {
+		setQuery: (state: any, { payload }: any) => {
 			state = { ...state, query: payload };
 			return state;
 		},
 
 		clearQuery: () => initialState,
 
-		toggleLoading: (state) => {
+		toggleLoading: (state: any) => {
 			return { ...state, loading: !state.loading };
 		},
 	},

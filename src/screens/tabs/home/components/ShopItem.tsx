@@ -18,7 +18,9 @@ const ShopsItem = ({
 	let navigation: any = useNavigation();
 	return (
 		<TouchableOpacity
-			onPress={() => navigation.navigate(ROUTES.CATALOG_PRODUCTS, { id, name })}
+			onPress={() =>
+				navigation.navigate(ROUTES.CATALOG_PRODUCTS, { id, name, type: "shop" })
+			}
 		>
 			<View style={styles.container}>
 				<Image source={{ uri: appendUrl(photo) }} style={styles.image} />

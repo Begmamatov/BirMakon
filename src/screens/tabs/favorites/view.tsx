@@ -34,7 +34,7 @@ const FavoriteView = () => {
 		<>
 			<DefaultHeader name={STRINGS.favorites} />
 			<ScrollView style={styles.container}>
-				<SelectableMenu />
+				{/* <SelectableMenu /> */}
 				<SelectableItems onPress={toggleModal} headerText={modalText} />
 				{favorites?.map((e) => {
 					return (

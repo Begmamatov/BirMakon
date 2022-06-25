@@ -129,28 +129,18 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 					<Text style={styles.lineThrough}>{data.product.price_old} ₽</Text>
 				</View>
 				<View style={styles.counter}>
-					<TouchableOpacity onPress={onDecreaseItem}>
-						<LinearGradient
-							start={{ x: 0, y: 0 }}
-							end={{ x: 3, y: 0 }}
-							colors={GRADIENT_COLORS}
-							style={styles.minus}
-						>
+					<TouchableOpacity onPress={onDecreaseItem} style={styles.minus}>
+						<View style={styles.minus}>
 							<MinusIcon fill={COLORS.white} />
-						</LinearGradient>
+						</View>
 					</TouchableOpacity>
 					<View style={styles.topBottom}>
 						<Text>{data.amount} шт</Text>
 					</View>
-					<TouchableOpacity onPress={onAddItem}>
-						<LinearGradient
-							start={{ x: 0, y: 0 }}
-							end={{ x: 3, y: 0 }}
-							colors={GRADIENT_COLORS}
-							style={styles.plus}
-						>
+					<TouchableOpacity onPress={onAddItem} style={styles.plus}>
+						<View style={styles.plus}>
 							<PlusCounterIcon fill={COLORS.white} />
-						</LinearGradient>
+						</View>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -184,6 +174,9 @@ const styles = StyleSheet.create({
 		marginVertical: 10,
 		flexDirection: "row",
 		justifyContent: "space-between",
+		borderBottomColor: COLORS.gray,
+		borderBottomWidth: 1,
+		paddingBottom: 10,
 	},
 
 	leftImage: {
@@ -243,19 +236,20 @@ const styles = StyleSheet.create({
 	},
 
 	minus: {
-		paddingVertical: 10,
-		paddingHorizontal: 15,
+		paddingVertical: 5,
+		paddingHorizontal: 5,
 		borderTopLeftRadius: 5,
 		borderBottomLeftRadius: 5,
+		backgroundColor: COLORS.orange,
 	},
 
 	plus: {
-		padding: 10,
-		paddingHorizontal: 15,
+		paddingVertical: 5,
+		paddingHorizontal: 5,
 		borderTopRightRadius: 5,
 		borderBottomRightRadius: 5,
+		backgroundColor: COLORS.lightBlack,
 	},
-
 	topBottom: {
 		// height: "100%",
 		width: 50,

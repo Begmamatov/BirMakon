@@ -6,6 +6,7 @@ export const ROUTES = {
 	CATEGORIES: "categories",
 	CART: "cart",
 	FAVORITES: "favorites",
+	FAVORITESSETTINGS: "favoritessettings",
 	PROFILE: "profile",
 	AUTH: "auth",
 	TABS: "tabs",
@@ -30,4 +31,7 @@ export const ROUTES = {
 	NEWS_DETAILS: "news-details",
 	SEND_REVIEW: "send_review",
 	USER_EDITING: "user_editing",
+	LANGUAGE: "language",
+	COURSE: "cource",
+	PAYMENTS: "payments",
 };

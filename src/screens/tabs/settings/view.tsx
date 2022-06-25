@@ -5,6 +5,7 @@ import {
 	CommentIcon,
 	ContactIcon,
 	ExitIcon,
+	LanguageIcon,
 	MessageIcon,
 	PaymentIcon,
 	PhoneIcon,
@@ -17,14 +18,14 @@ import { COLORS } from "@novomarkt/constants/colors";
 import { ROUTES } from "@novomarkt/constants/routes";
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { Image, ScrollView, View } from "react-native";
 import SettingsItem from "./components/SettingsItem";
 import useSettingsHook from "./hooks";
 import { styles } from "./style";
 
 const SettingsView = ({}) => {
 	let { onLogOut } = useSettingsHook();
-	let navigation = useNavigation();
+	let navigation: any = useNavigation();
 	return (
 		<ScrollView style={styles.container}>
 			<Text style={styles.headerText}>Доброе утро</Text>
@@ -41,6 +42,7 @@ const SettingsView = ({}) => {
 				/>
 				<SettingsItem
 					text={"Избранные товары"}
+					onPress={() => navigation.navigate(ROUTES.FAVORITESSETTINGS)}
 					icon={() => <BorderedLikeIcon fill={COLORS.defaultBlack} />}
 				/>
 				<SettingsItem
@@ -79,6 +81,21 @@ const SettingsView = ({}) => {
 				<SettingsItem
 					text={"Чат с поддержкой"}
 					icon={() => <MessageIcon stroke={COLORS.defaultBlack} />}
+				/>
+				<SettingsItem
+					onPress={() => navigation.navigate(ROUTES.LANGUAGE)}
+					text={"Язик"}
+					icon={() => <LanguageIcon stroke={COLORS.defaultBlack} />}
+				/>
+				<SettingsItem
+					onPress={() => navigation.navigate(ROUTES.COURSE)}
+					text={"Курс"}
+					icon={() => (
+						<Image
+							style={{ width: 23, height: 23 }}
+							source={require("../../../assets/images/exchange.png")}
+						/>
+					)}
 				/>
 				<SettingsItem
 					onPress={onLogOut}

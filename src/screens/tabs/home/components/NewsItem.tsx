@@ -4,7 +4,7 @@ import DefaultButton from "@novomarkt/components/general/DefaultButton";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import { ROUTES } from "@novomarkt/constants/routes";
-import { WINDOW_WIDTH } from "@novomarkt/constants/sizes";
+import { WINDOW_HEIGHT, WINDOW_WIDTH } from "@novomarkt/constants/sizes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useNavigation } from "@react-navigation/native";
 import React, { ReactElement } from "react";
@@ -60,9 +60,10 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 12,
 		color: COLORS.defaultBlack,
+		height: 65,
 	},
 	dateStyle: {
-		color: COLORS.gray,
+		color: COLORS.red,
 		fontSize: 12,
 		alignSelf: "flex-end",
 		marginTop: 10,

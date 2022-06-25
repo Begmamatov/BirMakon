@@ -13,6 +13,7 @@ export const COLORS = {
 	purple: "#C211A7",
 	lightPurple: "#FFBBBB",
 	red: "rgba(255, 27, 27, 1)",
+	discountRed: "rgba(238, 73, 39, 0.4)",
 	whiteGray: "#B4B4B4",
 	chatColor: "#F8F8FA",
 	menuBackground: "#e6eeff",

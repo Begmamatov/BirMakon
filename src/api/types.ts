@@ -109,6 +109,27 @@ export interface BaseResponse<T> {
 	_meta: Meta;
 }
 
+export interface OrderItemResponse {
+	id: number;
+	payment: {};
+	delivery: {};
+	price: number;
+	amount: number;
+	receiver: number;
+	name: string;
+	lastname: string;
+	email: string;
+	phone: string;
+	address: string;
+	comment: string;
+	status: number;
+	status_payment: number;
+	status_logist: number;
+	logist: null | any;
+	date: string;
+	orderProducts: {};
+}
+
 export interface NewsItemResponse {
 	id: number;
 	name: string;

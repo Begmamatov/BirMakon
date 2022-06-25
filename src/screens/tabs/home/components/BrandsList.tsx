@@ -12,7 +12,7 @@ const BrandsList = () => {
 	const [brands, setBrands] = useState([]);
 	let effect = async () => {
 		try {
-			let res = await requests.brands.getBrands();
+			let res = await requests.brands.getAllBrands();
 			setBrands(res.data.data);
 		} catch (error) {}
 	};

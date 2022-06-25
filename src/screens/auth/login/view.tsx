@@ -3,8 +3,10 @@ import DefaultInput from "@novomarkt/components/general/DefaultInput";
 import DefaultInputEye from "@novomarkt/components/general/DefaultInputEye";
 import Text from "@novomarkt/components/general/Text";
 import { STRINGS } from "@novomarkt/locales/strings";
-import React from "react";
+import { toggleLoading } from "@novomarkt/store/slices/appSettings";
+import React, { useEffect } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
+import { useDispatch } from "react-redux";
 import useLoginHook from "./hooks";
 import { styles } from "./style";
 
@@ -18,6 +20,12 @@ const LoginView = () => {
 		onForgotPassNavigation,
 		error,
 	} = useLoginHook();
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(toggleLoading());
+	}, []);
 
 	return (
 		<View style={styles.container}>

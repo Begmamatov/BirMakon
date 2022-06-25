@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "space-between",
 		backgroundColor: COLORS.lightGray,
+		color: COLORS.whiteGray,
 	},
 	input: {
 		paddingVertical: Platform.OS == "android" ? 10 : 12,
