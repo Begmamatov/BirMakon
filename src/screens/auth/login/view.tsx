@@ -24,7 +24,7 @@ const LoginView = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch(toggleLoading());
+		dispatch(toggleLoading(false));
 	}, []);
 
 	return (

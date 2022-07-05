@@ -6,6 +6,8 @@ import {
 	StyleProp,
 	StyleSheet,
 	TextStyle,
+	TouchableOpacity,
+	TouchableOpacityBase,
 	TouchableWithoutFeedback,
 	View,
 	ViewStyle,

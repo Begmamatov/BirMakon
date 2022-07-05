@@ -5,11 +5,10 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: COLORS.white,
+		paddingVertical: 20,
 	},
 	header: {
-		textAlign: "center",
-		fontSize: 22,
-		marginVertical: 20,
+		marginHorizontal: 20,
 		color: COLORS.defaultBlack,
 	},
 	containerText: {
@@ -17,5 +16,6 @@ export const styles = StyleSheet.create({
 		fontSize: 20,
 		marginHorizontal: 20,
 		marginVertical: 20,
+		color: COLORS.defaultBlack,
 	},
 });

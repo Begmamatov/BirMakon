@@ -2,6 +2,14 @@ import LocalizedStrings from "react-native-localization";
 
 export const STRINGS = new LocalizedStrings({
 	ru: {
+		characteristics: "Характеристики",
+		myOrders: "Мои заказы",
+		CompletedOrders: "Завершенные заказы",
+		Paymentexpected: "Ожидается оплата",
+		Shipmentexpected: "Ожидается отправка",
+		Theorderhasbeensent: "Заказ отправлен",
+		Reviewpending: "Ожидается отзыв",
+		Returns: "Возвраты",
 		back: "Назад",
 		save: "Сохранить",
 		continue: "Продолжить",
@@ -40,7 +48,6 @@ export const STRINGS = new LocalizedStrings({
 		news: "Новости",
 		detailed: "Подробно",
 		backHeaderName: "Мои данные",
-		myOrders: "Мои заказы",
 		seller: "Продавец:",
 		quantity: "Количество:",
 		delivery: "Доставка:",
@@ -105,5 +112,6 @@ export const STRINGS = new LocalizedStrings({
 		emptyCart: "Очистить корзину",
 		cartIsEmpty: "Корзина пустая",
 		favoritesIsEmpty: "Нет избранных товаров",
+		COURSE: "Курс",
 	},
 });

@@ -60,23 +60,23 @@ const ProductItem = ({
 		try {
 			if (isInCart) {
 				console.log("onCartPress", product_id);
-				dispatch(toggleLoading());
+				dispatch(toggleLoading(true));
 				let clear = await requests.products.removeItem({
 					product_id: id,
 				});
 				let cartGet = await requests.products.getCarts();
 				console.log("cartGet", cartGet);
 				dispatch(loadCart(cartGet.data.data));
-				dispatch(toggleLoading());
+				dispatch(toggleLoading(false));
 			} else {
-				dispatch(toggleLoading());
+				dispatch(toggleLoading(true));
 				let res = await requests.products.addToCart({
 					amount: 1,
 					product_id: id,
 				});
 				let cartRes = await requests.products.getCarts();
 				dispatch(loadCart(cartRes.data.data));
-				dispatch(toggleLoading());
+				dispatch(toggleLoading(false));
 			}
 		} catch (error) {
 			console.log(error);
@@ -89,7 +89,7 @@ const ProductItem = ({
 
 	const onAddFavorite = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.favorites.addFavorite({
 				product_id: id,
 			});
@@ -98,7 +98,7 @@ const ProductItem = ({
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 		}
 	};
 

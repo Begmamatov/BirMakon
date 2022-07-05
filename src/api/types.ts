@@ -110,6 +110,7 @@ export interface BaseResponse<T> {
 }
 
 export interface OrderItemResponse {
+	index: number;
 	id: number;
 	payment: {};
 	delivery: {};
@@ -201,6 +202,13 @@ export interface ShopsItemResponse {
 	name: string;
 	photo: string;
 	date: string;
+}
+
+export interface PaymentMethodResponse {
+	id: number;
+	name: string;
+	description: string;
+	photo: string;
 }
 
 export interface SendReviewProps {

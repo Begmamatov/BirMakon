@@ -19,9 +19,7 @@ const Cource = () => {
 			<View style={styles.containerView}>
 				<BackHeader name={STRINGS.COURSE} />
 			</View>
-			<ScrollView
-				style={{ backgroundColor: "#E9EEF6", marginBottom: -32 }}
-			>
+			<ScrollView style={{ backgroundColor: "#E9EEF6", marginBottom: -32 }}>
 				<View>
 					<View style={styles.containerText}>
 						<Text style={styles.sectionText}>Изменить Курс</Text>

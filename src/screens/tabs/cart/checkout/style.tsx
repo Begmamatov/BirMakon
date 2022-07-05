@@ -221,6 +221,8 @@ export const styles = StyleSheet.create({
 		paddingVertical: Platform.OS == "android" ? 10 : 15,
 		backgroundColor: COLORS.lightGray,
 		borderColor: COLORS.whiteGray,
+		color: COLORS.defaultBlack,
+		fontSize: 16,
 	},
 
 	underline: {

@@ -1,3 +1,4 @@
+import requests from "@novomarkt/api/requests";
 import { SaveIconMessage, TelegramIcon } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
 import BackHeader from "@novomarkt/components/navigation/BackHeader";
@@ -13,7 +14,7 @@ const MessageView = () => {
 		{ content: STRINGS.myMessages, myMsg: false },
 	]);
 
-	const sendMessage = () => {
+	const sendMessage = async () => {
 		if (sendingMsg.length == 0) {
 			return;
 		} else {
@@ -41,15 +42,11 @@ const MessageView = () => {
 						renderItem={({ item, index }) =>
 							item.myMsg ? (
 								<View key={index} style={styles.myBox}>
-									<Text style={styles.myMsg}>
-										{item.content}
-									</Text>
+									<Text style={styles.myMsg}>{item.content}</Text>
 								</View>
 							) : (
 								<View style={styles.innerBox}>
-									<Text style={styles.innerText}>
-										{STRINGS.comment}
-									</Text>
+									<Text style={styles.innerText}>{STRINGS.comment}</Text>
 								</View>
 							)
 						}

@@ -26,8 +26,8 @@ const appSettingsSlice = createSlice({
 
 		clearQuery: () => initialState,
 
-		toggleLoading: (state: any) => {
-			return { ...state, loading: !state.loading };
+		toggleLoading: (state: any, payload = !state.loading) => {
+			return { ...state, loading: payload };
 		},
 	},
 });

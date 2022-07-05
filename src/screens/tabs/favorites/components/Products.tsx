@@ -8,6 +8,7 @@ import {
 import DefaultButton from "@novomarkt/components/general/DefaultButton";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
+import { ROUTES } from "@novomarkt/constants/routes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useAppSelector } from "@novomarkt/store/hooks";
 import { toggleLoading } from "@novomarkt/store/slices/appSettings";
@@ -16,39 +17,28 @@ import {
 	favoriteSelector,
 	loadFavorite,
 } from "@novomarkt/store/slices/favoriteSlice";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import {
 	Image,
 	LayoutAnimation,
 	StyleSheet,
 	TouchableOpacity,
+	TouchableWithoutFeedback,
 	View,
 } from "react-native";
 import { useDispatch } from "react-redux";
 
-export let imageURL =
-	"https://static.theblacktux.com/products/suits/gray-suit/1_2018_0326_TBT_Spring-Ecomm_Shot03_-31_w1_1812x1875.jpg?width=1024";
+const Products = ({ item }: { item: ProductItemResponse }) => {
+	let { photo, name, price, discount, price_old, id, isFavorite } = item;
 
-export let ProductsData = {
-	name: "Элегантный Костюм с брюками ZARA стиль",
-	price: "1400  ₽",
-};
-
-export default function Products({
-	name,
-	photo,
-	price,
-	id,
-	discount,
-	price_old,
-	isFavorite,
-	getProducts,
-}: ProductItemResponse) {
 	const dispatch = useDispatch();
 	const cart = useAppSelector(cartSelector);
 	const favorite = useAppSelector(favoriteSelector);
 	let isInCart = !!cart[id];
 	let isInFavorite = !!favorite[id];
+
+	const navigation: any = useNavigation();
 
 	const onCartPress = async () => {
 		try {
@@ -91,7 +81,7 @@ export default function Products({
 
 	const onAddFavorite = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.favorites.addFavorite({
 				product_id: id,
 			});
@@ -100,80 +90,68 @@ export default function Products({
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 			LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
 		}
 	};
 
 	return (
-		<View style={styles.container}>
-			<Image source={{ uri: appendUrl(photo) }} style={styles.image} />
-			<View style={styles.itemsContainer}>
-				<View style={styles.nameContainer}>
-					<Text style={styles.itemName}>{name}</Text>
-					{discount && (
-						<View style={styles.discount}>
-							<Text style={styles.dscountText}>{discount}%</Text>
-						</View>
-					)}
-					<TouchableOpacity
-						onPress={onAddFavorite}
-						hitSlop={{ bottom: 10, top: 10, right: 10, left: 10 }}
-					>
-						{isFavorite === true ? (
-							<HeartIconRed fill={COLORS.red} />
-						) : (
-							<HeartIconBorder fill={COLORS.red} />
-						)}
-					</TouchableOpacity>
-				</View>
-				<View style={styles.nameContainer}>
-					<View>
-						{price_old && <Text style={styles.oldPrice}>{price_old} ₽</Text>}
-						<Text style={styles.price}>{price}₽</Text>
-					</View>
-					<DefaultButton
-						containerStyle={styles.button}
-						secondary={isInCart}
-						onPress={onCartPress}
-					>
-						<View style={styles.buttonContainer}>
-							<Text
-								style={[isInCart ? styles.inactiveCartText : styles.cartText]}
-							>
-								{isInCart ? `${STRINGS.addToCart}е` : `${STRINGS.addToCart}у`}
-							</Text>
-							<BasketIcon fill={isInCart ? COLORS.cartColor3 : COLORS.white} />
-						</View>
-					</DefaultButton>
-				</View>
-			</View>
-			{/* <View>
+		<TouchableWithoutFeedback
+			onPress={() => {
+				navigation.navigate(ROUTES.PRODUCT_DETAILS, { item, id });
+			}}
+		>
+			<View style={styles.container}>
 				<Image source={{ uri: appendUrl(photo) }} style={styles.image} />
-			</View>
-			<View style={styles.textBox}>
-				<Text style={styles.text}>{name}</Text>
-				<View style={styles.row}>
-					<Text style={styles.price}>{price}</Text>
-					<DefaultButton
-						containerStyle={styles.button}
-						secondary={isInCart}
-						onPress={onCartPress}
-					>
-						<View style={styles.buttonContainer}>
-							<Text
-								style={[isInCart ? styles.inactiveCartText : styles.cartText]}
-							>
-								{STRINGS.addToCart}
-							</Text>
-							<BasketIcon fill={isInCart ? COLORS.cartColor3 : COLORS.white} />
-						</View>
-					</DefaultButton>
+				<View style={styles.itemsContainer}>
+					<View style={styles.nameContainer}>
+						<Text style={styles.itemName}>{name}</Text>
+
+						<TouchableOpacity
+							onPress={onAddFavorite}
+							hitSlop={{ bottom: 10, top: 10, right: 10, left: 10 }}
+						>
+							{isFavorite === true ? (
+								<HeartIconRed fill={COLORS.red} />
+							) : (
+								<HeartIconBorder fill={COLORS.red} />
+							)}
+						</TouchableOpacity>
+					</View>
+					<View style={styles.priceContainer}>
+						{price_old && <Text style={styles.oldPrice}>{price_old} сум</Text>}
+						<Text style={styles.price}>{price} сум</Text>
+					</View>
+					<View style={styles.nameContainer}>
+						{discount && (
+							<View style={styles.discount}>
+								<Text style={styles.dscountText}>{discount}%</Text>
+							</View>
+						)}
+						<DefaultButton
+							containerStyle={styles.button}
+							secondary={isInCart}
+							onPress={onCartPress}
+						>
+							<View style={styles.buttonContainer}>
+								<Text
+									style={[isInCart ? styles.inactiveCartText : styles.cartText]}
+								>
+									{isInCart ? `${STRINGS.addToCart}е` : `${STRINGS.addToCart}у`}
+								</Text>
+								<BasketIcon
+									fill={isInCart ? COLORS.cartColor3 : COLORS.white}
+								/>
+							</View>
+						</DefaultButton>
+					</View>
 				</View>
-			</View> */}
-		</View>
+			</View>
+		</TouchableWithoutFeedback>
 	);
-}
+};
+
+export default Products;
 
 const styles = StyleSheet.create({
 	container: {
@@ -194,7 +172,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: "column",
 		justifyContent: "space-between",
-		paddingHorizontal: 5,
+		// paddingHorizontal: 5,
+	},
+	priceContainer: {
+		flexDirection: "column",
+		justifyContent: "space-between",
+		alignItems: "flex-start",
+		marginTop: 10,
 	},
 
 	nameContainer: {

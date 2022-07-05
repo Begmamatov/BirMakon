@@ -46,7 +46,7 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 
 	const onAddItem = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.products.increaseItem({
 				amount: 1,
 				product_id: id,
@@ -56,13 +56,13 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 		}
 	};
 
 	const onDecreaseItem = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.products.decreaseItem({
 				product_id: id,
 			});
@@ -71,13 +71,13 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 		}
 	};
 
 	const onRemoveItem = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.products.removeItem({
 				product_id: id,
 			});
@@ -86,14 +86,14 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 			LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
 		}
 	};
 
 	const onAddFavorite = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.favorites.addFavorite({
 				product_id: id,
 			});
@@ -102,9 +102,11 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 		}
 	};
+
+	console.log(data);
 
 	return (
 		<View style={styles.container}>
@@ -125,8 +127,10 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 					<Text> XXL - 44</Text>
 				</Text>
 				<View style={styles.rowTxt}>
-					<Text style={styles.blueTxt}>{data.product.price} ₽</Text>
-					<Text style={styles.lineThrough}>{data.product.price_old} ₽</Text>
+					<Text style={styles.blueTxt}>{data.product.price} сум</Text>
+					{data.product.price_old ? (
+						<Text style={styles.lineThrough}>{data.product.price_old} сум</Text>
+					) : null}
 				</View>
 				<View style={styles.counter}>
 					<TouchableOpacity onPress={onDecreaseItem} style={styles.minus}>

@@ -28,31 +28,15 @@ const FavoritesSettings = () => {
 			</View>
 		);
 	}
+
 	return (
 		<ScrollView style={styles.container}>
 			<BackHeader name={STRINGS.favorites} style={styles.header} />
 			{/* <SelectableMenu /> */}
 			<SelectableItems onPress={toggleModal} headerText={modalText} />
-			{favorites?.map((e) => {
-				return (
-					<Products
-						brand={e.brand}
-						name={e.name}
-						photo={e.photo}
-						price={e.price}
-						id={e.id}
-						price_old={e.price_old}
-						category={e.category}
-						views={e.views}
-						rating={e.rating}
-						discount={e.discount}
-						isFavorite={e.isFavorite}
-						credit_label={e.credit_label}
-						shop={e.shop}
-						getProducts={getFavs}
-					/>
-				);
-			})}
+			{favorites?.map((item) => (
+				<Products item={item} />
+			))}
 			<Modal
 				style={styles.view}
 				isVisible={isModalVisible}

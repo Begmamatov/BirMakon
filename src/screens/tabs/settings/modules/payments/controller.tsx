@@ -1,6 +1,6 @@
 import React from "react";
-import view from "./view";
+import Payment from "./view";
 
 export default function OrderController() {
-	return <view />;
+	return <Payment />;
 }

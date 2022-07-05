@@ -26,6 +26,8 @@ export let url = "https://birmakon.loko.uz/api";
 export let assetUrl = "https://birmakon.loko.uz";
 axios.interceptors.request.use((config) => {
 	let token = store.getState().user.token;
+	console.log("token----", token);
+
 	if (token) {
 		config.headers = {
 			...config.headers,
@@ -45,7 +47,6 @@ axios.interceptors.response.use(
 		if (error && error.response && error.response.status == 401) {
 			//@ts-ignore
 			store.dispatch(userLoggedOut());
-			store.dispatch(toggleLoading());
 		}
 		return error;
 	}
@@ -134,6 +135,10 @@ let requests = {
 			axios.get<BaseResponse<ProductItemResponse>>(
 				`${url}/product/by-brand?id=${id}`
 			),
+		getProductPayment: () =>
+			axios.get<BaseResponse<ProductItemResponse>>(
+				`${url}/category?type=payment`
+			),
 		searchProducts: (query: string) =>
 			axios.get<BaseResponse<ProductItemResponse>>(
 				`${url}/product/search?query=${query}`
@@ -157,8 +162,8 @@ let requests = {
 		deliveryMethods: () =>
 			axios.get<BaseResponse<DeliveryMethodResponse>>(`${url}/delivery`),
 
-		getReviews: (creds: { product_id: number }) =>
-			axios.get(`${url}/product/reviews?product_id=${creds.product_id}`),
+		getReviews: (product_id: number) =>
+			axios.get(`${url}/product/reviews?product_id=${product_id}`),
 
 		sendReview: (data: SendReviewProps) =>
 			axios.post(`${url}/product/set-review`, data),

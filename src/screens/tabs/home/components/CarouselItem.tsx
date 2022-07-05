@@ -8,10 +8,6 @@ import { AdditionalParallaxProps } from "react-native-snap-carousel";
 
 export type CarouselItemProps = { item: string; index: number };
 
-export let DotElement = ({ active }) => {
-	return <View style={styles.dot} />;
-};
-
 const CarouselItem = (
 	{ item }: { item: SliderTypes; index: number },
 	parallaxProps?: AdditionalParallaxProps

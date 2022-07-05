@@ -7,10 +7,6 @@ import { CustomCarouselItemProp } from "..";
 
 export type CustomCarouselItemProps = { item: string; index: number };
 
-export let DotElement = ({ active }) => {
-	return <View style={styles.dot} />;
-};
-
 const CustomCarouselItem = (
 	{ item }: { item: CustomCarouselItemProp; index: number },
 	parallaxProps?: AdditionalParallaxProps

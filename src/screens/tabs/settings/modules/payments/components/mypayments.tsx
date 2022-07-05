@@ -169,15 +169,18 @@ const styles = StyleSheet.create({
 		fontWeight: "400",
 		fontSize: 16,
 		paddingHorizontal: 20,
+		color: COLORS.defaultBlack,
 	},
 	text2: {
 		fontWeight: "400",
 		fontSize: 16,
 		paddingHorizontal: 70,
+		color: COLORS.defaultBlack,
 	},
 	text3: {
 		fontWeight: "400",
 		fontSize: 16,
 		paddingLeft: 30,
+		color: COLORS.defaultBlack,
 	},
 });

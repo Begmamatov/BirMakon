@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
 	sectionText: {
 		fontWeight: "600",
 		fontSize: 20,
+		color: COLORS.black,
 	},
 	sectionBoxView: {
 		paddingHorizontal: 30,
@@ -46,5 +47,6 @@ export const styles = StyleSheet.create({
 	},
 	animateText: {
 		fontSize: 20,
+		color: COLORS.black,
 	},
 });

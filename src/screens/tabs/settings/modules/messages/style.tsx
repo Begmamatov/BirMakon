@@ -83,6 +83,7 @@ export const styles = StyleSheet.create({
 		// paddingHorizontal: 20,
 		width: "80%",
 		marginLeft: 5,
+		color: COLORS.defaultBlack,
 	},
 
 	textingBox: {

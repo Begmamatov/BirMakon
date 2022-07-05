@@ -8,14 +8,14 @@ export const useCartScreenHooks = () => {
 	const dispatch = useDispatch();
 	const onClearCart = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.products.clearCart();
 			let cartGet = await requests.products.getCarts();
 			dispatch(loadCart(cartGet.data.data));
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 		}
 	};
 

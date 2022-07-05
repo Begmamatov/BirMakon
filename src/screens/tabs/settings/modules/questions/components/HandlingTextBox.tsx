@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 const HandlingTextBox = () => {
-	const [shouldShow, setShouldShow] = useState(true);
+	const [shouldShow, setShouldShow] = useState(0);
 	const [questions, setQuestions] = useState<QuestionsResponse[]>();
 	let effect = async () => {
 		try {
@@ -25,25 +25,20 @@ const HandlingTextBox = () => {
 	}, []);
 	return (
 		<View style={styles.container}>
-			{questions?.map((e) => {
+			{questions?.map((e, i) => {
 				return (
-					<View>
+					<View style={styles.containerView} key={i}>
 						<TouchableOpacity
 							style={styles.row}
 							onPress={() => {
-								LayoutAnimation.configureNext(
-									LayoutAnimation.Presets.easeInEaseOut
-								);
-								setShouldShow(!shouldShow);
+								setShouldShow(i);
 							}}
 						>
 							<PlayIcon fill={COLORS.white} />
-							<Text style={styles.text}>{e.question}</Text>
+							<Text style={styles.text1}>{e.question}</Text>
 						</TouchableOpacity>
 						<View>
-							{!shouldShow ? (
-								<Text style={styles.textBox}>{e.answer}</Text>
-							) : null}
+							{shouldShow === i && <Text style={styles.text}>{e.answer}</Text>}
 						</View>
 					</View>
 				);
@@ -60,16 +55,30 @@ const styles = StyleSheet.create({
 		marginHorizontal: 20,
 		marginVertical: 10,
 	},
+	containerView: {
+		borderBottomWidth: 0.5,
+		borderBottomColor: COLORS.gray,
+		paddingVertical: 10,
+	},
 
 	row: {
 		flexDirection: "row",
 		alignItems: "center",
 	},
 
+	text1: {
+		fontSize: 16,
+		fontWeight: "600",
+		color: COLORS.black,
+		marginLeft: 10,
+		alignItems: "center",
+		height: 25,
+	},
 	text: {
 		color: COLORS.defaultBlack,
 		fontSize: 14,
 		marginLeft: 10,
+		marginTop: 10,
 	},
 
 	textBox: {

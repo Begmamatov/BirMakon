@@ -16,7 +16,7 @@ import { SvgProps } from "react-native-svg";
 import { useSelector } from "react-redux";
 import CartStack from "./cart";
 import CatalogStack from "./catalog";
-import { FavoriteScreen } from "./favorites";
+import FavoritesScreen from "./favorites";
 import { HomeStack } from "./home";
 import { SettingsStack } from "./settings";
 
@@ -77,7 +77,7 @@ const TabNavigation = () => {
 			/>
 			<Tab.Screen
 				name={ROUTES.FAVORITES}
-				component={FavoriteScreen}
+				component={FavoritesScreen}
 				options={{
 					tabBarIcon: renderTabIcon(HeartIcon),
 					tabBarLabel: STRINGS.favorites,

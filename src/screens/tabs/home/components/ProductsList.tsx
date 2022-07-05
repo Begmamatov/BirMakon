@@ -47,11 +47,11 @@ const styles = StyleSheet.create({
 	title: {
 		color: COLORS.defaultBlack,
 		fontSize: 19,
-		marginLeft: 16,
+		marginLeft: 10,
 		marginBottom: 20,
 		fontWeight: "700",
 		letterSpacing: 0.5,
 	},
-	container: { marginBottom: 20 },
-	contentContainerStyle: { paddingHorizontal: 12 },
+	container: { marginBottom: 15, marginTop: 15 },
+	contentContainerStyle: { paddingHorizontal: 10 },
 });

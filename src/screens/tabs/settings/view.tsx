@@ -35,11 +35,11 @@ const SettingsView = ({}) => {
 					text={"Мои заказы"}
 					icon={() => <ShopIcon fill={COLORS.defaultBlack} />}
 				/>
-				<SettingsItem
+				{/* <SettingsItem
 					onPress={() => navigation.navigate(ROUTES.COMMENT)}
 					text={"Отзывы"}
 					icon={() => <BorderedStarIcon fill={COLORS.defaultBlack} />}
-				/>
+				/> */}
 				<SettingsItem
 					text={"Избранные товары"}
 					onPress={() => navigation.navigate(ROUTES.FAVORITESSETTINGS)}
@@ -51,6 +51,7 @@ const SettingsView = ({}) => {
 					icon={() => <CommentIcon fill={COLORS.defaultBlack} />}
 				/>
 				<SettingsItem
+					onPress={() => navigation.navigate(ROUTES.PAYMENTS)}
 					text={"Мои платежи"}
 					icon={() => <PaymentIcon fill={COLORS.defaultBlack} />}
 				/>

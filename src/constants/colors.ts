@@ -29,6 +29,7 @@ export const COLORS = {
 	lightOrange: "#F6A493",
 	lightgray: "#D9D9D9",
 	black: "#000000",
+	textColor1: "#023047",
 };
 
 export const CART_COLORS = [

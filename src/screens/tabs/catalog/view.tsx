@@ -14,7 +14,9 @@ const CatalogView = () => {
 		try {
 			let res = await requests.categories.getCategories();
 			setCategories(res.data.data);
-		} catch (error) {}
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	useEffect(() => {
 		effect();

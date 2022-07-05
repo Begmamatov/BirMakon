@@ -7,7 +7,7 @@ import ChatsView from "./modules/chats/view";
 import CommentView from "./modules/comments/view";
 import ContactsView from "./modules/contacts/view";
 import Cource from "./modules/Cource/view";
-import FavoritesSettingsController from "./modules/favoritesSettings/controller";
+import FavoritesScreen from "../favorites";
 import Language from "./modules/Language/view";
 import MessageView from "./modules/messages/view";
 import OrderView from "./modules/orders/view";
@@ -24,19 +24,19 @@ export let SettingsStack = () => {
 			<Stack.Screen component={SettingsController} name={ROUTES.SETTINGS} />
 			<Stack.Screen component={ProfileView} name={ROUTES.PROFILE} />
 			<Stack.Screen
-				component={FavoritesSettingsController}
+				component={FavoritesScreen}
 				name={ROUTES.FAVORITESSETTINGS}
 			/>
 			<Stack.Screen component={OrderView} name={ROUTES.ORDER} />
 			<Stack.Screen component={CommentView} name={ROUTES.COMMENT} />
 			<Stack.Screen component={MessageView} name={ROUTES.MESSAGE} />
+			<Stack.Screen component={Payments} name={ROUTES.PAYMENTS} />
 			<Stack.Screen component={QuestionsView} name={ROUTES.QUESTIONS} />
 			<Stack.Screen component={ContactsView} name={ROUTES.CONTACTS} />
 			<Stack.Screen component={ChatsView} name={ROUTES.CHATS} />
 			<Stack.Screen component={UserEditingForm} name={ROUTES.USER_EDITING} />
 			<Stack.Screen component={Language} name={ROUTES.LANGUAGE} />
 			<Stack.Screen component={Cource} name={ROUTES.COURSE} />
-			<Stack.Screen component={Payments} name={ROUTES.PAYMENTS} />
 		</Stack.Navigator>
 	);
 };

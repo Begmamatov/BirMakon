@@ -2,13 +2,16 @@ import { BottomArrow, FilterIcon } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
+import Modal from "react-native-modal";
 import React from "react";
-import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { useFavoritesSortHook } from "./hooks";
 
 const SelectableFlter = () => {
+	const { isModalVisible, toggleModal } = useFavoritesSortHook();
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={styles.row}>
+			<TouchableOpacity style={styles.row} onPress={toggleModal}>
 				<Text style={styles.text}>Популярные</Text>
 				<BottomArrow fill={COLORS.red} />
 			</TouchableOpacity>
@@ -16,7 +19,7 @@ const SelectableFlter = () => {
 				<Text style={styles.text}>Фильтры</Text>
 				<FilterIcon fill={COLORS.red} />
 			</TouchableOpacity>
-			{/* <Modal
+			<Modal
 				style={styles.view}
 				isVisible={isModalVisible}
 				onSwipeComplete={toggleModal}
@@ -40,7 +43,7 @@ const SelectableFlter = () => {
 						<Text style={styles.modalText}>{STRINGS.newAdded}</Text>
 					</TouchableOpacity>
 				</View>
-			</Modal> */}
+			</Modal>
 		</View>
 	);
 };
@@ -64,5 +67,37 @@ const styles = StyleSheet.create({
 	row: {
 		flexDirection: "row",
 		alignItems: "center",
+	},
+	view: {
+		justifyContent: "flex-end",
+		margin: 0,
+	},
+
+	modal: {
+		padding: 20,
+		borderTopLeftRadius: 8,
+		borderTopRightRadius: 8,
+		backgroundColor: COLORS.white,
+	},
+
+	modalText: {
+		fontSize: 16,
+		marginVertical: 15,
+		color: COLORS.defaultBlack,
+	},
+
+	empty: {
+		flex: 1,
+		backgroundColor: COLORS.white,
+	},
+
+	emptyBox: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+
+	emptyText: {
+		fontSize: 22,
 	},
 });

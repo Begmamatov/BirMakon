@@ -34,33 +34,21 @@ const AppRouter = () => {
 					}}
 				>
 					{!user.token ? (
-						<Stack.Screen
-							name={ROUTES.AUTH}
-							component={AuthStack}
-						/>
+						<Stack.Screen name={ROUTES.AUTH} component={AuthStack} />
 					) : (
 						<>
-							<Stack.Screen
-								name={ROUTES.TABS}
-								component={TabNavigation}
-							/>
+							<Stack.Screen name={ROUTES.TABS} component={TabNavigation} />
 							<Stack.Screen
 								name={ROUTES.CHECKOUT_POINT}
 								component={CheckoutPointScreen}
 							/>
-							<Stack.Screen
-								name={ROUTES.AUTH}
-								component={AuthStack}
-							/>
-							<Stack.Screen
-								name={ROUTES.SEARCH}
-								component={Search}
-							/>
+							<Stack.Screen name={ROUTES.AUTH} component={AuthStack} />
+							<Stack.Screen name={ROUTES.SEARCH} component={Search} />
 						</>
 					)}
 				</Stack.Navigator>
 			</NavigationContainer>
-			{appSettings.loading && (
+			{/* {appSettings.loading && (
 				<View style={styles.animation}>
 					<AnimatedLottieView
 						source={require("@novomarkt/assets/animations/loading-animation")}
@@ -68,7 +56,7 @@ const AppRouter = () => {
 						loop
 					/>
 				</View>
-			)}
+			)} */}
 		</View>
 	);
 };
