@@ -8,6 +8,11 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		backgroundColor: COLORS.white,
 	},
+	buttonTxt: {
+		color: COLORS.white,
+		fontSize: 16,
+		marginHorizontal: 20,
+	},
 
 	userImg: {
 		alignSelf: "center",
@@ -18,6 +23,10 @@ export const styles = StyleSheet.create({
 
 	changeTxt: {
 		marginVertical: 5,
+	},
+	back: {
+		marginTop: 20,
+		marginBottom: 10,
 	},
 
 	inputLabel: {
@@ -35,5 +44,6 @@ export const styles = StyleSheet.create({
 		borderWidth: 0,
 		borderBottomWidth: 1,
 		margin: 0,
+		zIndex: 999,
 	},
 });

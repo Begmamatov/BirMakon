@@ -2,9 +2,10 @@ import requests, { appendUrl } from "@novomarkt/api/requests";
 import Text from "@novomarkt/components/general/Text";
 import BackHeader from "@novomarkt/components/navigation/BackHeader";
 import { COLORS } from "@novomarkt/constants/colors";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
+	ActivityIndicator,
 	Image,
 	Platform,
 	TextInput,
@@ -16,22 +17,23 @@ import { styles } from "./styles";
 import DropDownPicker from "react-native-dropdown-picker";
 import DatePicker from "react-native-date-picker";
 import { LoginResponse } from "@novomarkt/api/types";
-import { useDispatch } from "react-redux";
-import { toggleLoading } from "@novomarkt/store/slices/appSettings";
+import { STRINGS } from "@novomarkt/locales/strings";
+import DefaultButton from "@novomarkt/components/general/DefaultButton";
+import { ROUTES } from "@novomarkt/constants/routes";
 
 export const UserEditingForm = () => {
-	const dispatch = useDispatch();
+	const navigation = useNavigation();
 	const data = useRoute();
 	const userData = data.params;
 	const [date, setDate] = useState(new Date(userData?.birthday));
 	const [open, setOpen] = useState(false);
 	const [state, setState] = useState<LoginResponse>({
 		gender: 1,
-		name: "",
-		phone: "",
-		photo: "",
-		birthday: "",
-		email: "",
+		name: userData?.name,
+		phone: userData?.phone,
+		photo: userData?.photo,
+		birthday: userData?.birthday,
+		email: userData?.email,
 	});
 	const [openDate, setOpenDate] = useState(false);
 	const [value, setValue] = useState(userData?.gender);
@@ -40,6 +42,7 @@ export const UserEditingForm = () => {
 		{ label: "Женщина", value: 2 },
 	]);
 	const [image, setImage] = useState<string | undefined>("");
+	const [animation, setAnimation] = useState(false);
 	let dateNow = new window.Date();
 
 	const changePhoto = () => {
@@ -54,11 +57,17 @@ export const UserEditingForm = () => {
 		setState({ ...state, [key]: value });
 	};
 
-	let onUpdateProfile = () => {
+	let onUpdateProfile = async () => {
+		console.log("====================================");
+		console.log("state", JSON.stringify(state, null, 4));
+		console.log("====================================");
 		try {
-			// dispatch(toggleLoading);
-			let res = requests.profile.editProfile(state);
-			// dispatch(toggleLoading);
+			setAnimation(true);
+			let res = await requests.profile.editProfile(state);
+			let data = await res.data;
+			console.log("data", JSON.stringify(data, null, 4));
+			setAnimation(false);
+			navigation.goBack();
 		} catch (error) {
 			console.log(error);
 		}
@@ -66,7 +75,7 @@ export const UserEditingForm = () => {
 
 	return (
 		<View style={styles.container}>
-			<BackHeader />
+			<BackHeader style={styles.back} />
 			<View style={styles.userImg}>
 				<Image
 					source={{
@@ -100,18 +109,18 @@ export const UserEditingForm = () => {
 					<TextInput
 						style={styles.input}
 						// value={userData?.name || ""}
-						defaultValue={userData?.name}
+						defaultValue={state?.name}
 						onChangeText={onStateChange("name")}
 						// onChange={onStateChange("name")}d
 					/>
 					<TextInput
 						style={styles.input}
-						value={userData?.email}
+						value={state?.email}
 						onChangeText={onStateChange("email")}
 					/>
 					<TextInput
 						style={styles.input}
-						value={userData?.phone}
+						value={state?.phone}
 						onChangeText={onStateChange}
 					/>
 					<TouchableOpacity
@@ -157,11 +166,24 @@ export const UserEditingForm = () => {
 						badgeStyle={{ margin: 0 }}
 						onChangeValue={onStateChange}
 					/>
-					<TouchableOpacity onPress={onUpdateProfile}>
-						<Text>Save</Text>
-					</TouchableOpacity>
 				</View>
 			</View>
+			<DefaultButton
+				containerStyle={{ marginHorizontal: 0, marginTop: 90 }}
+				onPress={() => {
+					onUpdateProfile();
+				}}
+			>
+				{animation ? (
+					<ActivityIndicator
+						size="small"
+						color={COLORS.red}
+						animating={animation}
+					/>
+				) : (
+					<Text style={styles.buttonTxt}>{STRINGS.save}</Text>
+				)}
+			</DefaultButton>
 		</View>
 	);
 };

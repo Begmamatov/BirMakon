@@ -185,8 +185,8 @@ export const styles = StyleSheet.create({
 
 	left: {
 		paddingHorizontal: 20,
-		paddingBottom: 10,
 		backgroundColor: COLORS.white,
+		paddingBottom: 15,
 	},
 
 	userData: {

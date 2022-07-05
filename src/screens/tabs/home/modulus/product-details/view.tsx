@@ -18,6 +18,7 @@ import DefaultButton from "@novomarkt/components/general/DefaultButton";
 import DefaultInput from "@novomarkt/components/general/DefaultInput";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
+import { ROUTES } from "@novomarkt/constants/routes";
 import { WINDOW_WIDTH } from "@novomarkt/constants/sizes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useAppSelector } from "@novomarkt/store/hooks";
@@ -332,9 +333,9 @@ const ProductDetailsView = ({}): ReactElement => {
 		const sum = reviewsList.reduce((a: any, b: any) => {
 			return b.rate + a;
 		}, 0);
-		const sumReviews = reviewsList.reduce((a: any, b: any) => {
+		const sumReviews = reviewsList.reduce((a, b) => {
 			return b.review;
-		});
+		}, "");
 
 		let percent = sum / reviewsList.length;
 		per = percent.toString().substring(0, 3);
@@ -349,7 +350,15 @@ const ProductDetailsView = ({}): ReactElement => {
 				contentContainerStyle={{ paddingBottom: 50 }}
 			>
 				<View style={styles.otsenka}>
-					<StarsIcon />
+					<Rating
+						type="custom"
+						ratingCount={5}
+						imageSize={18}
+						ratingColor="#EE4927"
+						ratingBackgroundColor="#f1f1f1c1"
+						readonly={true}
+						startingValue={3.8}
+					/>
 					<Text>54 отзывов</Text>
 				</View>
 				<View style={styles.carousel}>
@@ -541,7 +550,7 @@ const ProductDetailsView = ({}): ReactElement => {
 						</View>
 					</View>
 				</TouchableOpacity>
-				{item.options?.map((e) => {
+				{item.options?.map((e: any) => {
 					return (
 						<View style={styles.map}>
 							<Text style={styles.key}>{e.key}</Text>

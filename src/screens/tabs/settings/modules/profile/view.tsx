@@ -4,8 +4,8 @@ import Text from "@novomarkt/components/general/Text";
 import BackHeader from "@novomarkt/components/navigation/BackHeader";
 import { COLORS } from "@novomarkt/constants/colors";
 import { ROUTES } from "@novomarkt/constants/routes";
-import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import React, { useEffect } from "react";
 import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import CartSelectItem from "./components/cartItem/view";
 import useProfileHook from "./hooks";
@@ -21,12 +21,18 @@ export interface UserData {
 }
 
 const ProfileView = () => {
-	const navigation = useNavigation();
+	const navigation: any = useNavigation();
 	let { onTextChange, profileData, setProfileData, onFieldSubmit } =
 		useProfileHook();
 
+	const route = useRoute();
+
+	useEffect(() => {
+		profileData;
+	}, [route]);
+
 	return (
-		<>
+		<View style={styles.container}>
 			<BackHeader style={styles.left} />
 			<ScrollView style={styles.container}>
 				<View
@@ -162,7 +168,7 @@ const ProfileView = () => {
 					</Text>
 				</View>
 			</ScrollView>
-		</>
+		</View>
 	);
 };
 
