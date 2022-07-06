@@ -96,6 +96,8 @@ let requests = {
 		getCards: () => axios.get<{ data: CardItem[] }>(`${url}/user/cards`),
 		removeCard: (data: { card_id: number }) =>
 			axios.post<{ data: CardItem[] }>(`${url}/user/card-remove`, data),
+		getUploadPhoto: () =>
+			axios.get<{ data: string }>(`${url}/user/upload-photo`),
 	},
 
 	categories: {

@@ -8,6 +8,10 @@ export const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 		paddingVertical: 20,
 	},
+	container2: {
+		flex: 1,
+		backgroundColor: "#fff",
+	},
 
 	header: {
 		fontSize: 20,

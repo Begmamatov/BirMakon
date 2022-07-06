@@ -20,6 +20,7 @@ import { LoginResponse } from "@novomarkt/api/types";
 import { STRINGS } from "@novomarkt/locales/strings";
 import DefaultButton from "@novomarkt/components/general/DefaultButton";
 import { ROUTES } from "@novomarkt/constants/routes";
+import useProfileHook from "../../hooks";
 
 export const UserEditingForm = () => {
 	const navigation = useNavigation();
@@ -28,7 +29,7 @@ export const UserEditingForm = () => {
 	const [date, setDate] = useState(new Date(userData?.birthday));
 	const [open, setOpen] = useState(false);
 	const [state, setState] = useState<LoginResponse>({
-		gender: 1,
+		gender: userData?.gender,
 		name: userData?.name,
 		phone: userData?.phone,
 		photo: userData?.photo,
@@ -41,16 +42,23 @@ export const UserEditingForm = () => {
 		{ label: "Мужчина", value: 1 },
 		{ label: "Женщина", value: 2 },
 	]);
-	const [image, setImage] = useState<string | undefined>("");
+	const [image, setImage] = useState<object | undefined>({});
 	const [animation, setAnimation] = useState(false);
 	let dateNow = new window.Date();
+	const { fetchData, profileData } = useProfileHook();
 
 	const changePhoto = () => {
 		launchImageLibrary({ mediaType: "photo" }, ({ assets }) => {
 			if (assets) {
-				setImage(assets[0].uri);
+				const img = {
+					uri: assets[0].uri,
+					type: assets[0].type,
+					name: assets[0].fileName,
+				};
+				setImage(img);
 			}
 		});
+		setState({ ...state, photo: image });
 	};
 
 	let onStateChange = (key: string) => (value: string) => {
@@ -58,14 +66,9 @@ export const UserEditingForm = () => {
 	};
 
 	let onUpdateProfile = async () => {
-		console.log("====================================");
-		console.log("state", JSON.stringify(state, null, 4));
-		console.log("====================================");
 		try {
 			setAnimation(true);
 			let res = await requests.profile.editProfile(state);
-			let data = await res.data;
-			console.log("data", JSON.stringify(data, null, 4));
 			setAnimation(false);
 			navigation.goBack();
 		} catch (error) {
@@ -79,7 +82,7 @@ export const UserEditingForm = () => {
 			<View style={styles.userImg}>
 				<Image
 					source={{
-						uri: !image ? appendUrl(userData?.photo) : image?.toString(),
+						uri: !image.uri ? appendUrl(userData?.photo) : image?.uri,
 					}}
 					style={{ width: 100, height: 100, borderRadius: 100 }}
 				/>

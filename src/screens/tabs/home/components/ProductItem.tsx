@@ -20,8 +20,9 @@ import {
 } from "@novomarkt/store/slices/favoriteSlice";
 import { useNavigation } from "@react-navigation/core";
 import { is } from "immer/dist/internal";
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import {
+	ActivityIndicator,
 	Image,
 	ListRenderItemInfo,
 	StyleSheet,
@@ -56,36 +57,42 @@ const ProductItem = ({
 	const fav = useAppSelector(favoriteSelector);
 	let isFav = !!fav[id];
 
+	const [animate, setAnimate] = useState(false);
+
 	const onCartPress = async () => {
-		try {
-			if (isInCart) {
-				console.log("onCartPress", product_id);
-				dispatch(toggleLoading(true));
+		console.log("onCartPress");
+		if (isInCart) {
+			try {
+				setAnimate(true);
 				let clear = await requests.products.removeItem({
 					product_id: id,
 				});
 				let cartGet = await requests.products.getCarts();
-				console.log("cartGet", cartGet);
 				dispatch(loadCart(cartGet.data.data));
-				dispatch(toggleLoading(false));
-			} else {
-				dispatch(toggleLoading(true));
+				setAnimate(false);
+			} catch (error) {
+				console.log(error);
+				setAnimate(false);
+			}
+		} else {
+			try {
+				setAnimate(true);
 				let res = await requests.products.addToCart({
 					amount: 1,
 					product_id: id,
 				});
+
 				let cartRes = await requests.products.getCarts();
 				dispatch(loadCart(cartRes.data.data));
-				dispatch(toggleLoading(false));
+				setAnimate(false);
+			} catch (error) {
+				console.log("erorrs++++", JSON.stringify(error, null, 4));
+				alert(JSON.stringify(error, null, 4));
+			} finally {
+				setAnimate(false);
 			}
-		} catch (error) {
-			console.log(error);
 		}
 	};
-
-	// useEffect(() => {
-	// 	dispatch(toggleLoading());
-	// }, [5000]);
 
 	const onAddFavorite = async () => {
 		try {
@@ -150,14 +157,24 @@ const ProductItem = ({
 						secondary={isInCart}
 						onPress={onCartPress}
 					>
-						<View style={styles.buttonContainer}>
-							<Text
-								style={[isInCart ? styles.inactiveCartText : styles.cartText]}
-							>
-								{isInCart ? `${STRINGS.addToCart}е` : `${STRINGS.addToCart}у`}
-							</Text>
-							<BasketIcon fill={isInCart ? COLORS.cartColor3 : COLORS.white} />
-						</View>
+						{animate ? (
+							<ActivityIndicator
+								size="small"
+								color={COLORS.red}
+								animating={animate}
+							/>
+						) : (
+							<View style={styles.buttonContainer}>
+								<Text
+									style={[isInCart ? styles.inactiveCartText : styles.cartText]}
+								>
+									{isInCart ? `${STRINGS.addToCart}е` : `${STRINGS.addToCart}у`}
+								</Text>
+								<BasketIcon
+									fill={isInCart ? COLORS.cartColor3 : COLORS.white}
+								/>
+							</View>
+						)}
 					</DefaultButton>
 				</View>
 			</View>

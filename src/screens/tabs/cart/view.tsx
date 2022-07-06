@@ -19,6 +19,8 @@ import { styles } from "./style";
 
 const CartView = () => {
 	let navigation: any = useNavigation();
+	// let cart = useSelector((s) => s)?.cart.card_list ?? [];
+	// console.log("size", cart.length);
 
 	let cart = useSelector(cartArraySelector);
 

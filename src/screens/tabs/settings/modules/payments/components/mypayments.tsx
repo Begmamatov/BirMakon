@@ -12,11 +12,17 @@ import {
 	Image,
 } from "react-native";
 
+import MyPaymentsHooks from "./hooks";
+
 export interface BlueButtonProps {
 	onPress?: (event: GestureResponderEvent) => void;
 }
 
 const Mypayments = ({ onPress }: BlueButtonProps) => {
+	const { payments } = MyPaymentsHooks();
+
+	console.log("payments", JSON.stringify(payments, null, 4));
+
 	return (
 		<View>
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>

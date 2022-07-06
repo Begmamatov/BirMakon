@@ -34,7 +34,7 @@ const ProfileView = () => {
 	return (
 		<View style={styles.container}>
 			<BackHeader style={styles.left} />
-			<ScrollView style={styles.container}>
+			<ScrollView style={styles.container2}>
 				<View
 					style={{
 						flexDirection: "row",

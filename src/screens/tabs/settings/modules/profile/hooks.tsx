@@ -37,6 +37,7 @@ const useProfileHook = () => {
 		onTextChange,
 		setProfileData,
 		onFieldSubmit,
+		fetchData,
 	};
 };
 
