@@ -19,7 +19,7 @@ const SelectableItems = ({ onPress, headerText }: SelectableItemsProps) => {
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.row} onPress={onPress}>
-				<Text style={styles.text}>{headerText}</Text>
+				<Text style={styles.text}>{headerText ? headerText : ""}</Text>
 				<BottomArrow fill={COLORS.red} />
 			</TouchableOpacity>
 		</View>

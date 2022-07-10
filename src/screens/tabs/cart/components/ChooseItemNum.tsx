@@ -117,7 +117,7 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 				/>
 			</View>
 			<View style={styles.textBox}>
-				<Text style={styles.headerTxt}>{data.product.name}</Text>
+				<Text style={styles.headerTxt}>{data?.product?.name}</Text>
 				<Text style={styles.itemTxt}>
 					{STRINGS.color}
 					<Text> Белый</Text>
@@ -127,9 +127,11 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 					<Text> XXL - 44</Text>
 				</Text>
 				<View style={styles.rowTxt}>
-					<Text style={styles.blueTxt}>{data.product.price} сум</Text>
+					<Text style={styles.blueTxt}>{data?.product?.price} сум</Text>
 					{data.product.price_old ? (
-						<Text style={styles.lineThrough}>{data.product.price_old} сум</Text>
+						<Text style={styles.lineThrough}>
+							{data?.product?.price_old} сум
+						</Text>
 					) : null}
 				</View>
 				<View style={styles.counter}>
@@ -139,7 +141,7 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 						</View>
 					</TouchableOpacity>
 					<View style={styles.topBottom}>
-						<Text>{data.amount} шт</Text>
+						<Text>{data?.amount} шт</Text>
 					</View>
 					<TouchableOpacity onPress={onAddItem} style={styles.plus}>
 						<View style={styles.plus}>

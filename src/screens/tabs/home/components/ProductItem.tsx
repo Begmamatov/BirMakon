@@ -131,7 +131,9 @@ const ProductItem = ({
 					</TouchableOpacity>
 					{discount && (
 						<View style={styles.discount}>
-							<Text style={styles.dscountText}>{discount}%</Text>
+							<Text style={styles.dscountText}>
+								{discount ? discount : ""}%
+							</Text>
 						</View>
 					)}
 				</View>
@@ -140,7 +142,7 @@ const ProductItem = ({
 						<Text style={styles.brand}>{category?.name}</Text>
 						<Text style={styles.brand}>{shop?.name}</Text>
 					</View>
-					<Text style={styles.name}>{name}</Text>
+					<Text style={styles.name}>{name ? name : ""}</Text>
 					<View
 						style={{
 							flexDirection: "column",
@@ -149,8 +151,12 @@ const ProductItem = ({
 							height: 60,
 						}}
 					>
-						<Text style={styles.price}>{price} сум</Text>
-						{price_old && <Text style={styles.oldPrice}>{price_old} сум</Text>}
+						<Text style={styles.price}>{price ? price : ""} сум</Text>
+						{price_old && (
+							<Text style={styles.oldPrice}>
+								{price_old ? price_old : ""} сум
+							</Text>
+						)}
 					</View>
 					<DefaultButton
 						containerStyle={styles.button}

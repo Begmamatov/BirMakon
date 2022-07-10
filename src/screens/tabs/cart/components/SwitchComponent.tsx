@@ -13,7 +13,7 @@ const SwitchComponent = ({ text }: SwitchComponentProps) => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.text}> {text} </Text>
+			<Text style={styles.text}> {text ? text : ""} </Text>
 			<Switch
 				hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
 				trackColor={{ false: "#767577", true: COLORS.red }}

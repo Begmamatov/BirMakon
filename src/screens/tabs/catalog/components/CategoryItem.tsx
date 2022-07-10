@@ -24,7 +24,7 @@ const CategoryItem = ({
 		>
 			<View style={styles.container}>
 				<Image style={styles.image} source={{ uri: appendUrl(photo as any) }} />
-				<Text style={styles.text}>{name}</Text>
+				<Text style={styles.text}>{name ? name : ""}</Text>
 			</View>
 		</TouchableWithoutFeedback>
 	);

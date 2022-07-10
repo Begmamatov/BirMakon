@@ -34,8 +34,8 @@ const NewsItem = ({
 		<View style={styles.container}>
 			<Image source={{ uri: appendUrl(photo) }} style={styles.image} />
 			<View style={styles.content}>
-				<Text style={styles.text}>{name}</Text>
-				<Text style={styles.dateStyle}>{day}</Text>
+				<Text style={styles.text}>{name ? name : ""}</Text>
+				<Text style={styles.dateStyle}>{day ? day : ""}</Text>
 				<View style={styles.row}>
 					<DefaultButton
 						onPress={() =>

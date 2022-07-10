@@ -25,15 +25,15 @@ export default function RedItem() {
 				<View style={styles.itemBox}>
 					<ApprovedIcon />
 				</View>
-				<Text style={styles.containerText}>{data.title}</Text>
-				<Text style={styles.containerText1}>{data.descriptions}</Text>
+				<Text style={styles.containerText}>{data?.title}</Text>
+				<Text style={styles.containerText1}>{data?.descriptions}</Text>
 			</View>
 			<View style={styles.containerBoxTwo}>
 				<View style={styles.itemBox1}>
 					<MainPagesIcon />
 				</View>
-				<Text style={styles.containerText}>{data2.title}</Text>
-				<Text style={styles.containerText1}>{data2.descriptions}</Text>
+				<Text style={styles.containerText}>{data2?.title}</Text>
+				<Text style={styles.containerText1}>{data2?.descriptions}</Text>
 			</View>
 		</View>
 	);

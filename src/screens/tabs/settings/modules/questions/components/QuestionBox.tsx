@@ -30,7 +30,7 @@ const QuestionBox = ({ title, button }: QuestionBoxProps) => {
 	return (
 		<View style={{ backgroundColor: COLORS.white }}>
 			<View style={styles.footer}>
-				<Text style={styles.footerTxt}>{title}</Text>
+				<Text style={styles.footerTxt}>{title ? title : ""}</Text>
 				<TextInput
 					style={styles.input}
 					placeholder={"Ваше имя"}

@@ -191,6 +191,8 @@ let requests = {
 	},
 
 	sort: {
+		getSort: (data: any) =>
+			axios.get(`${url}/product?sort=${data.sort}&by-brand?id=${data.brand}`),
 		getRecently: () => axios.get(`${url}/product?sort=recently`),
 		getNewAdded: () => axios.get(`${url}/product?sort=new`),
 		getExpensive: () => axios.get(`${url}/product?sort=price_up`),

@@ -119,8 +119,8 @@ const CheckoutView = () => {
 									></View>
 								</View>
 								<View style={styles.textBox}>
-									<Text style={styles.text}>{item.name}</Text>
-									<Text style={styles.comment}>{item.description}</Text>
+									<Text style={styles.text}>{item?.name}</Text>
+									<Text style={styles.comment}>{item?.description}</Text>
 								</View>
 							</TouchableOpacity>
 						</>
@@ -151,7 +151,7 @@ const CheckoutView = () => {
 									></View>
 								</View>
 								<View style={[styles.textBox, { justifyContent: "center" }]}>
-									<Text style={[styles.text, {}]}>{item.name}</Text>
+									<Text style={[styles.text, {}]}>{item?.name}</Text>
 									<Text style={[styles.comment, {}]}>{item?.description}</Text>
 								</View>
 							</TouchableOpacity>
@@ -187,7 +187,7 @@ const CheckoutView = () => {
 									/>
 									{e.amount && (
 										<View style={styles.imageNum}>
-											<Text style={styles.num}>{e.amount}</Text>
+											<Text style={styles.num}>{e?.amount}</Text>
 										</View>
 									)}
 								</View>

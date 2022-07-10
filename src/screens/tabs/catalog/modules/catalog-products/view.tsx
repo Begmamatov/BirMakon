@@ -63,7 +63,7 @@ const CatalogProductsView = ({}): ReactElement => {
 			<ScrollView>
 				<Image source={{ uri: BannerURL }} style={styles.banner} />
 				{/* <ScrollableMenu /> */}
-				<SelectableFlter />
+				<SelectableFlter id={id} setProducts={setProducts} />
 				<FlatList
 					showsVerticalScrollIndicator={false}
 					style={styles.columns}

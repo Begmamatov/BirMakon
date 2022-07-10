@@ -26,7 +26,7 @@ export const ProductsList = ({
 	}, []);
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>{title}</Text>
+			<Text style={styles.title}>{title ? title : ""}</Text>
 			<FlatList
 				horizontal
 				showsHorizontalScrollIndicator={false}

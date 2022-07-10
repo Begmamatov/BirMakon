@@ -5,10 +5,18 @@ import { STRINGS } from "@novomarkt/locales/strings";
 import Modal from "react-native-modal";
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { useFavoritesSortHook } from "./hooks";
+import { useCatalogSortHook } from "./hooks";
 
-const SelectableFlter = () => {
-	const { isModalVisible, toggleModal } = useFavoritesSortHook();
+const SelectableFlter = ({ id, setProducts }) => {
+	const { isModalVisible, toggleModal, products, setState, getSort, state } =
+		useCatalogSortHook();
+
+	const handlePress = (sort: string) => {
+		toggleModal;
+		setState({ ...state, sort, id });
+		getSort();
+		setProducts(products);
+	};
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.row} onPress={toggleModal}>
@@ -27,19 +35,19 @@ const SelectableFlter = () => {
 				swipeDirection={["up", "left", "right", "down"]}
 			>
 				<View style={styles.modal}>
-					<TouchableOpacity onPress={toggleModal}>
+					<TouchableOpacity onPress={() => handlePress("recently")}>
 						<Text style={styles.modalText}>{STRINGS.recentlyAdded}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={toggleModal}>
+					<TouchableOpacity onPress={() => handlePress("new")}>
 						<Text style={styles.modalText}>{STRINGS.popular}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={toggleModal}>
+					<TouchableOpacity onPress={() => handlePress("price_up")}>
 						<Text style={styles.modalText}>{STRINGS.firstCheap}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={toggleModal}>
+					<TouchableOpacity onPress={() => handlePress("price_down")}>
 						<Text style={styles.modalText}>{STRINGS.firsExpensive}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={toggleModal}>
+					<TouchableOpacity onPress={() => handlePress("popular")}>
 						<Text style={styles.modalText}>{STRINGS.newAdded}</Text>
 					</TouchableOpacity>
 				</View>

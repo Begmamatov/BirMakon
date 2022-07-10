@@ -1,33 +1,36 @@
 import requests from "@novomarkt/api/requests";
-import { STRINGS } from "@novomarkt/locales/strings";
-import {
-	favoriteArraySelector,
-	loadFavorite,
-} from "@novomarkt/store/slices/favoriteSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export const useFavoritesSortHook = () => {
+export const useCatalogSortHook = () => {
 	const [isModalVisible, setModalVisible] = useState(false);
-	const [modalText, setModalText] = useState(STRINGS.recentlyAdded);
+	const [products, setProducts] = useState([]);
+	const [state, setState] = useState({
+		sort: "",
+		brand: "",
+	} as any);
+
 	const dispatch = useDispatch();
 
 	const toggleModal = () => {
 		setModalVisible(!isModalVisible);
 	};
 
-	const getFavs = async () => {
+	const getSort = async () => {
 		try {
-			let res = await requests.favorites.getFavorites();
-			dispatch(loadFavorite(res.data.data));
+			let res = await requests.sort.getSort(state);
+			setProducts(res.data.data);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 
 	return {
+		state,
+		products,
 		toggleModal,
 		isModalVisible,
-		modalText,
+		setState,
+		getSort,
 	};
 };

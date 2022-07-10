@@ -43,7 +43,7 @@ const BrandsList = () => {
 							<FlatList
 								data={brands}
 								renderItem={({ item }) => (
-									<Text style={styles.brandsName}>{item.name}</Text>
+									<Text style={styles.brandsName}>{item?.name}</Text>
 								)}
 							/>
 						</View>

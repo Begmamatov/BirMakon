@@ -377,7 +377,7 @@ const ProductDetailsView = ({}): ReactElement => {
 						activeDotIndex={activeSlide}
 						dotsLength={customCarouselData.length}
 					/>
-					<Text style={styles.itemName}>{item.name}</Text>
+					<Text style={styles.itemName}>{item?.name}</Text>
 				</View>
 				<FavoritePrice
 					oldprice={item.price_old}

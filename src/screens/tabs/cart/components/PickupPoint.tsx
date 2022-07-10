@@ -32,12 +32,12 @@ const PickupPoint = ({ items }) => {
 						return (
 							<View style={styles.boxNum}>
 								<Image
-									source={{ uri: appendUrl(e.product.photo) }}
+									source={{ uri: appendUrl(e?.product?.photo) }}
 									style={styles.boxImage}
 								/>
 								{e.amount && (
 									<View style={styles.imageNum}>
-										<Text style={styles.num}>{e.amount}</Text>
+										<Text style={styles.num}>{e?.amount}</Text>
 									</View>
 								)}
 							</View>
@@ -52,6 +52,7 @@ const PickupPoint = ({ items }) => {
 export default PickupPoint;
 
 const styles = StyleSheet.create({
+	container: {},
 	pickupContainer: {
 		marginVertical: 10,
 		marginHorizontal: 20,

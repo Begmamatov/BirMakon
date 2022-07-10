@@ -35,10 +35,10 @@ const HandlingTextBox = () => {
 							}}
 						>
 							<PlayIcon fill={COLORS.white} />
-							<Text style={styles.text1}>{e.question}</Text>
+							<Text style={styles.text1}>{e?.question}</Text>
 						</TouchableOpacity>
 						<View>
-							{shouldShow === i && <Text style={styles.text}>{e.answer}</Text>}
+							{shouldShow === i && <Text style={styles.text}>{e?.answer}</Text>}
 						</View>
 					</View>
 				);

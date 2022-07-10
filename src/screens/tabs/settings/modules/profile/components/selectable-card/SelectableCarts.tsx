@@ -27,20 +27,12 @@ const SelectableCarts = ({
 					return (
 						<TouchableOpacity
 							style={
-								activeIndex === i
-									? styles.activeBorder
-									: styles.inactiveBorder
+								activeIndex === i ? styles.activeBorder : styles.inactiveBorder
 							}
 							onPress={() => setActiveIndex(i)}
 						>
-							<Text
-								style={
-									activeIndex === i
-										? styles.active
-										: styles.inactive
-								}
-							>
-								{e.name}
+							<Text style={activeIndex === i ? styles.active : styles.inactive}>
+								{e?.name}
 							</Text>
 						</TouchableOpacity>
 					);

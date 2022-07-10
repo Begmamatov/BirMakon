@@ -34,7 +34,7 @@ const CategoryItem = ({
 		>
 			<View style={styles.nameContainer}>
 				<Text numberOfLines={2} ellipsizeMode="tail" style={styles.text}>
-					{name}
+					{name ? name : ""}
 				</Text>
 			</View>
 			<Image style={styles.image} source={{ uri: appendUrl(photo) }} />

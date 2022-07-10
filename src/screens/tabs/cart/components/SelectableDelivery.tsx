@@ -41,8 +41,8 @@ const SelectableDelivery = () => {
 								></View>
 							</View>
 							<View style={styles.textBox}>
-								<Text style={styles.text}>{item.name}</Text>
-								<Text style={styles.comment}>{item.description}</Text>
+								<Text style={styles.text}>{item?.name}</Text>
+								<Text style={styles.comment}>{item?.description}</Text>
 							</View>
 						</TouchableOpacity>
 					</>
@@ -55,6 +55,9 @@ const SelectableDelivery = () => {
 export default SelectableDelivery;
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
 	deliveryContainer: {
 		marginHorizontal: 20,
 	},

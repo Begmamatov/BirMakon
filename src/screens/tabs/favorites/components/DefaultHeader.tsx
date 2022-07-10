@@ -11,7 +11,7 @@ export interface DefaultHeaderProps {
 const DefaultHeader = ({ name }: DefaultHeaderProps) => {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.text}>{name}</Text>
+			<Text style={styles.text}>{name ? name : ""}</Text>
 		</View>
 	);
 };

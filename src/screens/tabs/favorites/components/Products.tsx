@@ -105,7 +105,7 @@ const Products = ({ item }: { item: ProductItemResponse }) => {
 				<Image source={{ uri: appendUrl(photo) }} style={styles.image} />
 				<View style={styles.itemsContainer}>
 					<View style={styles.nameContainer}>
-						<Text style={styles.itemName}>{name}</Text>
+						<Text style={styles.itemName}>{name ? name : ""}</Text>
 
 						<TouchableOpacity
 							onPress={onAddFavorite}
@@ -119,13 +119,19 @@ const Products = ({ item }: { item: ProductItemResponse }) => {
 						</TouchableOpacity>
 					</View>
 					<View style={styles.priceContainer}>
-						{price_old && <Text style={styles.oldPrice}>{price_old} сум</Text>}
+						{price_old && (
+							<Text style={styles.oldPrice}>
+								{price_old ? price_old : ""} сум
+							</Text>
+						)}
 						<Text style={styles.price}>{price} сум</Text>
 					</View>
 					<View style={styles.nameContainer}>
 						{discount && (
 							<View style={styles.discount}>
-								<Text style={styles.dscountText}>{discount}%</Text>
+								<Text style={styles.dscountText}>
+									{discount ? discount : ""}%
+								</Text>
 							</View>
 						)}
 						<DefaultButton

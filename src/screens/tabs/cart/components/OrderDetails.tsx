@@ -21,7 +21,7 @@ const OrderDetails = ({
 			<View style={styles.box}>
 				<View style={styles.row}>
 					<Text>
-						{STRINGS.items} ({total.count}){" "}
+						{STRINGS.items} ({total?.count}){" "}
 					</Text>
 					<Text style={styles.price}>{total.total} сум</Text>
 				</View>
@@ -33,7 +33,7 @@ const OrderDetails = ({
 				</View>
 				<View style={styles.rowFooter}>
 					<Text style={styles.footerTxt}>{STRINGS.totalPrice}</Text>
-					<Text style={styles.total}> {total.total} сум </Text>
+					<Text style={styles.total}> {total?.total} сум </Text>
 				</View>
 			</View>
 		</View>

@@ -24,7 +24,7 @@ const NewsList = ({ title = STRINGS.news }: NewsData) => {
 	}, []);
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>{title}</Text>
+			<Text style={styles.title}>{title ? title : ""}</Text>
 			<FlatList
 				horizontal
 				showsHorizontalScrollIndicator={false}
@@ -43,8 +43,10 @@ const styles = StyleSheet.create({
 	title: {
 		color: COLORS.defaultBlack,
 		fontSize: 19,
-		marginLeft: 16,
+		marginLeft: 10,
 		marginBottom: 20,
+		fontWeight: "700",
+		letterSpacing: 0.5,
 	},
 	container: { marginBottom: 20 },
 	contentContainerStyle: { paddingHorizontal: 12 },

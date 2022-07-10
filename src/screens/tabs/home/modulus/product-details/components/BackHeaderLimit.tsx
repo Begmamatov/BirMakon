@@ -33,7 +33,7 @@ const BackHeaderLimit = ({ name }) => {
 			<TouchableOpacity onPress={navigation.goBack}>
 				<LeftArrowIcon hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }} />
 			</TouchableOpacity>
-			<Text style={styles.logoText}>{name}</Text>
+			<Text style={styles.logoText}>{name ? name : ""}</Text>
 			<TouchableOpacity>
 				<GroupIcon />
 			</TouchableOpacity>
