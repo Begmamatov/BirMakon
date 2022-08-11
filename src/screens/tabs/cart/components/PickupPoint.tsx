@@ -8,8 +8,10 @@ import { useNavigation } from "@react-navigation/core";
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
 
-const PickupPoint = ({ items }) => {
-	let navigation = useNavigation();
+type Props = any;
+
+const PickupPoint = ({ items }: Props) => {
+
 	return (
 		<View style={styles.container}>
 			<Text style={styles.headerTxt}>{STRINGS.pickupPoint}*</Text>
@@ -28,18 +30,18 @@ const PickupPoint = ({ items }) => {
 						flexWrap: "wrap",
 					}}
 				>
-					{items.map((e) => {
+					{items.map((e: any) => {
 						return (
 							<View style={styles.boxNum}>
 								<Image
 									source={{ uri: appendUrl(e?.product?.photo) }}
 									style={styles.boxImage}
 								/>
-								{e.amount && (
+								{e.amount ? (
 									<View style={styles.imageNum}>
 										<Text style={styles.num}>{e?.amount}</Text>
 									</View>
-								)}
+								) : null}
 							</View>
 						);
 					})}

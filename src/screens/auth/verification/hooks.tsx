@@ -55,7 +55,6 @@ const useVerificationHook = () => {
 				// console.warn(error.response.data);
 			} finally {
 				setLoading(false);
-				navigation.navigate(ROUTES.TABS);
 			}
 		}
 	};

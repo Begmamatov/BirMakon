@@ -19,7 +19,7 @@ const SettingsItem = ({ icon: Icon, text, onPress }: SettingsItemProps) => {
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
 			<View style={styles.container}>
-				<View style={styles.icon}>{Icon && <Icon />}</View>
+				<View style={styles.icon}>{Icon ? <Icon /> : null}</View>
 				<Text style={styles.text}>{text}</Text>
 			</View>
 		</TouchableWithoutFeedback>

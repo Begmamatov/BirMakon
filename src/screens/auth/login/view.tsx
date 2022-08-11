@@ -55,7 +55,7 @@ const LoginView = () => {
 					title={STRINGS.password}
 					placeholder={STRINGS.yourPassword}
 					textContentType={"password"}
-					secureText={true}
+					secureText={false}
 					onChange={onStateChange("password")}
 					value={state.password}
 				/>

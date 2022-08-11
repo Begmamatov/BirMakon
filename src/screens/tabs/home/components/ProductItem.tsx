@@ -129,13 +129,13 @@ const ProductItem = ({
 							<HeartIconBorder fill={COLORS.red} stroke={COLORS.red} />
 						)}
 					</TouchableOpacity>
-					{discount && (
+					{discount ? (
 						<View style={styles.discount}>
 							<Text style={styles.dscountText}>
 								{discount ? discount : ""}%
 							</Text>
 						</View>
-					)}
+					) : null}
 				</View>
 				<View style={styles.details}>
 					<View style={styles.row}>
@@ -152,11 +152,11 @@ const ProductItem = ({
 						}}
 					>
 						<Text style={styles.price}>{price ? price : ""} сум</Text>
-						{price_old && (
+						{price_old ? (
 							<Text style={styles.oldPrice}>
 								{price_old ? price_old : ""} сум
 							</Text>
-						)}
+						) : null}
 					</View>
 					<DefaultButton
 						containerStyle={styles.button}

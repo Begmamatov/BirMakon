@@ -12,7 +12,7 @@ import { styles } from "./style";
 let BannerURL =
 	"https://lh4.googleusercontent.com/mEIPzmkL2ezY8H55Ib7dyT7gUPQRnDSxyu_SM458KWgKAkOWD0X9VmkIw7hBQdgecLARQOUT97qOtLxf2OHysWaByiq-HbLPzrMA5Sb9hsUP3Xrml-BPjUTBQP_YR1ZTOsm14Doh";
 
-const CatalogProductsView = ({}): ReactElement => {
+const CatalogProductsView = ({ }): ReactElement => {
 	const [products, setProducts] = useState<ProductItemResponse[]>();
 
 	let {

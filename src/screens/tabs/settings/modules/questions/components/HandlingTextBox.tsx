@@ -18,7 +18,7 @@ const HandlingTextBox = () => {
 		try {
 			let res = await requests.frequentQuestions.getQuestions();
 			setQuestions(res.data.data);
-		} catch (error) {}
+		} catch (error) { }
 	};
 	useEffect(() => {
 		effect();
@@ -38,7 +38,7 @@ const HandlingTextBox = () => {
 							<Text style={styles.text1}>{e?.question}</Text>
 						</TouchableOpacity>
 						<View>
-							{shouldShow === i && <Text style={styles.text}>{e?.answer}</Text>}
+							{shouldShow === i ? <Text style={styles.text}>{e?.answer}</Text> : null}
 						</View>
 					</View>
 				);

@@ -36,7 +36,7 @@ const BackHeader = ({
 				</TouchableOpacity>
 				<Text style={styles.text}>{name}</Text>
 			</View>
-			{hasSearch && <SearchIcon fill={COLORS.black} />}
+			{hasSearch ? <SearchIcon fill={COLORS.black} /> : null}
 		</View>
 	);
 };

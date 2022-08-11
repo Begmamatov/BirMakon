@@ -42,7 +42,8 @@ const DefaultButton = ({
 					{loading ? (
 						//TODO Check color
 						<ActivityIndicator
-							color={secondary ? COLORS.blue : COLORS.white}
+							animating={loading}
+							color={COLORS.red}
 							size={"small"}
 						/>
 					) : (

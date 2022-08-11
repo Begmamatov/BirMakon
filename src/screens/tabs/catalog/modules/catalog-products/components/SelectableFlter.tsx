@@ -3,24 +3,40 @@ import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
 import Modal from "react-native-modal";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { useCatalogSortHook } from "./hooks";
+import requests from "@novomarkt/api/requests";
 
-const SelectableFlter = ({ id, setProducts }) => {
-	const { isModalVisible, toggleModal, products, setState, getSort, state } =
-		useCatalogSortHook();
+type Props = {
+	id: number;
+	setProducts: (products: any) => void;
+};
 
-	const handlePress = (sort: string) => {
-		toggleModal;
-		setState({ ...state, sort, id });
-		getSort();
-		setProducts(products);
+const SelectableFlter = ({ id, setProducts }: Props) => {
+	const [isModalVisible, setModalVisible] = useState(false);
+	const [title, setTitle] = useState("");
+
+	const toggleModal = () => {
+		setModalVisible(!isModalVisible);
+	};
+
+	const handlePress = (sort: string, sortName: string) => {
+		setTitle(sortName);
+		const getSorting = async () => {
+			try {
+				let res = await requests.sort.getSort({ sort, id });
+				setProducts(res.data.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getSorting()
+		toggleModal();
 	};
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.row} onPress={toggleModal}>
-				<Text style={styles.text}>Популярные</Text>
+				<Text style={styles.text}>{title ? title : "Сортировка"}</Text>
 				<BottomArrow fill={COLORS.red} />
 			</TouchableOpacity>
 			<TouchableOpacity style={styles.row}>
@@ -35,20 +51,20 @@ const SelectableFlter = ({ id, setProducts }) => {
 				swipeDirection={["up", "left", "right", "down"]}
 			>
 				<View style={styles.modal}>
-					<TouchableOpacity onPress={() => handlePress("recently")}>
+					<TouchableOpacity onPress={() => handlePress("recently", STRINGS.recentlyAdded)}>
 						<Text style={styles.modalText}>{STRINGS.recentlyAdded}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={() => handlePress("new")}>
+					<TouchableOpacity onPress={() => handlePress("popular", STRINGS.popular)}>
 						<Text style={styles.modalText}>{STRINGS.popular}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={() => handlePress("price_up")}>
-						<Text style={styles.modalText}>{STRINGS.firstCheap}</Text>
+					<TouchableOpacity onPress={() => handlePress("new", STRINGS.newAdded)}>
+						<Text style={styles.modalText}>{STRINGS.newAdded}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={() => handlePress("price_down")}>
+					<TouchableOpacity onPress={() => handlePress("price_up", STRINGS.firsExpensive)}>
 						<Text style={styles.modalText}>{STRINGS.firsExpensive}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={() => handlePress("popular")}>
-						<Text style={styles.modalText}>{STRINGS.newAdded}</Text>
+					<TouchableOpacity onPress={() => handlePress("price_down", STRINGS.firstCheap)}>
+						<Text style={styles.modalText}>{STRINGS.firstCheap}</Text>
 					</TouchableOpacity>
 				</View>
 			</Modal>

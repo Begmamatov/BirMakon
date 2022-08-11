@@ -54,6 +54,8 @@ const CheckoutView = () => {
 		receiver: 0,
 	});
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
 	const toggleSnackbar = () => setVisibleSnackbar(!visibleSnackbar);
@@ -63,7 +65,7 @@ const CheckoutView = () => {
 			let res = await requests.products.deliveryMethods();
 			let res2 = await requests.products.getProductPayment();
 			setDelivery(res.data.data);
-			setPayment(res2.data.data);
+			setPayment(res2.data.data as any);
 		} catch (error) {
 			console.log(error);
 		}
@@ -79,7 +81,7 @@ const CheckoutView = () => {
 
 	const sendOrder = async () => {
 		try {
-			dispatch(toggleLoading(true));
+			setIsLoading(true);
 			let res = await requests.order.sendOrder(state);
 			let ClearRes = await requests.products.clearCart();
 			let cartGet = await requests.products.getCarts();
@@ -91,7 +93,7 @@ const CheckoutView = () => {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading(false));
+			setIsLoading(false);
 		}
 	};
 
@@ -185,11 +187,11 @@ const CheckoutView = () => {
 										source={{ uri: appendUrl(e.product.photo) }}
 										style={styles.boxImage}
 									/>
-									{e.amount && (
+									{e.amount ? (
 										<View style={styles.imageNum}>
 											<Text style={styles.num}>{e?.amount}</Text>
 										</View>
-									)}
+									) : null}
 								</View>
 							);
 						})}
@@ -262,6 +264,7 @@ const CheckoutView = () => {
 					containerStyle={styles.recipButton}
 					text={STRINGS.addOrder}
 					onPress={sendOrder}
+					loading={isLoading}
 				/>
 			</View>
 			<Snackbar

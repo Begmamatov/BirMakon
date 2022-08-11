@@ -119,21 +119,21 @@ const Products = ({ item }: { item: ProductItemResponse }) => {
 						</TouchableOpacity>
 					</View>
 					<View style={styles.priceContainer}>
-						{price_old && (
+						{price_old ? (
 							<Text style={styles.oldPrice}>
 								{price_old ? price_old : ""} сум
 							</Text>
-						)}
+						) : null}
 						<Text style={styles.price}>{price} сум</Text>
 					</View>
 					<View style={styles.nameContainer}>
-						{discount && (
+						{discount ? (
 							<View style={styles.discount}>
 								<Text style={styles.dscountText}>
 									{discount ? discount : ""}%
 								</Text>
 							</View>
-						)}
+						) : null}
 						<DefaultButton
 							containerStyle={styles.button}
 							secondary={isInCart}

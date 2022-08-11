@@ -22,8 +22,8 @@ import {
 	SliderTypes,
 } from "./types";
 
-export let url = "https://birmakon.loko.uz/api";
-export let assetUrl = "https://birmakon.loko.uz";
+export let url = "https://birmakon.qwertyuz.ru/api";
+export let assetUrl = "https://birmakon.qwertyuz.ru";
 axios.interceptors.request.use((config) => {
 	let token = store.getState().user.token;
 	console.log("token----", token);

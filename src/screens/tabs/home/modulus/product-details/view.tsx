@@ -252,7 +252,7 @@ const ProductDetailsView = ({}): ReactElement => {
 	const [rate, setRate] = useState(0);
 
 	console.log("====================================");
-	console.log(JSON.stringify(review, null, 4));
+	console.log("review+++++", JSON.stringify(review, null, 4));
 	console.log("====================================");
 
 	let onStateChange = (key: string) => (value: string) => {
@@ -651,12 +651,7 @@ const ProductDetailsView = ({}): ReactElement => {
 				<Text style={styles.flexEnd}>{STRINGS.comments}</Text>
 				<DefaultButton
 					containerStyle={styles.marginBottom}
-					onPress={() => {
-						setModalOpen(!modalOpen);
-						LayoutAnimation.configureNext(
-							LayoutAnimation.Presets.easeInEaseOut
-						);
-					}}
+					onPress={toggleModal}
 				>
 					<Text style={styles.buttonReview}>{STRINGS.sendReview}</Text>
 				</DefaultButton>
@@ -667,7 +662,7 @@ const ProductDetailsView = ({}): ReactElement => {
 			<ReactNativeModal isVisible={modalOpen} onBackdropPress={toggleModal}>
 				<View style={styles.modalView}>
 					<DefaultInput
-						autoFocus={modalOpen}
+						// autoFocus={modalOpen}
 						title={STRINGS.sendReview}
 						inputStyle={styles.inputStyle}
 						value={review.review}
