@@ -31,11 +31,14 @@ const BackHeaderLimit = ({ name }) => {
 	return (
 		<View style={styles.row}>
 			<TouchableOpacity onPress={navigation.goBack}>
-				<LeftArrowIcon hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }} />
+				<LeftArrowIcon
+					style={{ width: 120, height: 120 }}
+					hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
+				/>
 			</TouchableOpacity>
 			<Text style={styles.logoText}>{name ? name : ""}</Text>
 			<TouchableOpacity>
-				<GroupIcon />
+				<GroupIcon style={{ width: 120, height: 120 }} />
 			</TouchableOpacity>
 		</View>
 	);

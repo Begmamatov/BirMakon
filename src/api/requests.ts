@@ -1,4 +1,5 @@
 import { LoginState } from "@novomarkt/screens/auth/login/hooks";
+import { OnResed } from "./types";
 import { RegisterState } from "@novomarkt/screens/auth/register/hooks";
 import { store } from "@novomarkt/store/configureStore";
 import { toggleLoading } from "@novomarkt/store/slices/appSettings";
@@ -21,6 +22,7 @@ import {
 	SendReviewProps,
 	SliderTypes,
 } from "./types";
+import { resedSmsProps } from "@novomarkt/screens/auth/resedSms/hooks";
 
 export let url = "https://birmakon.qwertyuz.ru/api";
 export let assetUrl = "https://birmakon.qwertyuz.ru";
@@ -84,6 +86,14 @@ let requests = {
 			axios.post(`${url}/user/send-code`, credentials, {
 				headers: { Authorization: `Bearer ${token}` },
 			}),
+		forgetPassword: (phone: OnResed) => {
+			axios.post<OnResed, AxiosResponse<LoginResponse>>(
+				`${url}/user/recover-password`,
+				phone
+			);
+		},
+		resedSms: (code: resedSmsProps) =>
+			axios.post<resedSmsProps, any>(`${url}/user/accept-recover-code`, code),
 	},
 	profile: {
 		getProfile: () => axios.get<{ data: LoginResponse }>(`${url}/user/profile`),
@@ -169,6 +179,8 @@ let requests = {
 
 		sendReview: (data: SendReviewProps) =>
 			axios.post(`${url}/product/set-review`, data),
+
+		colorItem: () => axios.get(`${url}/color`),
 	},
 
 	news: {
@@ -204,6 +216,16 @@ let requests = {
 		sendOrder: (credentials: OrderSend) =>
 			axios.post(`${url}/order/send`, credentials),
 		getOrders: () => axios.get<BaseResponse<OrderItemResponse>>(`${url}/order`),
+	},
+	chat: {
+		sendAdminMessege: (sendingMsg: any, file: any) =>
+			axios.post(`${url}/chat/send`, {
+				getter_id: 1,
+				message: sendingMsg,
+				file: file,
+				product_id: "",
+				type_user: "admin",
+			}),
 	},
 };
 export default requests;

@@ -17,6 +17,9 @@ export interface RegisterData {
 	code: string;
 	token: string;
 }
+export interface OnResed {
+	phone?: string;
+}
 
 export interface RegisterResponse {
 	data: RegisterData;

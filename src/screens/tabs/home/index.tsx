@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import CatalogDetailsView from "../catalog/modules/catalog-details/view";
 import CatalogProductsView from "../catalog/modules/catalog-products/view";
+import all_Information from "./modulus/all_Information/view";
+import Comparison from "./modulus/Comparison/view";
 import NewsDetailsView from "./modulus/news-details/view";
 import ProductDetailsView from "./modulus/product-details/view";
 import HomeView from "./view";
@@ -18,6 +20,8 @@ export let HomeStack = () => {
 				name={ROUTES.PRODUCT_DETAILS}
 			/>
 			<Stack.Screen component={NewsDetailsView} name={ROUTES.NEWS_DETAILS} />
+			<Stack.Screen component={all_Information} name={ROUTES.ALL_INFORMATION} />
+			<Stack.Screen component={Comparison} name={ROUTES.COMPARISON} />
 			<Stack.Screen
 				component={CatalogProductsView}
 				name={ROUTES.CATALOG_PRODUCTS}

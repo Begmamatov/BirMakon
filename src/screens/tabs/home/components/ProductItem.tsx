@@ -50,23 +50,21 @@ const ProductItem = ({
 		id,
 		isFavorite,
 	} = item;
+
 	const dispatch = useDispatch();
 	let navigation = useNavigation();
 	const cart = useAppSelector(cartSelector);
 	let isInCart = !!cart[id];
+
 	const fav = useAppSelector(favoriteSelector);
 	let isFav = !!fav[id];
 
 	const [animate, setAnimate] = useState(false);
 
 	const onCartPress = async () => {
-		console.log("onCartPress");
 		if (isInCart) {
 			try {
 				setAnimate(true);
-				let clear = await requests.products.removeItem({
-					product_id: id,
-				});
 				let cartGet = await requests.products.getCarts();
 				dispatch(loadCart(cartGet.data.data));
 				setAnimate(false);
@@ -124,9 +122,16 @@ const ProductItem = ({
 						hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
 					>
 						{isFav ? (
-							<HeartIconRed fill={COLORS.red} />
+							<HeartIconRed
+								style={{ width: 120, height: 120 }}
+								fill={COLORS.red}
+							/>
 						) : (
-							<HeartIconBorder fill={COLORS.red} stroke={COLORS.red} />
+							<HeartIconBorder
+								style={{ width: 120, height: 120 }}
+								fill={COLORS.red}
+								stroke={COLORS.red}
+							/>
 						)}
 					</TouchableOpacity>
 					{discount ? (
@@ -178,6 +183,7 @@ const ProductItem = ({
 								</Text>
 								<BasketIcon
 									fill={isInCart ? COLORS.cartColor3 : COLORS.white}
+									style={{ width: 120, height: 120 }}
 								/>
 							</View>
 						)}

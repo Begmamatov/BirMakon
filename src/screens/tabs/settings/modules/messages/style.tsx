@@ -13,13 +13,44 @@ export const styles = StyleSheet.create({
 		marginHorizontal: 20,
 	},
 
-	headerTxt: {
-		fontSize: 20,
+	headerButton: {
 		marginHorizontal: 20,
 		marginVertical: 20,
-		color: COLORS.defaultBlack,
+		flexDirection: "row",
+		justifyContent: "space-between",
 	},
-
+	buttonActive: {
+		flexDirection: "column",
+		borderRadius: 8,
+		backgroundColor: "#131E3D",
+		justifyContent: "center",
+		alignItems: "center",
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingLeft: 20,
+		paddingRight: 20,
+	},
+	buttonActiveNO: {
+		flexDirection: "column",
+		borderRadius: 8,
+		backgroundColor: "#f8f8fa",
+		justifyContent: "center",
+		alignItems: "center",
+		paddingTop: 10,
+		paddingBottom: 10,
+		paddingLeft: 20,
+		paddingRight: 20,
+	},
+	button_text_Active: {
+		color: "#ffff",
+		fontSize: 12,
+		fontWeight: "500",
+	},
+	button_text_ActiveNo: {
+		color: "#423d3d",
+		fontSize: 12,
+		fontWeight: "500",
+	},
 	box: {
 		backgroundColor: COLORS.chatColor,
 		elevation: 5,
@@ -36,8 +67,16 @@ export const styles = StyleSheet.create({
 		borderBottomLeftRadius: 8,
 		borderBottomRightRadius: 8,
 		flex: 1,
+		// display: "none",
 	},
-
+	me_messege: {
+		backgroundColor: COLORS.chatColor,
+		marginHorizontal: 20,
+		marginVertical: 20,
+		paddingTop: 20,
+		paddingBottom: 20,
+		paddingLeft: 10,
+	},
 	top: {
 		backgroundColor: "rgba(0, 82, 255, 0.15)",
 		padding: 15,

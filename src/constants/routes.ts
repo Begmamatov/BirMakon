@@ -11,6 +11,7 @@ export const ROUTES = {
 	AUTH: "auth",
 	TABS: "tabs",
 	VERIFICATION: "verification",
+	RESEDSMS: "resedSms",
 	SETTINGS: "settings",
 	SETTINGSSTACK: "settingsstack",
 	ORDER: "order",
@@ -34,4 +35,6 @@ export const ROUTES = {
 	LANGUAGE: "language",
 	COURSE: "cource",
 	PAYMENTS: "payments",
+	ALL_INFORMATION: "all_Information",
+	COMPARISON: "Comparison",
 };

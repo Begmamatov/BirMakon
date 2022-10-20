@@ -37,6 +37,14 @@ const useVerificationHook = () => {
 
 	let resendCode = async () => {
 		setTimeLeft(10);
+		if (validatePhoneNumber(state.phone)) {
+			try {
+				setLoading(true);
+				let res = await requests.auth.avtorizovatsya(state);
+			} catch (error) {
+				console.log(error);
+			}
+		}
 	};
 
 	let onVerificate = async () => {
@@ -45,10 +53,7 @@ const useVerificationHook = () => {
 			//send data to remote
 			try {
 				setLoading(true);
-				let res = await requests.auth.verify(
-					state,
-					route.params?.token
-				);
+				let res = await requests.auth.verify(state, route.params?.token);
 				dispatch(userLoggedIn(res.data.data));
 			} catch (error) {
 				// console.warn(error.toJSON());

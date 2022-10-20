@@ -30,18 +30,18 @@ const SelectableFlter = ({ id, setProducts }: Props) => {
 				console.log(error);
 			}
 		};
-		getSorting()
+		getSorting();
 		toggleModal();
 	};
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.row} onPress={toggleModal}>
 				<Text style={styles.text}>{title ? title : "Сортировка"}</Text>
-				<BottomArrow fill={COLORS.red} />
+				<BottomArrow fill={COLORS.red} style={{ width: 120, height: 120 }} />
 			</TouchableOpacity>
 			<TouchableOpacity style={styles.row}>
 				<Text style={styles.text}>Фильтры</Text>
-				<FilterIcon fill={COLORS.red} />
+				<FilterIcon fill={COLORS.red} style={{ width: 120, height: 120 }} />
 			</TouchableOpacity>
 			<Modal
 				style={styles.view}
@@ -51,19 +51,29 @@ const SelectableFlter = ({ id, setProducts }: Props) => {
 				swipeDirection={["up", "left", "right", "down"]}
 			>
 				<View style={styles.modal}>
-					<TouchableOpacity onPress={() => handlePress("recently", STRINGS.recentlyAdded)}>
+					<TouchableOpacity
+						onPress={() => handlePress("recently", STRINGS.recentlyAdded)}
+					>
 						<Text style={styles.modalText}>{STRINGS.recentlyAdded}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={() => handlePress("popular", STRINGS.popular)}>
+					<TouchableOpacity
+						onPress={() => handlePress("popular", STRINGS.popular)}
+					>
 						<Text style={styles.modalText}>{STRINGS.popular}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={() => handlePress("new", STRINGS.newAdded)}>
+					<TouchableOpacity
+						onPress={() => handlePress("new", STRINGS.newAdded)}
+					>
 						<Text style={styles.modalText}>{STRINGS.newAdded}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={() => handlePress("price_up", STRINGS.firsExpensive)}>
+					<TouchableOpacity
+						onPress={() => handlePress("price_up", STRINGS.firsExpensive)}
+					>
 						<Text style={styles.modalText}>{STRINGS.firsExpensive}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={() => handlePress("price_down", STRINGS.firstCheap)}>
+					<TouchableOpacity
+						onPress={() => handlePress("price_down", STRINGS.firstCheap)}
+					>
 						<Text style={styles.modalText}>{STRINGS.firstCheap}</Text>
 					</TouchableOpacity>
 				</View>

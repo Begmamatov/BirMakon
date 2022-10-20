@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		borderBottomWidth: 1,
 		borderColor: "rgba(113, 113, 113, 0.3)",
+		// borderColor: "red",
 	},
 
 	image: {

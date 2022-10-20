@@ -15,11 +15,14 @@ export const ProductsList = ({
 	title = STRINGS.popularProducts,
 }: PropularProductsProps) => {
 	const [products, setProducts] = useState<ProductItemResponse[]>([]);
+
 	const getProducts = async () => {
 		try {
 			let res = await requests.products.getProducts();
 			setProducts(res.data.data);
-		} catch (error) {}
+		} catch (error) {
+			console.log("product lest", error);
+		}
 	};
 	useEffect(() => {
 		getProducts();

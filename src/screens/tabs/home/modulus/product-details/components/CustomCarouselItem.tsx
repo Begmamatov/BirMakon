@@ -3,17 +3,19 @@ import { WINDOW_WIDTH } from "@novomarkt/constants/sizes";
 import React, { JSXElementConstructor, ReactElement } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import { AdditionalParallaxProps } from "react-native-snap-carousel";
-import { CustomCarouselItemProp } from "..";
 
 export type CustomCarouselItemProps = { item: string; index: number };
 
 const CustomCarouselItem = (
-	{ item }: { item: CustomCarouselItemProp; index: number },
+	{ item }: { item: string; index: number },
 	parallaxProps?: AdditionalParallaxProps
 ): ReactElement<any, string | JSXElementConstructor<any>> | null => {
 	return (
 		<View>
-			<Image source={{ uri: item }} style={styles.image} />
+			<Image
+				source={{ uri: "https://birmakon.qwertyuz.ru" + item.photo }}
+				style={styles.image}
+			/>
 		</View>
 	);
 };

@@ -23,7 +23,13 @@ import { WINDOW_WIDTH } from "@novomarkt/constants/sizes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useAppSelector } from "@novomarkt/store/hooks";
 import { toggleLoading } from "@novomarkt/store/slices/appSettings";
-import { cartSelector, loadCart } from "@novomarkt/store/slices/cartSlice";
+import { Shadow } from "react-native-shadow-2";
+import {
+	cartArraySelector,
+	cartSelector,
+	loadCart,
+} from "@novomarkt/store/slices/cartSlice";
+import { favoriteSelector } from "@novomarkt/store/slices/favoriteSlice";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import {
@@ -46,220 +52,42 @@ import FavoritePrice from "./components/favoritePrice";
 import ReviewBox from "./components/ReviewBox";
 import { styles } from "./style";
 
-export let customCarouselData: string[] = [
-	"https://konvers-kazan.ru/wp-content/uploads/2020/11/fytbolki_02-e1614013120178.jpg",
-	"https://image.freepik.com/free-photo/black-t-shirts-with-copy-space_53876-102012.jpg",
-];
-
-let productColors = [
-	"https://pngimg.com/uploads/running_shoes/running_shoes_PNG5823.png",
-	"https://u01.appmifile.com/images/2018/01/11/e269ddd1-9d47-4beb-8741-92764fb0578d.jpg",
-	"https://xiaomistore.md/files/product_common_photo/id_2694/addphoto/10_5a2c291a326fe.jpg",
-	"https://www.ixbt.com/img/n1/news/2020/1/6/1269151_10844817.jpg",
-	"https://img.championat.com/c/1200x900/news/big/o/l/camye-dorogie-krossovki-v-mire_1593518652374931204.jpg",
-];
-
-const data2 = {
-	data: {
-		id: 100,
-		name: "Shakhshop",
-		price: 168000,
-		price_old: 200000,
-		price_opt: 1000,
-		price_opt_small: 1200,
-		count_price: null,
-		count_price1: null,
-		count_price2: null,
-		discount: 5,
-		discount_small_count: null,
-		discount_big_count: null,
-		weight: 500,
-		height: 70,
-		width: 30,
-		length: 50,
-		amount: null,
-		brand: {
-			id: 3,
-			name: "Puma",
-			description: "",
-			photo: "/uploads/brand/3/original/1648783760.jpeg",
-			category: {
-				id: 3,
-				name: "Продукты",
-				description: "",
-				photo: "/assets_files/images/no-photo.png",
-			},
-		},
-		category: {
-			id: 30,
-			name: "Мужские",
-			description: "",
-			photo: "/assets_files/images/no-photo.png",
-		},
-		category_full: "Одежда/Рубашки/Мужские",
-		category_full_array: [
-			{
-				id: 2,
-				name: "Одежда",
-			},
-			{
-				id: 7,
-				name: "Рубашки",
-			},
-			{
-				id: 30,
-				name: "Мужские",
-			},
-		],
-		views: 1,
-		rating: 0,
-		photo: "/uploads/product/100/original/1656527721.png",
-		isFavorite: false,
-		credit_label: "кредит до 50 млн. сум",
-		status: 1,
-		shop: {
-			id: 8,
-			name: "Магазин 2",
-			photo: "/uploads/shop/8/original/1647145574.jpeg",
-			gallery: [
-				"/uploads/shop/8/original/1647125314.jpeg",
-				"/uploads/shop/8/original/1646659983.jpeg",
-			],
-			contact_user: "",
-			contact_phone: "",
-			date: "2022-06-22 19:43:17",
-			map_location: "41.29559575902607, 69.188192299082",
-			description: "<p>Тестовое описание магазина 2 (RU)</p>\r\n",
-			user: {
-				id: 86,
-				device_id: null,
-				token: "CqAfCUfARIe2t3_yme_uNerzn9nC5FKq",
-				login: "shop2",
-				name: "Санджар",
-				phone: "+998909008877",
-				email: "",
-				gender: null,
-				birthday: null,
-				photo: "/assets_files/images/user.png",
-				addresses: [],
-				date: "2022-06-24 13:34:54",
-				last_address: null,
-			},
-			shopSeller: {
-				id: 4,
-				inn: "223344",
-				account: "555666777",
-				bank: "Agrobank",
-				address_legal: "56 Aviasozlar 1 Street",
-				oked: "4455",
-				okohx: "6677",
-				mfo: "8899",
-			},
-			product_count: 18,
-			advertisment_count: 1,
-			news_count: 0,
-		},
-		description: "Qalaysiz zo'rmi omonmisiz",
-		composition: "Состав Sostav",
-		recommendation: "Рекомендации Rek",
-		filters: [],
-		reviews: [],
-		reviews_count: 0,
-		review_separate: {
-			rate_1: 0,
-			rate_2: 0,
-			rate_3: 0,
-			rate_4: 0,
-			rate_5: 0,
-		},
-		gallery: ["/uploads/product/100/original/1656527721.png"],
-		productProperties: [
-			{
-				key_name: "key 1",
-				value_name: "value 1",
-			},
-			{
-				key_name: "key 2",
-				value_name: "value 2",
-			},
-		],
-		user: {
-			id: 86,
-			device_id: null,
-			token: "CqAfCUfARIe2t3_yme_uNerzn9nC5FKq",
-			login: "shop2",
-			name: "Санджар",
-			phone: "+998909008877",
-			email: "",
-			gender: null,
-			birthday: null,
-			photo: "/assets_files/images/user.png",
-			addresses: [],
-			date: "2022-06-24 13:34:54",
-			last_address: null,
-		},
-		stock: {
-			id: 2,
-			name: "тест 2",
-			description: "<p>тест</p>\r\n",
-			photo: "/assets_files/images/no-photo.png",
-			product_count: 23,
-			status: 1,
-			date: "2022-05-19 09:28:13",
-		},
-	},
-};
-
-let productSize = [
-	"35",
-	"36",
-	"37",
-	"38",
-	"39",
-	"40",
-	"41",
-	"42",
-	"43",
-	"44",
-	"45",
-];
+let productSize = ["35", "36", "37", "38", "39", "40"];
 
 const ProductDetailsView = ({}): ReactElement => {
 	const colorScrollerRef = useRef<ScrollView>();
 	const sizeScrollerRef = useRef<ScrollView>();
-	const [currentColor, setCurrentColor] = useState(-1);
-	const [colorScrollIndex, setColorScrollIndex] = useState(0);
-	const [currentSize, setCurrentSize] = useState(-1);
+	const [currentColor, setCurrentColor] = useState(0);
+
+	const [currentSize, setCurrentSize] = useState();
 	const [sizeScroll, setSizeScroll] = useState(0);
-	const [isActive, setIsActive] = useState(false);
+	const [colorValue, setColorValue] = useState([]);
 
 	const [modalOpen, setModalOpen] = useState(false);
 
 	let {
 		params: { item, id },
-	} = useRoute();
+	} = useRoute<any>();
 
 	const [activeSlide, setActiveSlide] = useState(0);
 	const [shouldShow, setShouldShow] = useState(true);
 	const [loading, setLoading] = useState(false);
 	const [reviewsList, setReviewsList] = useState([]);
+	const [rate, setRate] = useState(0);
 	const [review, setReview] = useState<SendReviewProps>({
 		product_id: item.id,
 		rate: 0,
 		review: "",
 	});
-
-	const [rate, setRate] = useState(0);
-
+	const cart = useAppSelector(cartArraySelector);
+	const isActive =
+		cart.filter((i) => i.product.id == item.id).length > 0 ? true : false;
 	console.log("====================================");
-	console.log("review+++++", JSON.stringify(review, null, 4));
+	console.log("Item Value", JSON.stringify(item, null, 2), isActive);
 	console.log("====================================");
 
 	let onStateChange = (key: string) => (value: string) => {
-		console.log({ review, "OLD REVIEW": "" });
-
 		setReview((e) => ({ ...e, [key]: value }));
-		console.log({ key, value, review });
 	};
 
 	const toggleModal = () => {
@@ -267,32 +95,36 @@ const ProductDetailsView = ({}): ReactElement => {
 	};
 
 	const dispatch = useDispatch();
-	let navigation: any = useNavigation();
-	const cart = useAppSelector(cartSelector);
-	let isInCart = !!cart[id];
 
-	const onCartPress = async () => {
+	let navigation: any = useNavigation();
+
+	const onAddItem = async () => {
 		try {
-			if (isInCart) {
-				dispatch(toggleLoading(true));
-				let clear = await requests.products.removeItem({
-					product_id: id,
-				});
-				let cartGet = await requests.products.getCarts();
-				dispatch(loadCart(cartGet.data.data));
-				dispatch(toggleLoading(false));
-			} else {
-				dispatch(toggleLoading(true));
-				let res = await requests.products.addToCart({
-					amount: 1,
-					product_id: id,
-				});
-				let cartRes = await requests.products.getCarts();
-				dispatch(loadCart(cartRes.data.data));
-				dispatch(toggleLoading(false));
-			}
+			dispatch(toggleLoading(true));
+			let res = await requests.products.increaseItem({
+				amount: 1,
+				product_id: id,
+			});
+			let cartRes = await requests.products.getCarts();
+			dispatch(loadCart(cartRes.data.data));
 		} catch (error) {
 			console.log(error);
+		} finally {
+			dispatch(toggleLoading(false));
+		}
+	};
+	const onDecreaseItem = async () => {
+		try {
+			dispatch(toggleLoading(true));
+			let res = await requests.products.decreaseItem({
+				product_id: id,
+			});
+			let cartRes = await requests.products.getCarts();
+			dispatch(loadCart(cartRes.data.data));
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch(toggleLoading(false));
 		}
 	};
 
@@ -322,9 +154,18 @@ const ProductDetailsView = ({}): ReactElement => {
 			console.log(e);
 		}
 	};
+	const colorHandler = async () => {
+		try {
+			let res = await requests.products.colorItem();
+			setColorValue(res.data.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
 		getReviews();
+		colorHandler();
 	}, []);
 
 	let per;
@@ -342,6 +183,12 @@ const ProductDetailsView = ({}): ReactElement => {
 		console.log(percent.toString().substring(0, 3));
 	});
 
+	const basketAktev = () => {
+		setLoading(true);
+		navigation.navigate(ROUTES.CART, { currentSize: currentSize });
+		setLoading(false);
+	};
+	const productCart = cart.filter((i) => i.product.id == item.id);
 	return (
 		<View style={styles.container}>
 			<BackHeaderLimit name={item.name} />
@@ -357,10 +204,11 @@ const ProductDetailsView = ({}): ReactElement => {
 						ratingColor="#EE4927"
 						ratingBackgroundColor="#f1f1f1c1"
 						readonly={true}
-						startingValue={3.8}
+						startingValue={item?.views}
 					/>
-					<Text>54 отзывов</Text>
+					<Text>{}отзывов</Text>
 				</View>
+				{/* carousel */}
 				<View style={styles.carousel}>
 					<Carousel
 						onSnapToItem={(index) => setActiveSlide(index)}
@@ -369,15 +217,15 @@ const ProductDetailsView = ({}): ReactElement => {
 						sliderWidth={WINDOW_WIDTH}
 						itemHeight={200}
 						sliderHeight={200}
-						data={customCarouselData}
+						data={[item]}
 						renderItem={CustomCarouselItem}
 						pagingEnabled
 					/>
-					<Pagination
+					{/* <Pagination
 						activeDotIndex={activeSlide}
 						dotsLength={customCarouselData.length}
-					/>
-					<Text style={styles.itemName}>{item?.name}</Text>
+					/> */}
+					<Text style={styles.itemName}>{item.name}</Text>
 				</View>
 				<FavoritePrice
 					oldprice={item.price_old}
@@ -393,31 +241,32 @@ const ProductDetailsView = ({}): ReactElement => {
 					<ScrollView
 						horizontal
 						showsHorizontalScrollIndicator={false}
-						ref={colorScrollerRef}
-						contentContainerStyle={{ paddingRight: 60 }}
+						// ref={colorScrollerRef}
+						contentContainerStyle={{ paddingRight: 45, paddingLeft: 20 }}
+						style={{ marginTop: 20 }}
 					>
-						{productColors.map((e, i) => {
+						{colorValue.map((a) => {
+							const isHas = item.color.name === a.name;
+							const borderWidth = isHas ? 1 : 0;
 							return (
-								<TouchableOpacity onPress={() => setCurrentColor(i)}>
-									<View style={styles.corusellContiner}>
-										<Image
-											source={{ uri: e }}
-											style={
-												currentColor === i
-													? styles.activeColor
-													: styles.corusell
-											}
-										/>
-									</View>
+								<TouchableOpacity onPress={() => setCurrentColor(a.id)}>
+									<View
+										style={[
+											{
+												width: 75,
+												height: 68,
+												backgroundColor: `${a.color}`,
+												borderWidth,
+											},
+										]}
+									></View>
 								</TouchableOpacity>
 							);
 						})}
 					</ScrollView>
-					<View style={styles.scrollView}>
+					{/* <View style={styles.scrollView}>
 						<TouchableOpacity
 							onPress={() => {
-								console.log({ colorScrollIndex });
-
 								colorScrollerRef.current?.scrollTo({
 									x: Dimensions.get("window").width * (colorScrollIndex + 1),
 									animated: true,
@@ -427,31 +276,26 @@ const ProductDetailsView = ({}): ReactElement => {
 						>
 							<ScrollViewIcon />
 						</TouchableOpacity>
-					</View>
+					</View> */}
 				</View>
 				<Text style={styles.corusellText}>Размер</Text>
 				<View>
 					<ScrollView
 						horizontal
 						showsHorizontalScrollIndicator={false}
-						ref={sizeScrollerRef}
 						contentContainerStyle={{ paddingRight: 45, paddingLeft: 20 }}
 					>
 						{productSize.map((e, index) => {
 							return (
 								<TouchableOpacity
 									onPress={() => {
-										// sizeScrollerRef.current?.scrollTo({
-										// 	x: (index + 1) * 20,
-										// 	animated: true,
-										// });
-										setCurrentSize(index);
+										setCurrentSize(e);
 									}}
 								>
 									<View style={styles.sectionSize}>
 										<Text
 											style={
-												currentSize === index
+												currentSize === e
 													? styles.activeSize
 													: styles.sectionText
 											}
@@ -463,13 +307,9 @@ const ProductDetailsView = ({}): ReactElement => {
 							);
 						})}
 					</ScrollView>
-					<View style={styles.scrollView1}>
+					{/* <View style={styles.scrollView1}>
 						<TouchableOpacity
 							onPress={() => {
-								console.log({
-									setSizeScroll,
-								});
-
 								sizeScrollerRef.current?.scrollTo({
 									x: Dimensions.get("window").width * (sizeScroll + 1),
 									animated: true,
@@ -479,7 +319,7 @@ const ProductDetailsView = ({}): ReactElement => {
 						>
 							<ScrollViewIcon />
 						</TouchableOpacity>
-					</View>
+					</View> */}
 				</View>
 				<View style={styles.deliveryView}>
 					<Text style={styles.deliveryText}>Доставка: 318,94 сум</Text>
@@ -488,34 +328,50 @@ const ProductDetailsView = ({}): ReactElement => {
 						Расчётное время доставки: 29-48 дней
 					</Text>
 				</View>
+				{/* amount */}
 				<View style={styles.counter}>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={onDecreaseItem}>
 						<View style={styles.minus}>
-							<MinusIcon fill={COLORS.white} />
+							<MinusIcon
+								style={{ width: 120, height: 120 }}
+								fill={COLORS.white}
+							/>
 						</View>
 					</TouchableOpacity>
 					<View style={styles.topBottom}>
-						<Text>1 шт</Text>
+						<Text>
+							{cart.filter((i) => i.product.id == item.id).length
+								? cart.filter((i) => i.product.id == item.id)[0].amount
+								: 0}
+						</Text>
 					</View>
-					<TouchableOpacity>
+					<TouchableOpacity onPress={onAddItem}>
 						<View style={styles.plus}>
-							<PlusCounterIcon fill={COLORS.white} />
+							<PlusCounterIcon
+								style={{ width: 120, height: 120 }}
+								fill={COLORS.white}
+							/>
 						</View>
 					</TouchableOpacity>
 					<View style={styles.function}>
 						<Text style={styles.functionText}>Габариты: 120х120</Text>
 					</View>
 				</View>
+				{/* amount */}
 				<View style={styles.oldContainer}>
-					<TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => navigation.navigate(ROUTES.CHECKOUT, productCart)}
+					>
 						<View style={styles.oldView}>
 							<Text style={styles.oldText}>Купить</Text>
 						</View>
 					</TouchableOpacity>
+
+					{/* basketAktev */}
 					<View style={styles.sectionContainer}>
 						<DefaultButton
 							containerStyle={styles.button}
-							onPress={() => setIsActive((e) => !e)}
+							onPress={basketAktev}
 							secondary={isActive}
 						>
 							<View style={styles.buttonContainer}>
@@ -525,12 +381,22 @@ const ProductDetailsView = ({}): ReactElement => {
 									{STRINGS.addToCart}
 								</Text>
 								<BasketIcon
+									style={{ width: 120, height: 120 }}
 									fill={isActive ? COLORS.cartColor3 : COLORS.white}
 								/>
 							</View>
 						</DefaultButton>
 					</View>
-					<TouchableOpacity onPress={() => navigation.navigate(ROUTES.COMPARE)}>
+					{/* basketAktev */}
+
+					<TouchableOpacity
+						onPress={() =>
+							navigation.navigate(ROUTES.COMPARISON, {
+								item: item.options,
+								productSize: productSize,
+							})
+						}
+					>
 						<View style={styles.oldView1}>
 							<Text style={styles.oldText}>Сравнить</Text>
 						</View>
@@ -538,7 +404,7 @@ const ProductDetailsView = ({}): ReactElement => {
 				</View>
 				<TouchableOpacity
 					onPress={() =>
-						navigation.navigate(ROUTES.CHARACTERISTIC_DETAILS, {
+						navigation.navigate(ROUTES.ALL_INFORMATION, {
 							options: item.options,
 						})
 					}
@@ -546,7 +412,7 @@ const ProductDetailsView = ({}): ReactElement => {
 					<View style={styles.sectionBox}>
 						<Text style={styles.sectionBoxText}>{STRINGS.allDetails}</Text>
 						<View style={styles.iconView}>
-							<BlueBackIcon />
+							<BlueBackIcon style={{ width: 120, height: 120 }} />
 						</View>
 					</View>
 				</TouchableOpacity>
@@ -564,7 +430,7 @@ const ProductDetailsView = ({}): ReactElement => {
 				<View style={styles.flatlistContainerView}>
 					<View style={styles.flatlistContainer}>
 						<Text style={styles.flatlistContainerText}>Описание</Text>
-						<RightBlueIcon />
+						<RightBlueIcon style={{ width: 120, height: 120 }} />
 					</View>
 					<View style={styles.flatlistContainerBox}>
 						<Text style={styles.flatlistContainerBoxText}>
@@ -614,7 +480,7 @@ const ProductDetailsView = ({}): ReactElement => {
 						<Text style={styles.composition}>
 							{STRINGS.reviews} {reviewsList.length}
 						</Text>
-						<RightArrow fill={COLORS.red} />
+						<RightArrow style={{ width: 120, height: 120 }} fill={COLORS.red} />
 					</View>
 				</TouchableOpacity>
 				<ReviewBox percent={per} />
@@ -628,9 +494,19 @@ const ProductDetailsView = ({}): ReactElement => {
 										<View style={styles.stars}>
 											{new Array(5).fill(1).map((e, i) => {
 												if (i < item.rate) {
-													return <MarkedStar fill={COLORS.red} />;
+													return (
+														<MarkedStar
+															style={{ width: 120, height: 120 }}
+															fill={COLORS.red}
+														/>
+													);
 												} else {
-													return <NotMarkedStar fill={COLORS.whiteGray} />;
+													return (
+														<NotMarkedStar
+															style={{ width: 120, height: 120 }}
+															fill={COLORS.whiteGray}
+														/>
+													);
 												}
 											})}
 										</View>
@@ -639,7 +515,10 @@ const ProductDetailsView = ({}): ReactElement => {
 									<View style={styles.row}>
 										<Text>{item.date.split(" ")[0]}</Text>
 										<View style={styles.row}>
-											<Checked fill={COLORS.red} style={styles.icon} />
+											<Checked
+												fill={COLORS.red}
+												style={[styles.icon, { width: 120, height: 120 }]}
+											/>
 											<Text>Я купил товар</Text>
 										</View>
 									</View>

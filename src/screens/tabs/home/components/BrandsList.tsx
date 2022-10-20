@@ -2,13 +2,22 @@ import requests from "@novomarkt/api/requests";
 import AllButton from "@novomarkt/components/general/AllButton";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
+import { ROUTES } from "@novomarkt/constants/routes";
 import { STRINGS } from "@novomarkt/locales/strings";
+import { useNavigation } from "@react-navigation/core";
 import React, { useEffect, useState } from "react";
-import { Dimensions, FlatList, StyleSheet, View } from "react-native";
+import {
+	Dimensions,
+	FlatList,
+	StyleSheet,
+	TouchableOpacity,
+	View,
+} from "react-native";
 import Modal from "react-native-modal";
-import BrandItem, { BrandItemProps } from "./BrandItem";
+import BrandItem from "./BrandItem";
 
 const BrandsList = () => {
+	let navigation: any = useNavigation();
 	const [brands, setBrands] = useState([]);
 	let effect = async () => {
 		try {
@@ -19,14 +28,19 @@ const BrandsList = () => {
 	useEffect(() => {
 		effect();
 	}, []);
+
 	const [allModalVisible, setAllModalVisible] = useState(false);
+
 	const toggleAllModalVisible = () => {
 		setAllModalVisible(!allModalVisible);
 	};
 	return (
 		<View style={styles.container}>
 			<View style={styles.allButtonsView}>
-				<Text style={styles.title}>{STRINGS.brands}</Text>
+				<TouchableOpacity>
+					<Text style={styles.title}>{STRINGS.brands}</Text>
+				</TouchableOpacity>
+
 				<Modal
 					isVisible={allModalVisible}
 					testID={"modal"}
@@ -38,12 +52,25 @@ const BrandsList = () => {
 					style={styles.modalStyle}
 				>
 					<View style={styles.modalInView}>
-						<Text style={styles.brandsText}>{STRINGS.brands}</Text>
+						<TouchableOpacity onPress={toggleAllModalVisible}>
+							<Text style={styles.brandsText}>{STRINGS.brands}</Text>
+						</TouchableOpacity>
 						<View style={styles.view}>
 							<FlatList
 								data={brands}
-								renderItem={({ item }) => (
-									<Text style={styles.brandsName}>{item?.name}</Text>
+								renderItem={({ item: { id, name } }: any) => (
+									<TouchableOpacity
+										onPress={() => {
+											navigation.navigate(ROUTES.CATALOG_PRODUCTS, {
+												id,
+												name,
+												type: "brand",
+											});
+											toggleAllModalVisible();
+										}}
+									>
+										<Text style={styles.brandsName}>{name}</Text>
+									</TouchableOpacity>
 								)}
 							/>
 						</View>

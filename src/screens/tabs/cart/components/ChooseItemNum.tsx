@@ -37,9 +37,16 @@ export let ProductsData = {
 	price: "1400  ₽",
 };
 
-export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
+export default function ChooseItemNum({
+	data,
+	index,
+}: {
+	data: CartItemResponse;
+	index: number;
+}) {
 	const [shouldShow, setShouldShow] = useState(true);
 	const dispatch = useDispatch();
+
 	let id = data.product.id;
 	const fav = useAppSelector(favoriteSelector);
 	let isFav = !!fav[id];
@@ -106,10 +113,8 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 		}
 	};
 
-	console.log(data);
-
 	return (
-		<View style={styles.container}>
+		<View key={index} style={styles.container}>
 			<View>
 				<Image
 					style={styles.leftImage}
@@ -120,11 +125,11 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 				<Text style={styles.headerTxt}>{data?.product?.name}</Text>
 				<Text style={styles.itemTxt}>
 					{STRINGS.color}
-					<Text> Белый</Text>
+					<Text> {data.product.color.name}</Text>
 				</Text>
 				<Text style={styles.itemTxt}>
 					{STRINGS.size}
-					<Text> XXL - 44</Text>
+					<Text> {data.product.size ?? 36}</Text>
 				</Text>
 				<View style={styles.rowTxt}>
 					<Text style={styles.blueTxt}>{data?.product?.price} сум</Text>
@@ -174,8 +179,6 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 
 const styles = StyleSheet.create({
 	container: {
-		// borderWidth: 1,
-		// padding: 10,
 		marginHorizontal: 20,
 		marginVertical: 10,
 		flexDirection: "row",

@@ -205,6 +205,8 @@ export const styles = StyleSheet.create({
 		marginTop: 20,
 		marginLeft: 18,
 		paddingHorizontal: 1,
+		width: 92,
+		height: 86,
 	},
 	scrollView: {
 		position: "absolute",
@@ -516,5 +518,13 @@ export const styles = StyleSheet.create({
 
 	icon: {
 		marginRight: 5,
+	},
+
+	ceckedColor: {
+		borderWidth: 1,
+		borderColor: "blue",
+	},
+	ceckedColorNo: {
+		borderWidth: 0,
 	},
 });

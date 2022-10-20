@@ -26,17 +26,15 @@ const BackHeader = ({
 }: BackHeaderProps) => {
 	let navigation = useNavigation();
 	return (
-		<View style={[styles.container, style]}>
-			<View style={styles.row}>
-				<TouchableOpacity
-					hitSlop={{ bottom: 20, top: 20, left: 20, right: 20 }}
-					onPress={() => navigation.goBack()}
-				>
-					<LeftArrow />
-				</TouchableOpacity>
+		<View>
+			<TouchableOpacity
+				hitSlop={{ bottom: 20, top: 20, left: 20, right: 20 }}
+				onPress={() => navigation.goBack()}
+				style={styles.row}
+			>
+				<LeftArrow style={{ width: 120, height: 120 }} />
 				<Text style={styles.text}>{name}</Text>
-			</View>
-			{hasSearch ? <SearchIcon fill={COLORS.black} /> : null}
+			</TouchableOpacity>
 		</View>
 	);
 };
@@ -44,13 +42,6 @@ const BackHeader = ({
 export default BackHeader;
 
 const styles = StyleSheet.create({
-	container: {
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-between",
-		// marginHorizontal: 20,
-	},
-
 	text: {
 		marginLeft: 10,
 		fontSize: 20,

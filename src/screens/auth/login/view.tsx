@@ -5,7 +5,7 @@ import Text from "@novomarkt/components/general/Text";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { toggleLoading } from "@novomarkt/store/slices/appSettings";
 import React, { useEffect } from "react";
-import { Image, TouchableOpacity, View } from "react-native";
+import { Alert, Image, TouchableOpacity, View } from "react-native";
 import { useDispatch } from "react-redux";
 import useLoginHook from "./hooks";
 import { styles } from "./style";
@@ -19,6 +19,7 @@ const LoginView = () => {
 		onLoginNavigation,
 		onForgotPassNavigation,
 		error,
+		codeValue,
 	} = useLoginHook();
 
 	const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import { ROUTES } from "@novomarkt/constants/routes";
 import { useAppDispatch } from "@novomarkt/store/hooks";
 import { userLoggedIn } from "@novomarkt/store/slices/userSlice";
 import { validatePhoneNumber } from "@novomarkt/utils/validation";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 
@@ -14,6 +14,8 @@ export interface LoginState {
 }
 
 const useLoginHook = () => {
+	const route = useRoute();
+	const codeValue = route.params;
 	let navigation = useNavigation();
 	//TODO remove initial value
 	const [state, setState] = useState<LoginState>({
@@ -76,6 +78,7 @@ const useLoginHook = () => {
 		onLoginNavigation,
 		onForgotPassNavigation,
 		error,
+		codeValue,
 	};
 };
 

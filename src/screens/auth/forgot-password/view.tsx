@@ -6,10 +6,13 @@ import { STRINGS } from "@novomarkt/locales/strings";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
+import { ResendHook } from "./hooks";
 import { styles } from "./styles";
 
 const ForgotPassView = () => {
 	let navigation = useNavigation();
+	let { onChange, OnPress, error, loading, state } = ResendHook();
+
 	return (
 		<View style={styles.container}>
 			<Image
@@ -30,11 +33,20 @@ const ForgotPassView = () => {
 						containerStyle={styles.input}
 						inputStyle={styles.inputStyle}
 						placeholder={STRINGS.yourNumber}
+						onChange={onChange}
+						value={state.phone}
 					/>
+					{error ? (
+						<Text style={styles.error}>{error}</Text>
+					) : (
+						<Text style={styles.error}></Text>
+					)}
 					<DefaultButton
 						textStyle={styles.buttonTxt}
 						text={STRINGS.continue}
 						containerStyle={styles.button}
+						onPress={OnPress}
+						loading={loading}
 					/>
 				</View>
 				<TouchableOpacity onPress={navigation.goBack}>

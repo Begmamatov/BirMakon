@@ -16,7 +16,7 @@ export interface RegisterState {
 
 const useRegisterHook = () => {
 	let navigation = useNavigation();
-	//TODO remove initial value
+
 	const [state, setState] = useState<RegisterState>({
 		name: "",
 		password: "",
@@ -43,6 +43,7 @@ const useRegisterHook = () => {
 					phone: state.phone,
 					token: res.data.data.token,
 				});
+				dispatch(userLoggedIn(res));
 			} catch (error) {
 				let err = error as AxiosError<RegisterResponseErrors>;
 				if (axios.isAxiosError(err)) {
@@ -59,10 +60,10 @@ const useRegisterHook = () => {
 			}
 		} else {
 			//TODO warn that data is incorrect
-			// console.log("INCORRECT PHONE NUMBER");
+			console.log("INCORRECT PHONE NUMBER");
 		}
 	};
-
+	// @ts-ignore
 	let onRegisterNavigation = () => navigation.navigate(ROUTES.VERIFICATION);
 
 	let onStateChange = (key: string) => (value: string) => {

@@ -28,9 +28,15 @@ const SearchHeader = ({ autoFocus, onChange }: SearchProps) => {
 						navigation.navigate(ROUTES.SEARCH);
 					}}
 				/>
-				<SearchIcon fill={COLORS.whiteGray} />
+				<SearchIcon
+					fill={COLORS.whiteGray}
+					style={{ width: 120, height: 120 }}
+				/>
 			</View>
-			<DeliveryIcon fill={COLORS.whiteGray} />
+			<DeliveryIcon
+				fill={COLORS.whiteGray}
+				style={{ width: 120, height: 120 }}
+			/>
 		</View>
 	);
 };

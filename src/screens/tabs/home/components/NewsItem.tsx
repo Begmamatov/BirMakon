@@ -45,9 +45,6 @@ const NewsItem = ({
 						containerStyle={styles.buttonContainer}
 						text={STRINGS.detailed}
 					/>
-					{/* <View style={{ alignItems: "flex-end" }}>
-						<Text style={styles.dateStyle}>{day}</Text>
-					</View> */}
 				</View>
 			</View>
 		</View>

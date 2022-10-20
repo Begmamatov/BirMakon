@@ -16,11 +16,12 @@ import LocationBox from "./components/LocationBox";
 import OrderDetails from "./components/OrderDetails";
 import { useCartScreenHooks } from "./hooks";
 import { styles } from "./style";
+import { useRoute } from "@react-navigation/native";
 
 const CartView = () => {
+	let rout = useRoute();
+
 	let navigation: any = useNavigation();
-	// let cart = useSelector((s) => s)?.cart.card_list ?? [];
-	// console.log("size", cart.length);
 
 	let cart = useSelector(cartArraySelector);
 
@@ -44,8 +45,8 @@ const CartView = () => {
 			<ScrollView style={styles.container}>
 				{/* <LocationBox /> */}
 				<OrderDetails total={cartTotal} />
-				{cart.map((e) => {
-					return <ChooseItemNum data={e} />;
+				{cart.map((e, index) => {
+					return <ChooseItemNum data={e} index={index} />;
 				})}
 
 				<DefaultButton
