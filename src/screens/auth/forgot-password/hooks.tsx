@@ -29,8 +29,11 @@ export const ResendHook = () => {
 			try {
 				setLoading(true);
 				let res = await requests.auth.forgetPassword(state);
-				console.log("res++++", res);
 				setLoading(false);
+				console.log("====================================");
+				console.log("Phone Number:::::", JSON.stringify(res, null, 2));
+				console.log("====================================");
+
 				dispatch(userLoggedIn(res));
 				navigition.navigate(ROUTES.RESEDSMS as never, { state: state.phone });
 			} catch (error) {

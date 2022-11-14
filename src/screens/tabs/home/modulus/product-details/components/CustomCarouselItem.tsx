@@ -13,7 +13,7 @@ const CustomCarouselItem = (
 	return (
 		<View>
 			<Image
-				source={{ uri: "https://birmakon.qwertyuz.ru" + item.photo }}
+				source={{ uri: "https://birmakon.qwertyuz.ru" + item }}
 				style={styles.image}
 			/>
 		</View>

@@ -1,37 +1,55 @@
 import requests from "@novomarkt/api/requests";
 import { SaveIconMessage, TelegramIcon } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
-import BackHeader from "@novomarkt/components/navigation/BackHeader";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
-import React, { useRef, useState } from "react";
-import {
-	FlatList,
-	LayoutAnimation,
-	TextInput,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { useRoute } from "@react-navigation/native";
+import { fill } from "lodash";
+import React, { useEffect, useRef, useState } from "react";
+import { FlatList, TextInput, View } from "react-native";
 import { styles } from "../style";
 
 const ShopView = () => {
 	const [sendingMsg, setSendingMsg] = useState("");
-	const [messages, setMessages] = useState([
-		{ content: STRINGS.myMessages, myMsg: false },
-	]);
+	const [messages, setMessages] = useState();
+	const [messagesActive, setMessagesActive] = useState(true);
 
-	const sendMessage = async () => {
-		if (sendingMsg.length == 0) {
-			return;
-		} else {
+	const router = useRoute();
+	let id = router.params;
+	console.log("====================================");
+	console.log("Rout id::::", router.params);
+	console.log("====================================");
+
+	const file = "";
+	const getMessage = async () => {
+		try {
+			let res = await requests.chat.sendShopMessege(sendingMsg, file, id);
+			let data = await res.data.data;
+			setMessages(data);
 			setSendingMsg("");
-			setMessages([...messages, { content: sendingMsg, myMsg: true }]);
+		} catch (error) {
+			console.log("====================================");
+			console.log(error);
+			console.log("====================================");
 		}
-
-		ref.current?.scrollToEnd();
 	};
-
-	const ref = useRef<FlatList<any>>(null);
+	const sendMessage = async () => {
+		try {
+			if (!!sendingMsg) {
+				let res = await requests.chat.sendShopMessege(sendingMsg, file, id);
+				let data = await res.data.data;
+				setMessages(data);
+				setSendingMsg("");
+			}
+		} catch (error) {
+			console.log("====================================");
+			console.log(error);
+			console.log("====================================");
+		}
+	};
+	useEffect(() => {
+		getMessage();
+	}, []);
 
 	return (
 		<View style={styles.container}>
@@ -41,12 +59,13 @@ const ShopView = () => {
 				</View>
 				<View style={styles.inner}>
 					<FlatList
-						ref={ref}
 						data={messages}
+						inverted
+						showsVerticalScrollIndicator={false}
 						renderItem={({ item, index }) =>
-							item.myMsg ? (
-								<View key={index} style={styles.myBox}>
-									<Text style={styles.myMsg}>{item.content}</Text>
+							item ? (
+								<View key={index} style={[styles.myBox, {}]}>
+									<Text style={styles.myMsg}>{item.message}</Text>
 								</View>
 							) : (
 								<View style={styles.innerBox}>

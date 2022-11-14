@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { FC, ReactElement } from "react";
 import {
 	ListRenderItemInfo,
 	StyleSheet,
@@ -15,18 +15,20 @@ import {
 } from "@novomarkt/assets/icons/icons";
 import { COLORS } from "@novomarkt/constants/colors";
 import { Colors } from "react-native/Libraries/NewAppScreen";
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation } from "@react-navigation/native";
 import { NewsItemProps } from "../../../components/NewsItem";
 import { STRINGS } from "@novomarkt/locales/strings";
+import { ROUTES } from "@novomarkt/constants/routes";
 
-export interface BackHeaderLimit {
-	image: string;
-	content: string;
-	date: string;
-	name: string;
+export interface BackHeaderLimitType {
+	image?: string;
+	content?: string;
+	date?: string;
+	name?: string;
+	id?: Number;
 }
 
-const BackHeaderLimit = ({ name }) => {
+const BackHeaderLimit: FC<BackHeaderLimitType> = ({ name, id }) => {
 	let navigation = useNavigation();
 	return (
 		<View style={styles.row}>
@@ -37,7 +39,9 @@ const BackHeaderLimit = ({ name }) => {
 				/>
 			</TouchableOpacity>
 			<Text style={styles.logoText}>{name ? name : ""}</Text>
-			<TouchableOpacity>
+			<TouchableOpacity
+				onPress={() => navigation.navigate(ROUTES.SHOPVIEW as never)}
+			>
 				<GroupIcon style={{ width: 120, height: 120 }} />
 			</TouchableOpacity>
 		</View>

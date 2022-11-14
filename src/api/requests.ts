@@ -86,12 +86,11 @@ let requests = {
 			axios.post(`${url}/user/send-code`, credentials, {
 				headers: { Authorization: `Bearer ${token}` },
 			}),
-		forgetPassword: (phone: OnResed) => {
+		forgetPassword: (phone: OnResed) =>
 			axios.post<OnResed, AxiosResponse<LoginResponse>>(
 				`${url}/user/recover-password`,
 				phone
-			);
-		},
+			),
 		resedSms: (code: resedSmsProps) =>
 			axios.post<resedSmsProps, any>(`${url}/user/accept-recover-code`, code),
 	},
@@ -135,13 +134,19 @@ let requests = {
 	products: {
 		getProducts: () =>
 			axios.get<BaseResponse<ProductItemResponse>>(`${url}/product`),
+
 		getProductsWithID: (id: number) =>
 			axios.get<BaseResponse<ProductItemResponse>>(
 				`${url}/product/by-category?id=${id}`
 			),
+
 		getProductWithShopID: (id: number) =>
 			axios.get<BaseResponse<ProductItemResponse>>(
 				`${url}/product/by-shop?id=${id}`
+			),
+		getProductDetailID: (id: number) =>
+			axios.get<BaseResponse<ProductItemResponse>>(
+				`${url}/product/detail?id=${id}`
 			),
 		getProductsWithBrand: (id: number) =>
 			axios.get<BaseResponse<ProductItemResponse>>(
@@ -225,6 +230,22 @@ let requests = {
 				file: file,
 				product_id: "",
 				type_user: "admin",
+			}),
+		sendUserMessege: (sendingMsg: any, file: any) =>
+			axios.post(`${url}/chat/send`, {
+				getter_id: 100,
+				message: sendingMsg,
+				file: file,
+				product_id: 604,
+				type_user: "user",
+			}),
+		sendShopMessege: (sendingMsg: any, file: any, id: any) =>
+			axios.post(`${url}/chat/send`, {
+				getter_id: 101,
+				message: sendingMsg,
+				file: file,
+				product_id: id,
+				type_user: "shop",
 			}),
 	},
 };

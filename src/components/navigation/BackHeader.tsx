@@ -26,7 +26,13 @@ const BackHeader = ({
 }: BackHeaderProps) => {
 	let navigation = useNavigation();
 	return (
-		<View>
+		<View
+			style={{
+				backgroundColor: COLORS.white,
+				paddingTop: 20,
+				paddingBottom: 20,
+			}}
+		>
 			<TouchableOpacity
 				hitSlop={{ bottom: 20, top: 20, left: 20, right: 20 }}
 				onPress={() => navigation.goBack()}

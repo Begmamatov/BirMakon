@@ -52,17 +52,8 @@ import FavoritePrice from "./components/favoritePrice";
 import ReviewBox from "./components/ReviewBox";
 import { styles } from "./style";
 
-let productSize = ["35", "36", "37", "38", "39", "40"];
-
 const ProductDetailsView = ({}): ReactElement => {
-	const colorScrollerRef = useRef<ScrollView>();
-	const sizeScrollerRef = useRef<ScrollView>();
-	const [currentColor, setCurrentColor] = useState(0);
-
-	const [currentSize, setCurrentSize] = useState();
-	const [sizeScroll, setSizeScroll] = useState(0);
-	const [colorValue, setColorValue] = useState([]);
-
+	const [detailIdValue, setDetailIdValue] = useState<any>([]);
 	const [modalOpen, setModalOpen] = useState(false);
 
 	let {
@@ -82,9 +73,6 @@ const ProductDetailsView = ({}): ReactElement => {
 	const cart = useAppSelector(cartArraySelector);
 	const isActive =
 		cart.filter((i) => i.product.id == item.id).length > 0 ? true : false;
-	console.log("====================================");
-	console.log("Item Value", JSON.stringify(item, null, 2), isActive);
-	console.log("====================================");
 
 	let onStateChange = (key: string) => (value: string) => {
 		setReview((e) => ({ ...e, [key]: value }));
@@ -154,20 +142,14 @@ const ProductDetailsView = ({}): ReactElement => {
 			console.log(e);
 		}
 	};
-	const colorHandler = async () => {
+	const getDetailId = async () => {
 		try {
-			let res = await requests.products.colorItem();
-			setColorValue(res.data.data);
+			let res = await requests.products.getProductDetailID(id);
+			setDetailIdValue(res.data.data);
 		} catch (error) {
 			console.log(error);
 		}
 	};
-
-	useEffect(() => {
-		getReviews();
-		colorHandler();
-	}, []);
-
 	let per;
 
 	reviewsList.map((i) => {
@@ -185,13 +167,28 @@ const ProductDetailsView = ({}): ReactElement => {
 
 	const basketAktev = () => {
 		setLoading(true);
-		navigation.navigate(ROUTES.CART, { currentSize: currentSize });
+		navigation.navigate(ROUTES.CART);
 		setLoading(false);
 	};
 	const productCart = cart.filter((i) => i.product.id == item.id);
+	const massive = detailIdValue.gallery;
+	console.log("====================================");
+	console.log("massive", massive);
+	console.log("====================================");
+
+	useEffect(() => {
+		getReviews();
+		getDetailId();
+	}, []);
+	// const [addValue, setAddValue] = useState();
+	// const addHandler = () => {
+	// 	setAddValue((a) => {
+	// 		return
+	// 	});
+	// };
 	return (
 		<View style={styles.container}>
-			<BackHeaderLimit name={item.name} />
+			<BackHeaderLimit name={item.name} id={id} />
 			<ScrollView
 				showsVerticalScrollIndicator={false}
 				contentContainerStyle={{ paddingBottom: 50 }}
@@ -217,14 +214,11 @@ const ProductDetailsView = ({}): ReactElement => {
 						sliderWidth={WINDOW_WIDTH}
 						itemHeight={200}
 						sliderHeight={200}
-						data={[item]}
+						data={detailIdValue.gallery}
 						renderItem={CustomCarouselItem}
 						pagingEnabled
 					/>
-					{/* <Pagination
-						activeDotIndex={activeSlide}
-						dotsLength={customCarouselData.length}
-					/> */}
+					{/* <Pagination activeDotIndex={activeSlide} dotsLength={} /> */}
 					<Text style={styles.itemName}>{item.name}</Text>
 				</View>
 				<FavoritePrice
@@ -236,8 +230,8 @@ const ProductDetailsView = ({}): ReactElement => {
 					smallprice={item.price_opt_small}
 					bigprice={item.price_opt}
 				/>
-				<Text style={styles.corusellText}>Цвет</Text>
-				<View>
+				{/* <Text style={styles.corusellText}>Цвет</Text> */}
+				{/* <View>
 					<ScrollView
 						horizontal
 						showsHorizontalScrollIndicator={false}
@@ -264,22 +258,10 @@ const ProductDetailsView = ({}): ReactElement => {
 							);
 						})}
 					</ScrollView>
-					{/* <View style={styles.scrollView}>
-						<TouchableOpacity
-							onPress={() => {
-								colorScrollerRef.current?.scrollTo({
-									x: Dimensions.get("window").width * (colorScrollIndex + 1),
-									animated: true,
-								});
-								setColorScrollIndex(colorScrollIndex + 1);
-							}}
-						>
-							<ScrollViewIcon />
-						</TouchableOpacity>
-					</View> */}
-				</View>
-				<Text style={styles.corusellText}>Размер</Text>
-				<View>
+				
+				</View> */}
+				{/* <Text style={styles.corusellText}>Размер</Text> */}
+				{/* <View>
 					<ScrollView
 						horizontal
 						showsHorizontalScrollIndicator={false}
@@ -307,27 +289,14 @@ const ProductDetailsView = ({}): ReactElement => {
 							);
 						})}
 					</ScrollView>
-					{/* <View style={styles.scrollView1}>
-						<TouchableOpacity
-							onPress={() => {
-								sizeScrollerRef.current?.scrollTo({
-									x: Dimensions.get("window").width * (sizeScroll + 1),
-									animated: true,
-								});
-								setSizeScroll(sizeScroll + 1);
-							}}
-						>
-							<ScrollViewIcon />
-						</TouchableOpacity>
-					</View> */}
-				</View>
-				<View style={styles.deliveryView}>
+				</View> */}
+				{/* <View style={styles.deliveryView}>
 					<Text style={styles.deliveryText}>Доставка: 318,94 сум</Text>
 					<Text style={styles.deliveryText1}>В Uzbekistan через BTC</Text>
 					<Text style={styles.deliveryText1}>
 						Расчётное время доставки: 29-48 дней
 					</Text>
-				</View>
+				</View> */}
 				{/* amount */}
 				<View style={styles.counter}>
 					<TouchableOpacity onPress={onDecreaseItem}>
@@ -390,12 +359,12 @@ const ProductDetailsView = ({}): ReactElement => {
 					{/* basketAktev */}
 
 					<TouchableOpacity
-						onPress={() =>
-							navigation.navigate(ROUTES.COMPARISON, {
-								item: item.options,
-								productSize: productSize,
-							})
-						}
+					// onPress={() =>
+					// 	navigation.navigate(ROUTES.COMPARISON, {
+					// 		item: item.options,
+					// 		productSize: productSize,
+					// 	})
+					// }
 					>
 						<View style={styles.oldView1}>
 							<Text style={styles.oldText}>Сравнить</Text>
@@ -404,9 +373,7 @@ const ProductDetailsView = ({}): ReactElement => {
 				</View>
 				<TouchableOpacity
 					onPress={() =>
-						navigation.navigate(ROUTES.ALL_INFORMATION, {
-							options: item.options,
-						})
+						navigation.navigate(ROUTES.ALL_INFORMATION, detailIdValue)
 					}
 				>
 					<View style={styles.sectionBox}>
@@ -424,9 +391,7 @@ const ProductDetailsView = ({}): ReactElement => {
 						</View>
 					);
 				})}
-				<DefaultButton containerStyle={{ marginHorizontal: 20 }}>
-					<Text style={styles.buttonTxt}>{STRINGS.allDetails}</Text>
-				</DefaultButton>
+
 				<View style={styles.flatlistContainerView}>
 					<View style={styles.flatlistContainer}>
 						<Text style={styles.flatlistContainerText}>Описание</Text>
@@ -434,19 +399,7 @@ const ProductDetailsView = ({}): ReactElement => {
 					</View>
 					<View style={styles.flatlistContainerBox}>
 						<Text style={styles.flatlistContainerBoxText}>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat a
-							ut pellentesque adipiscing viverra risus laoreet. Orci, dictumst
-							eget vel nunc at vulputate cras posuere commodo. Tortor, semper
-							fermentum felis sagittis, phasellus molestie at nunc ut. Sit
-							tristique at faucibus risus nunc cras.
-						</Text>
-						<Text style={styles.flatlistContainerBoxText1}>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Feugiat a
-							ut pellentesque adipiscing viverra risus laoreet. Orci, dictumst
-							eget vel nunc at vulputate cras posuere commodo. Tortor,
-							semperdispatch(toggleLoading()); fermentum felis sagittis,
-							phasellus molestie at nunc ut. Sit tristique at faucibus risus
-							nunc cras.
+							{detailIdValue.description}
 						</Text>
 					</View>
 				</View>

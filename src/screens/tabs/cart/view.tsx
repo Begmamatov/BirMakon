@@ -43,7 +43,6 @@ const CartView = () => {
 		<>
 			<DefaultHeader name={STRINGS.cart} />
 			<ScrollView style={styles.container}>
-				{/* <LocationBox /> */}
 				<OrderDetails total={cartTotal} />
 				{cart.map((e, index) => {
 					return <ChooseItemNum data={e} index={index} />;

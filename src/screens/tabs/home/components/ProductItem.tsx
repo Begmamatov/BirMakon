@@ -82,6 +82,7 @@ const ProductItem = ({
 
 				let cartRes = await requests.products.getCarts();
 				dispatch(loadCart(cartRes.data.data));
+
 				setAnimate(false);
 			} catch (error) {
 				console.log("erorrs++++", JSON.stringify(error, null, 4));
@@ -122,16 +123,9 @@ const ProductItem = ({
 						hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
 					>
 						{isFav ? (
-							<HeartIconRed
-								style={{ width: 120, height: 120 }}
-								fill={COLORS.red}
-							/>
+							<HeartIconRed fill={COLORS.red} />
 						) : (
-							<HeartIconBorder
-								style={{ width: 120, height: 120 }}
-								fill={COLORS.red}
-								stroke={COLORS.red}
-							/>
+							<HeartIconBorder fill={COLORS.red} stroke={COLORS.red} />
 						)}
 					</TouchableOpacity>
 					{discount ? (
@@ -145,7 +139,7 @@ const ProductItem = ({
 				<View style={styles.details}>
 					<View style={styles.row}>
 						<Text style={styles.brand}>{category?.name}</Text>
-						<Text style={styles.brand}>{shop?.name}</Text>
+						{/* <Text style={styles.brand}>{shop?.name}</Text> */}
 					</View>
 					<Text style={styles.name}>{name ? name : ""}</Text>
 					<View
@@ -163,7 +157,7 @@ const ProductItem = ({
 							</Text>
 						) : null}
 					</View>
-					<DefaultButton
+					{/* <DefaultButton
 						containerStyle={styles.button}
 						secondary={isInCart}
 						onPress={onCartPress}
@@ -183,11 +177,10 @@ const ProductItem = ({
 								</Text>
 								<BasketIcon
 									fill={isInCart ? COLORS.cartColor3 : COLORS.white}
-									style={{ width: 120, height: 120 }}
 								/>
 							</View>
 						)}
-					</DefaultButton>
+					</DefaultButton> */}
 				</View>
 			</View>
 		</TouchableWithoutFeedback>

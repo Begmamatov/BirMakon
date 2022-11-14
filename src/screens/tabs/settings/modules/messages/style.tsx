@@ -152,5 +152,6 @@ export const styles = StyleSheet.create({
 	myBox: {
 		marginTop: 20,
 		alignItems: "flex-end",
+		marginRight: 10,
 	},
 });

@@ -15,6 +15,8 @@ const Search = () => {
 			<SearchBackHeader autoFocus={true} onChange={onStateChange("text")} />
 			<FlatList
 				data={result}
+				showsHorizontalScrollIndicator={false}
+				showsVerticalScrollIndicator={false}
 				renderItem={({ item }) => {
 					return <ProductItem item={item} />;
 				}}

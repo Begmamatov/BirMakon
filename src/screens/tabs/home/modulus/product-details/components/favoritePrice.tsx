@@ -40,14 +40,12 @@ const FavoritePrice = ({
 			<View style={styles.box1}>
 				<View style={styles.row}>
 					<Text style={styles.fromTo}>
-						от {fromTo} до {fromToFrom}:
+						от {fromToFrom} до {tofrom} Кг.
 					</Text>
 					<Text style={styles.smallprice}>{smallprice} сум</Text>
 				</View>
 				<View style={styles.row}>
-					<Text style={styles.tofrom}>
-						от {fromToFrom} до {tofrom}:
-					</Text>
+					<Text style={styles.tofrom}>от {tofrom} Кг.</Text>
 					<Text style={styles.bigprice}>{bigprice} сум</Text>
 				</View>
 			</View>
@@ -78,11 +76,10 @@ const styles = StyleSheet.create({
 	},
 	box: {
 		width: "50%",
-		marginHorizontal: -5,
+		// marginHorizontal: -5,
 	},
 	box1: {
 		width: "50%",
-		marginHorizontal: 25,
 	},
 	fromTo: {
 		fontSize: 16,

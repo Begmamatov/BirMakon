@@ -5,6 +5,8 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: COLORS.white,
+		alignItems: "center",
+		flexWrap: "wrap",
 	},
 
 	list: {

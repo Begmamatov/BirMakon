@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		paddingBottom: 20,
 		flexDirection: "column",
-		marginTop: 20,
+		backgroundColor: "white",
 	},
 	scrol_container: {
 		height: "100%",
@@ -28,13 +28,11 @@ export const styles = StyleSheet.create({
 		marginTop: 24,
 	},
 	title_text: {
-		fontStyle: "normal",
 		fontSize: 16,
 		fontWeight: "600",
-		color: "#023047",
+		color: COLORS.gray,
 	},
 	information: {
-		marginTop: 25,
-		marginBottom: 30,
+		marginTop: 45,
 	},
 });

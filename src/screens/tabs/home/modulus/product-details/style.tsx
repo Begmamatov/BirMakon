@@ -122,6 +122,7 @@ export const styles = StyleSheet.create({
 		flexDirection: "row",
 		marginHorizontal: 20,
 		borderRadius: 8,
+		marginTop: 30,
 	},
 	minus: {
 		paddingVertical: 10,

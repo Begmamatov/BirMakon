@@ -8,25 +8,17 @@ import {
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/core";
+import { useRoute } from "@react-navigation/core";
 import { LeftArrowIcon } from "@novomarkt/assets/icons/icons";
 import { styles } from "./styles";
-import Item_Info from "./components/item_Info";
-
-const data = [
-	{
-		name: "Farrux",
-		age: "24",
-		title: "Kastyum",
-	},
-	{
-		name: "Farrux",
-		age: "24",
-		title: "Kuylak",
-	},
-];
 
 const all_Information = () => {
 	let navigation = useNavigation();
+
+	let router = useRoute<any>();
+	console.log("====================================");
+	console.log("Router Value::", JSON.stringify(router, null, 2));
+	console.log("====================================");
 	return (
 		<SafeAreaView>
 			<View style={styles.container}>
@@ -37,18 +29,17 @@ const all_Information = () => {
 					/>
 					<Text style={styles.text}>Характеристики</Text>
 				</TouchableOpacity>
-				<ScrollView style={styles.scrol_container}>
+				<View style={styles.scrol_container}>
 					<View style={styles.title}>
-						<Text style={styles.title_text}>
-							Элегантный Костюм с брюками ZARA стиль {}
-						</Text>
+						<Text style={styles.title_text}>{router.params.name}</Text>
 					</View>
-					<View style={styles.information}>
-						{data.map((item) => {
-							return <Item_Info items={item} />;
-						})}
-					</View>
-				</ScrollView>
+					<ScrollView
+						style={styles.information}
+						showsVerticalScrollIndicator={false}
+					>
+						<Text style={styles.title_text}>{router.params.description}</Text>
+					</ScrollView>
+				</View>
 			</View>
 		</SafeAreaView>
 	);

@@ -11,16 +11,37 @@ import { styles } from "../style";
 const AdminView = () => {
 	const [sendingMsg, setSendingMsg] = useState("");
 	const [messages, setMessages] = useState();
+	const [messagesActive, setMessagesActive] = useState(true);
+
 	const file = "";
-
-	const sendMessage = async () => {
-		let res = await requests.chat.sendAdminMessege(sendingMsg, file);
-		setMessages(res.data.data);
-		setSendingMsg("");
+	const getMessage = async () => {
+		try {
+			let res = await requests.chat.sendAdminMessege(sendingMsg, file);
+			let data = await res.data.data;
+			setMessages(data);
+			setSendingMsg("");
+		} catch (error) {
+			console.log("====================================");
+			console.log(error);
+			console.log("====================================");
+		}
 	};
-
+	const sendMessage = async () => {
+		try {
+			if (!!sendingMsg) {
+				let res = await requests.chat.sendAdminMessege(sendingMsg, file);
+				let data = await res.data.data;
+				setMessages(data);
+				setSendingMsg("");
+			}
+		} catch (error) {
+			console.log("====================================");
+			console.log(error);
+			console.log("====================================");
+		}
+	};
 	useEffect(() => {
-		sendMessage();
+		getMessage();
 	}, []);
 
 	return (
@@ -32,11 +53,19 @@ const AdminView = () => {
 				<View style={styles.inner}>
 					<FlatList
 						data={messages}
-						renderItem={({ item, index }) => (
-							<View key={index} style={styles.myBox}>
-								<Text style={styles.myMsg}>{item.message}</Text>
-							</View>
-						)}
+						inverted
+						showsVerticalScrollIndicator={false}
+						renderItem={({ item, index }) =>
+							item ? (
+								<View key={index} style={[styles.myBox, {}]}>
+									<Text style={styles.myMsg}>{item.message}</Text>
+								</View>
+							) : (
+								<View style={styles.innerBox}>
+									<Text style={styles.innerText}>{STRINGS.comment}</Text>
+								</View>
+							)
+						}
 					/>
 				</View>
 				<View style={styles.texting}>

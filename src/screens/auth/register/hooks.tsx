@@ -6,7 +6,7 @@ import { userLoggedIn } from "@novomarkt/store/slices/userSlice";
 import { validatePhoneNumber } from "@novomarkt/utils/validation";
 import { useNavigation } from "@react-navigation/native";
 import axios, { AxiosError } from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 
 export interface RegisterState {
 	name: string;
