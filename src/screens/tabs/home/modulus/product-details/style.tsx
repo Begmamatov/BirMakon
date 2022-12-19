@@ -528,4 +528,14 @@ export const styles = StyleSheet.create({
 	ceckedColorNo: {
 		borderWidth: 0,
 	},
+	topBarr: {
+		flexDirection: "row",
+		paddingHorizontal: 20,
+		marginBottom: 22,
+	},
+	topBarrTitle: {
+		fontSize: 14,
+		color: "#999999",
+		marginRight: 5,
+	},
 });

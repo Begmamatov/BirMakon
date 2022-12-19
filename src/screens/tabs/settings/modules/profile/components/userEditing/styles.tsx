@@ -5,7 +5,6 @@ import { Platform, StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingHorizontal: 20,
 		backgroundColor: COLORS.white,
 	},
 	buttonTxt: {
@@ -19,6 +18,7 @@ export const styles = StyleSheet.create({
 		marginVertical: 10,
 		flexDirection: "column",
 		alignItems: "center",
+		paddingHorizontal: 20,
 	},
 
 	changeTxt: {

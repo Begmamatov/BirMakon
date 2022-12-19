@@ -1,3 +1,4 @@
+import { assetUrl } from "@novomarkt/api/requests";
 import { COLORS } from "@novomarkt/constants/colors";
 import { WINDOW_WIDTH } from "@novomarkt/constants/sizes";
 import React, { JSXElementConstructor, ReactElement } from "react";
@@ -12,10 +13,7 @@ const CustomCarouselItem = (
 ): ReactElement<any, string | JSXElementConstructor<any>> | null => {
 	return (
 		<View>
-			<Image
-				source={{ uri: "https://birmakon.qwertyuz.ru" + item }}
-				style={styles.image}
-			/>
+			<Image source={{ uri: assetUrl + item }} style={styles.image} />
 		</View>
 	);
 };

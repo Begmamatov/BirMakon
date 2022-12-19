@@ -1,5 +1,6 @@
 //@ts-ignore
-import { appendUrl } from "@novomarkt/api/requests";
+import { appendUrl, assetUrl } from "@novomarkt/api/requests";
+//@ts-ignore
 import MasterCard from "@novomarkt/assets/images/mastercard.png";
 //@ts-ignore
 import MirCard from "@novomarkt/assets/images/mir.png";
@@ -7,30 +8,28 @@ import MirCard from "@novomarkt/assets/images/mir.png";
 import VisaCard from "@novomarkt/assets/images/visa.png";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
-import { ProductItemProps } from "@novomarkt/screens/tabs/home/components/ProductItem";
-import React from "react";
-import {
-	Image,
-	ListRenderItemInfo,
-	StyleSheet,
-	Text,
-	View,
-} from "react-native";
 
-const OrderItem = ({
-	item: { name, photo, shopName, price },
-}: ListRenderItemInfo<ProductItemProps>) => {
+import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
+
+const OrderItem = ({ item }: any) => {
+	console.log("================item====================");
+	console.log(JSON.stringify(item, null, 2));
+	console.log("================item====================");
 	return (
 		<View style={styles.shadowBox}>
 			<View>
-				<Image source={{ uri: appendUrl(photo) }} style={styles.img} />
-				<Text style={styles.price}>{price} сум</Text>
+				<Image
+					source={{ uri: assetUrl + item.user.photo }}
+					style={styles.img}
+				/>
+				<Text style={styles.price}>{item.price}сум</Text>
 			</View>
 			<View style={styles.contentBox}>
-				<Text style={styles.text}>{name}</Text>
-				<Text style={styles.name}>{shopName}</Text>
+				<Text style={styles.text}>{item.name}</Text>
+				<Text style={styles.name}>{item.shopName}</Text>
 				<Text style={styles.items}>
-					{STRINGS.seller} {shopName}
+					{STRINGS.seller} {item.shopName}
 				</Text>
 				<Text style={styles.items}>{STRINGS.quantity} 1 шт</Text>
 				<Text style={styles.items}>

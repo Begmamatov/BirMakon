@@ -113,5 +113,7 @@ export const STRINGS = new LocalizedStrings({
 		cartIsEmpty: "Корзина пустая",
 		favoritesIsEmpty: "Нет избранных товаров",
 		COURSE: "Курс",
+		ExpirationMonth: "Месяц истечения",
+		FullName: "ФИО",
 	},
 });

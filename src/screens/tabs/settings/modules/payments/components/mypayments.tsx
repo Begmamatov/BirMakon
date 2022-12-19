@@ -1,5 +1,6 @@
+import requests from "@novomarkt/api/requests";
 import { COLORS } from "@novomarkt/constants/colors";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	StyleSheet,
 	View,
@@ -21,8 +22,21 @@ export interface BlueButtonProps {
 const Mypayments = ({ onPress }: BlueButtonProps) => {
 	const { payments } = MyPaymentsHooks();
 
-	console.log("payments", JSON.stringify(payments, null, 4));
-
+	const [state, setState] = useState();
+	const transaction = async () => {
+		try {
+			let res = await requests.profile.getTransaction();
+			setState(res.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
+		transaction();
+	}, []);
+	console.log("====================================");
+	console.log(JSON.stringify(state, null, 2));
+	console.log("====================================");
 	return (
 		<View>
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>

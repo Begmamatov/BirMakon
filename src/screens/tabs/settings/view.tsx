@@ -28,18 +28,14 @@ const SettingsView = ({}) => {
 	let navigation: any = useNavigation();
 	return (
 		<ScrollView style={styles.container}>
-			<Text style={styles.headerText}>Доброе утро</Text>
+			<Text style={styles.headerText}>Профиль</Text>
 			<View style={styles.itemsBox}>
 				<SettingsItem
 					onPress={() => navigation.navigate(ROUTES.ORDER)}
 					text={"Мои заказы"}
 					icon={() => <ShopIcon fill={COLORS.defaultBlack} />}
 				/>
-				{/* <SettingsItem
-					onPress={() => navigation.navigate(ROUTES.COMMENT)}
-					text={"Отзывы"}
-					icon={() => <BorderedStarIcon fill={COLORS.defaultBlack} />}
-				/> */}
+
 				<SettingsItem
 					text={"Избранные товары"}
 					onPress={() => navigation.navigate(ROUTES.FAVORITESSETTINGS)}
@@ -75,14 +71,14 @@ const SettingsView = ({}) => {
 					onPress={() => navigation.navigate(ROUTES.CHATS)}
 					icon={() => <ChatIcon fill={COLORS.defaultBlack} />}
 				/>
-				<SettingsItem
+				{/* <SettingsItem
 					text={"Позвонить"}
 					icon={() => <PhoneIcon stroke={COLORS.defaultBlack} />}
-				/>
-				<SettingsItem
+				/> */}
+				{/* <SettingsItem
 					text={"Чат с поддержкой"}
 					icon={() => <MessageIcon stroke={COLORS.defaultBlack} />}
-				/>
+				/> */}
 				<SettingsItem
 					onPress={() => navigation.navigate(ROUTES.LANGUAGE)}
 					text={"Язик"}

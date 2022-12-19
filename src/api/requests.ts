@@ -24,8 +24,8 @@ import {
 } from "./types";
 import { resedSmsProps } from "@novomarkt/screens/auth/resedSms/hooks";
 
-export let url = "https://birmakon.qwertyuz.ru/api";
-export let assetUrl = "https://birmakon.qwertyuz.ru";
+export let url = "https://admin.birmakon.uz/api";
+export let assetUrl = "https://admin.birmakon.uz";
 axios.interceptors.request.use((config) => {
 	let token = store.getState().user.token;
 	console.log("token----", token);
@@ -98,8 +98,7 @@ let requests = {
 		getProfile: () => axios.get<{ data: LoginResponse }>(`${url}/user/profile`),
 		editProfile: (data: Partial<LoginResponse>) =>
 			axios.post<any, any, FormData>(`${url}/user/update`, formData(data)),
-		addCard: (creds: AddCardRequest) =>
-			axios.post(`${url}/user/card-add`, creds),
+		addCard: (creds: AddCardRequest) => axios.post(`${url}/card/send`, creds),
 		getCardTypes: () =>
 			axios.get<{ data: CardTypeItem[] }>(`${url}/category?type=card`),
 		getCards: () => axios.get<{ data: CardItem[] }>(`${url}/user/cards`),
@@ -107,6 +106,7 @@ let requests = {
 			axios.post<{ data: CardItem[] }>(`${url}/user/card-remove`, data),
 		getUploadPhoto: () =>
 			axios.get<{ data: string }>(`${url}/user/upload-photo`),
+		getTransaction: () => axios.get(`${url}/transaction`),
 	},
 
 	categories: {

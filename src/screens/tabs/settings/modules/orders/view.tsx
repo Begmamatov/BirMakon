@@ -11,7 +11,7 @@ import StatusBar from "./components/StatusBar";
 import { styles } from "./style";
 
 const OrderView = () => {
-	const [orders, setOrders] = useState<OrderItemResponse[]>([]);
+	const [orders, setOrders] = useState<any>([]);
 	const [date, setDate] = useState<string>("");
 
 	const getOrders = async () => {
@@ -26,6 +26,9 @@ const OrderView = () => {
 	useEffect(() => {
 		getOrders();
 	}, []);
+	// console.log("===============OrderView=====================");
+	// console.log(JSON.stringify(orders, null, 2));
+	// console.log("==============OrderView======================");
 
 	return (
 		<View style={styles.container}>
@@ -45,7 +48,7 @@ const OrderView = () => {
 									<Text>ООО "ПРАЙД"</Text>
 								</View>
 							</View>
-							<Text style={styles.salesman}>2022.06.24</Text>
+							<Text style={styles.salesman}></Text>
 						</View>
 					);
 				}}

@@ -2,7 +2,7 @@ import requests from "@novomarkt/api/requests";
 import { useEffect, useState } from "react";
 
 const MyPaymentsHooks = () => {
-	const [payments, setPayments] = useState([]);
+	const [payments, setPayments] = useState<any>([]);
 
 	const getPayments = async () => {
 		try {

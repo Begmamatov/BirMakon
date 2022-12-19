@@ -1,4 +1,4 @@
-import { appendUrl } from "@novomarkt/api/requests";
+import { appendUrl, assetUrl } from "@novomarkt/api/requests";
 import { LocationIcon } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
 import BackHeader from "@novomarkt/components/navigation/BackHeader";
@@ -22,6 +22,7 @@ export interface UserData {
 
 const ProfileView = () => {
 	const navigation: any = useNavigation();
+
 	let { onTextChange, profileData, setProfileData, onFieldSubmit } =
 		useProfileHook();
 
@@ -58,7 +59,7 @@ const ProfileView = () => {
 						style={{ flexDirection: "row", justifyContent: "space-between" }}
 					>
 						<Image
-							source={{ uri: appendUrl(profileData?.photo) }}
+							source={{ uri: assetUrl + profileData?.photo }}
 							style={{ width: 80, height: 80 }}
 						/>
 					</View>
@@ -145,7 +146,7 @@ const ProfileView = () => {
 				</View>
 				<View style={styles.shadowBoxTwo}>
 					<Text style={styles.bank}> Банковские карты </Text>
-					<CartSelectItem />
+					{/* <CartSelectItem /> */}
 				</View>
 				<View style={styles.locate}>
 					<Text style={styles.txt}>Адресa клиента</Text>

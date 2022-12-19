@@ -31,6 +31,7 @@ const BackHeader = ({
 				backgroundColor: COLORS.white,
 				paddingTop: 20,
 				paddingBottom: 20,
+				paddingHorizontal: 15,
 			}}
 		>
 			<TouchableOpacity

@@ -3,7 +3,7 @@ import { useRoute } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 
 const useCatalogDetailsHook = () => {
-	const route = useRoute();
+	const route: any = useRoute();
 	const [details, setDetails] = useState();
 	let effect = async () => {
 		try {

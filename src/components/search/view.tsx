@@ -14,13 +14,12 @@ const Search = () => {
 		<View style={styles.container}>
 			<SearchBackHeader autoFocus={true} onChange={onStateChange("text")} />
 			<FlatList
+				numColumns={2}
 				data={result}
 				showsHorizontalScrollIndicator={false}
 				showsVerticalScrollIndicator={false}
-				renderItem={({ item }) => {
-					return <ProductItem item={item} />;
-				}}
-				style={styles.list}
+				renderItem={(props) => <ProductItem {...props} />}
+				style={styles.container2}
 			/>
 		</View>
 	);

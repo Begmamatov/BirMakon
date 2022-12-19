@@ -157,7 +157,7 @@ const ProductItem = ({
 							</Text>
 						) : null}
 					</View>
-					{/* <DefaultButton
+					<DefaultButton
 						containerStyle={styles.button}
 						secondary={isInCart}
 						onPress={onCartPress}
@@ -180,7 +180,7 @@ const ProductItem = ({
 								/>
 							</View>
 						)}
-					</DefaultButton> */}
+					</DefaultButton>
 				</View>
 			</View>
 		</TouchableWithoutFeedback>

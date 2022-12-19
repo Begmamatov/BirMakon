@@ -5,9 +5,6 @@ import { FlatList, Image, View } from "react-native";
 import CategoryItem from "./components/CategoryItem";
 import { styles } from "./style";
 
-let BannerURL =
-	"https://lh4.googleusercontent.com/mEIPzmkL2ezY8H55Ib7dyT7gUPQRnDSxyu_SM458KWgKAkOWD0X9VmkIw7hBQdgecLARQOUT97qOtLxf2OHysWaByiq-HbLPzrMA5Sb9hsUP3Xrml-BPjUTBQP_YR1ZTOsm14Doh";
-
 const CatalogView = () => {
 	const [categories, setCategories] = useState([]);
 	let effect = async () => {
@@ -21,10 +18,16 @@ const CatalogView = () => {
 	useEffect(() => {
 		effect();
 	}, []);
+	console.log("====================================");
+	console.log(JSON.stringify(categories, null, 2));
+	console.log("====================================");
 	return (
 		<View style={styles.container}>
 			<SearchHeader />
-			<Image source={{ uri: BannerURL }} style={styles.banner} />
+			<Image
+				source={require("../../../assets/images/image 26.png")}
+				style={{ width: "100%", height: 80 }}
+			/>
 			<FlatList
 				data={categories}
 				renderItem={(props) => <CategoryItem {...props} />}

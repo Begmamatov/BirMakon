@@ -123,17 +123,21 @@ const Products = ({ item }: { item: ProductItemResponse }) => {
 							<Text style={styles.oldPrice}>
 								{price_old ? price_old : ""} сум
 							</Text>
-						) : null}
+						) : (
+							<Text style={styles.oldPrice}>0</Text>
+						)}
 						<Text style={styles.price}>{price} сум</Text>
 					</View>
 					<View style={styles.nameContainer}>
 						{discount ? (
 							<View style={styles.discount}>
 								<Text style={styles.dscountText}>
-									{discount ? discount : ""}%
+									{discount ? discount : "0"}%
 								</Text>
 							</View>
-						) : null}
+						) : (
+							<Text style={styles.dscountText}>0%</Text>
+						)}
 						<DefaultButton
 							containerStyle={styles.button}
 							secondary={isInCart}

@@ -8,6 +8,7 @@ import ShopView from "../settings/modules/messages/components/shopView";
 import all_Information from "./modulus/all_Information/view";
 import Comparison from "./modulus/Comparison/view";
 import NewsDetailsView from "./modulus/news-details/view";
+import ReviewsAll from "./modulus/product-details/components/ReviewsAll";
 import ProductDetailsView from "./modulus/product-details/view";
 import HomeView from "./view";
 
@@ -34,6 +35,7 @@ export let HomeStack = () => {
 				name={ROUTES.CATALOG_DETAILS}
 			/>
 			<Stack.Screen name={ROUTES.SHOPVIEW} component={ShopView} />
+			<Stack.Screen name={ROUTES.REVIEWSALL} component={ReviewsAll} />
 		</Stack.Navigator>
 	);
 };

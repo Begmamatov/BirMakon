@@ -39,4 +39,5 @@ export const ROUTES = {
 	COMPARISON: "Comparison",
 	SHOPVIEW: "ShopView",
 	DELIVERY: "Delivery",
+	REVIEWSALL: "ReviewsAll",
 };

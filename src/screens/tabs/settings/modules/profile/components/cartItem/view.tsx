@@ -181,7 +181,7 @@ const CartSelectItem = (props: ExampleProps) => {
 							placeholder="Card Number"
 							style={styles.modalInput}
 						/>
-						<Text style={styles.modalTitle}>{STRINGS.cardNumber}</Text>
+						<Text style={styles.modalTitle}>{STRINGS.ExpirationMonth}</Text>
 						<TextInput
 							value={cardDetail?.expiry as string}
 							onChangeText={(e) => {
@@ -190,7 +190,7 @@ const CartSelectItem = (props: ExampleProps) => {
 							placeholder="Expiration month"
 							style={styles.modalInput}
 						/>
-						<Text style={styles.modalTitle}>{STRINGS.cardNumber}</Text>
+						<Text style={styles.modalTitle}>{STRINGS.FullName}</Text>
 						<TextInput
 							value={cardDetail?.phone as string}
 							onChangeText={(e) => {

@@ -19,7 +19,7 @@ import {
 
 interface SearchProps {
 	autoFocus?: boolean;
-	onChange?: () => void;
+	onChange?: (valyu: string) => void;
 }
 
 const SearchBackHeader = ({ autoFocus, onChange }: SearchProps) => {
@@ -41,7 +41,7 @@ const SearchBackHeader = ({ autoFocus, onChange }: SearchProps) => {
 					autoCorrect={false}
 					onChangeText={onChange}
 					onFocus={() => {
-						navigation.navigate(ROUTES.SEARCH);
+						navigation.navigate(ROUTES.SEARCH as never);
 					}}
 				/>
 				<SearchIcon fill={COLORS.whiteGray} />

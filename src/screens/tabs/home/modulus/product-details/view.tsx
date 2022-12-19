@@ -33,6 +33,7 @@ import { favoriteSelector } from "@novomarkt/store/slices/favoriteSlice";
 import { useNavigation, useRoute } from "@react-navigation/core";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import {
+	Alert,
 	Dimensions,
 	Image,
 	LayoutAnimation,
@@ -55,7 +56,6 @@ import { styles } from "./style";
 const ProductDetailsView = ({}): ReactElement => {
 	const [detailIdValue, setDetailIdValue] = useState<any>([]);
 	const [modalOpen, setModalOpen] = useState(false);
-
 	let {
 		params: { item, id },
 	} = useRoute<any>();
@@ -63,7 +63,7 @@ const ProductDetailsView = ({}): ReactElement => {
 	const [activeSlide, setActiveSlide] = useState(0);
 	const [shouldShow, setShouldShow] = useState(true);
 	const [loading, setLoading] = useState(false);
-	const [reviewsList, setReviewsList] = useState([]);
+	const [reviewsList, setReviewsList] = useState<any>([]);
 	const [rate, setRate] = useState(0);
 	const [review, setReview] = useState<SendReviewProps>({
 		product_id: item.id,
@@ -81,38 +81,44 @@ const ProductDetailsView = ({}): ReactElement => {
 	const toggleModal = () => {
 		setModalOpen(!modalOpen);
 	};
-
 	const dispatch = useDispatch();
-
 	let navigation: any = useNavigation();
 
-	const onAddItem = async () => {
-		try {
-			dispatch(toggleLoading(true));
-			let res = await requests.products.increaseItem({
-				amount: 1,
-				product_id: id,
-			});
-			let cartRes = await requests.products.getCarts();
-			dispatch(loadCart(cartRes.data.data));
-		} catch (error) {
-			console.log(error);
-		} finally {
-			dispatch(toggleLoading(false));
-		}
-	};
-	const onDecreaseItem = async () => {
-		try {
-			dispatch(toggleLoading(true));
-			let res = await requests.products.decreaseItem({
-				product_id: id,
-			});
-			let cartRes = await requests.products.getCarts();
-			dispatch(loadCart(cartRes.data.data));
-		} catch (error) {
-			console.log(error);
-		} finally {
-			dispatch(toggleLoading(false));
+	let isInCart = !!cart[id];
+	const [animate, setAnimate] = useState(false);
+
+	const onCartPress = async () => {
+		if (isInCart) {
+			try {
+				setAnimate(true);
+				let clear = await requests.products.removeItem({
+					product_id: id,
+				});
+				let cartGet = await requests.products.getCarts();
+				dispatch(loadCart(cartGet.data.data));
+				setAnimate(false);
+			} catch (error) {
+				console.log(error);
+				setAnimate(false);
+			}
+		} else {
+			try {
+				setAnimate(true);
+				let res = await requests.products.addToCart({
+					amount: adValue,
+					product_id: id,
+				});
+				if (res.status.toString() === "422") {
+					Alert.alert("Кол-во товара на складе меньше чем вы указали");
+				}
+				let cartRes = await requests.products.getCarts();
+				dispatch(loadCart(cartRes.data.data));
+				setAnimate(false);
+			} catch (error) {
+				Alert.alert("Кол-во товара на складе меньше чем вы указали");
+			} finally {
+				setAnimate(false);
+			}
 		}
 	};
 
@@ -150,15 +156,12 @@ const ProductDetailsView = ({}): ReactElement => {
 			console.log(error);
 		}
 	};
-	let per;
-
-	reviewsList.map((i) => {
+	let per = detailIdValue.reviews_count;
+	let separate = detailIdValue.review_separate;
+	reviewsList.map(() => {
 		const sum = reviewsList.reduce((a: any, b: any) => {
 			return b.rate + a;
 		}, 0);
-		const sumReviews = reviewsList.reduce((a, b) => {
-			return b.review;
-		}, "");
 
 		let percent = sum / reviewsList.length;
 		per = percent.toString().substring(0, 3);
@@ -173,19 +176,22 @@ const ProductDetailsView = ({}): ReactElement => {
 	const productCart = cart.filter((i) => i.product.id == item.id);
 	const massive = detailIdValue.gallery;
 	console.log("====================================");
-	console.log("massive", massive);
+	console.log("massive", JSON.stringify(detailIdValue, null, 2));
 	console.log("====================================");
 
 	useEffect(() => {
 		getReviews();
 		getDetailId();
 	}, []);
-	// const [addValue, setAddValue] = useState();
-	// const addHandler = () => {
-	// 	setAddValue((a) => {
-	// 		return
-	// 	});
-	// };
+	const [adValue, setAdValue] = useState(0);
+	const adHandler = (a: string) => {
+		if (a === "add") {
+			setAdValue((c) => c + 1);
+		} else {
+			setAdValue((c) => c - 1);
+		}
+	};
+
 	return (
 		<View style={styles.container}>
 			<BackHeaderLimit name={item.name} id={id} />
@@ -201,9 +207,9 @@ const ProductDetailsView = ({}): ReactElement => {
 						ratingColor="#EE4927"
 						ratingBackgroundColor="#f1f1f1c1"
 						readonly={true}
-						startingValue={item?.views}
+						startingValue={item?.rating}
 					/>
-					<Text>{}отзывов</Text>
+					<Text>{item.views} отзывов</Text>
 				</View>
 				{/* carousel */}
 				<View style={styles.carousel}>
@@ -218,7 +224,12 @@ const ProductDetailsView = ({}): ReactElement => {
 						renderItem={CustomCarouselItem}
 						pagingEnabled
 					/>
-					{/* <Pagination activeDotIndex={activeSlide} dotsLength={} /> */}
+					<Pagination
+						activeDotIndex={activeSlide}
+						dotsLength={
+							detailIdValue.gallery ? detailIdValue.gallery.length : 1
+						}
+					/>
 					<Text style={styles.itemName}>{item.name}</Text>
 				</View>
 				<FavoritePrice
@@ -230,76 +241,9 @@ const ProductDetailsView = ({}): ReactElement => {
 					smallprice={item.price_opt_small}
 					bigprice={item.price_opt}
 				/>
-				{/* <Text style={styles.corusellText}>Цвет</Text> */}
-				{/* <View>
-					<ScrollView
-						horizontal
-						showsHorizontalScrollIndicator={false}
-						// ref={colorScrollerRef}
-						contentContainerStyle={{ paddingRight: 45, paddingLeft: 20 }}
-						style={{ marginTop: 20 }}
-					>
-						{colorValue.map((a) => {
-							const isHas = item.color.name === a.name;
-							const borderWidth = isHas ? 1 : 0;
-							return (
-								<TouchableOpacity onPress={() => setCurrentColor(a.id)}>
-									<View
-										style={[
-											{
-												width: 75,
-												height: 68,
-												backgroundColor: `${a.color}`,
-												borderWidth,
-											},
-										]}
-									></View>
-								</TouchableOpacity>
-							);
-						})}
-					</ScrollView>
-				
-				</View> */}
-				{/* <Text style={styles.corusellText}>Размер</Text> */}
-				{/* <View>
-					<ScrollView
-						horizontal
-						showsHorizontalScrollIndicator={false}
-						contentContainerStyle={{ paddingRight: 45, paddingLeft: 20 }}
-					>
-						{productSize.map((e, index) => {
-							return (
-								<TouchableOpacity
-									onPress={() => {
-										setCurrentSize(e);
-									}}
-								>
-									<View style={styles.sectionSize}>
-										<Text
-											style={
-												currentSize === e
-													? styles.activeSize
-													: styles.sectionText
-											}
-										>
-											{e}
-										</Text>
-									</View>
-								</TouchableOpacity>
-							);
-						})}
-					</ScrollView>
-				</View> */}
-				{/* <View style={styles.deliveryView}>
-					<Text style={styles.deliveryText}>Доставка: 318,94 сум</Text>
-					<Text style={styles.deliveryText1}>В Uzbekistan через BTC</Text>
-					<Text style={styles.deliveryText1}>
-						Расчётное время доставки: 29-48 дней
-					</Text>
-				</View> */}
-				{/* amount */}
+
 				<View style={styles.counter}>
-					<TouchableOpacity onPress={onDecreaseItem}>
+					<TouchableOpacity onPress={() => adHandler("remov")}>
 						<View style={styles.minus}>
 							<MinusIcon
 								style={{ width: 120, height: 120 }}
@@ -309,12 +253,13 @@ const ProductDetailsView = ({}): ReactElement => {
 					</TouchableOpacity>
 					<View style={styles.topBottom}>
 						<Text>
-							{cart.filter((i) => i.product.id == item.id).length
+							{/* {cart.filter((i) => i.product.id == item.id).length
 								? cart.filter((i) => i.product.id == item.id)[0].amount
-								: 0}
+								: 0} */}
+							{adValue}
 						</Text>
 					</View>
-					<TouchableOpacity onPress={onAddItem}>
+					<TouchableOpacity onPress={() => adHandler("add")}>
 						<View style={styles.plus}>
 							<PlusCounterIcon
 								style={{ width: 120, height: 120 }}
@@ -340,7 +285,7 @@ const ProductDetailsView = ({}): ReactElement => {
 					<View style={styles.sectionContainer}>
 						<DefaultButton
 							containerStyle={styles.button}
-							onPress={basketAktev}
+							onPress={onCartPress}
 							secondary={isActive}
 						>
 							<View style={styles.buttonContainer}>
@@ -416,10 +361,10 @@ const ProductDetailsView = ({}): ReactElement => {
 					</View>
 				</View>
 				<View style={{ marginHorizontal: 10 }}>
-					<ProductsList title={STRINGS.advertBlock} />
+					<ProductsList title="Товары продовца" />
 				</View>
 				<DefaultButton containerStyle={styles.marginBottomEnd}>
-					<Text style={styles.buttonReview}>{STRINGS.sendCustomer}</Text>
+					<Text style={styles.buttonReview}>Перейти в магазин</Text>
 				</DefaultButton>
 				<TouchableOpacity
 					onPress={() => {
@@ -436,11 +381,17 @@ const ProductDetailsView = ({}): ReactElement => {
 						<RightArrow style={{ width: 120, height: 120 }} fill={COLORS.red} />
 					</View>
 				</TouchableOpacity>
-				<ReviewBox percent={per} />
+				{/* ReviewBox */}
+				<ReviewBox
+					percent={per}
+					separate={separate}
+					rating={detailIdValue.rating}
+				/>
+				{/* ReviewBox */}
 				{!shouldShow ? (
 					<View style={{ marginVertical: 10 }}>
 						{reviewsList?.map((item) => (
-							<View style={styles.containerComment}>
+							<View key={item.id} style={styles.containerComment}>
 								<View style={styles.boxes}>
 									<View style={styles.nameRow}>
 										<Text style={styles.name}>{item.user.name}</Text>
@@ -480,7 +431,12 @@ const ProductDetailsView = ({}): ReactElement => {
 						))}
 					</View>
 				) : null}
-				<Text style={styles.flexEnd}>{STRINGS.comments}</Text>
+				<TouchableOpacity
+					onPress={() => navigation.navigate(ROUTES.REVIEWSALL, reviewsList)}
+				>
+					<Text style={styles.flexEnd}>{STRINGS.comments}</Text>
+				</TouchableOpacity>
+
 				<DefaultButton
 					containerStyle={styles.marginBottom}
 					onPress={toggleModal}
