@@ -26,10 +26,6 @@ const OrderView = () => {
 	useEffect(() => {
 		getOrders();
 	}, []);
-	// console.log("===============OrderView=====================");
-	// console.log(JSON.stringify(orders, null, 2));
-	// console.log("==============OrderView======================");
-
 	return (
 		<View style={styles.container}>
 			<BackHeader name={STRINGS.myOrders} style={styles.header} />

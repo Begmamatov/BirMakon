@@ -53,7 +53,7 @@ import FavoritePrice from "./components/favoritePrice";
 import ReviewBox from "./components/ReviewBox";
 import { styles } from "./style";
 
-const ProductDetailsView = ({}): ReactElement => {
+const ProductDetailsView = ({ }): ReactElement => {
 	const [detailIdValue, setDetailIdValue] = useState<any>([]);
 	const [modalOpen, setModalOpen] = useState(false);
 	let {
@@ -165,7 +165,6 @@ const ProductDetailsView = ({}): ReactElement => {
 
 		let percent = sum / reviewsList.length;
 		per = percent.toString().substring(0, 3);
-		console.log(percent.toString().substring(0, 3));
 	});
 
 	const basketAktev = () => {
@@ -175,9 +174,6 @@ const ProductDetailsView = ({}): ReactElement => {
 	};
 	const productCart = cart.filter((i) => i.product.id == item.id);
 	const massive = detailIdValue.gallery;
-	console.log("====================================");
-	console.log("massive", JSON.stringify(detailIdValue, null, 2));
-	console.log("====================================");
 
 	useEffect(() => {
 		getReviews();
@@ -390,7 +386,7 @@ const ProductDetailsView = ({}): ReactElement => {
 				{/* ReviewBox */}
 				{!shouldShow ? (
 					<View style={{ marginVertical: 10 }}>
-						{reviewsList?.map((item) => (
+						{reviewsList?.map((item: any) => (
 							<View key={item.id} style={styles.containerComment}>
 								<View style={styles.boxes}>
 									<View style={styles.nameRow}>

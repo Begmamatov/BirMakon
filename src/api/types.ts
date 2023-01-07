@@ -1,4 +1,5 @@
 export interface LoginResponse {
+	lastName: any;
 	id?: number;
 	device_id?: string;
 	token?: string;
@@ -221,6 +222,7 @@ export interface SendReviewProps {
 }
 
 export interface OrderSend {
+	// additionalPhone: string | undefined;
 	address: string;
 	comment: string;
 	payment_id: number;

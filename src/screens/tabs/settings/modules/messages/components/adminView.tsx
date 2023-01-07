@@ -21,9 +21,7 @@ const AdminView = () => {
 			setMessages(data);
 			setSendingMsg("");
 		} catch (error) {
-			console.log("====================================");
 			console.log(error);
-			console.log("====================================");
 		}
 	};
 	const sendMessage = async () => {
@@ -35,9 +33,7 @@ const AdminView = () => {
 				setSendingMsg("");
 			}
 		} catch (error) {
-			console.log("====================================");
 			console.log(error);
-			console.log("====================================");
 		}
 	};
 	useEffect(() => {

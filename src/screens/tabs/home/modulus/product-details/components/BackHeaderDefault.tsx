@@ -23,10 +23,10 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 
-const BackHeaderDefault = ({}): ReactElement => {
+const BackHeaderDefault = ({ }): ReactElement => {
 	let {
-		params: { item, id },
-	} = useRoute();
+		params: { item, id }
+	} = useRoute<any>()
 	let navigation = useNavigation();
 	const dispatch = useDispatch();
 	const favorite = useAppSelector(favoriteSelector);
@@ -34,7 +34,6 @@ const BackHeaderDefault = ({}): ReactElement => {
 
 	const onAddFavorite = async () => {
 		try {
-			dispatch(toggleLoading());
 			let res = await requests.favorites.addFavorite({
 				product_id: id,
 			});
@@ -43,7 +42,6 @@ const BackHeaderDefault = ({}): ReactElement => {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
 		}
 	};
 

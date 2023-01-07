@@ -16,9 +16,6 @@ const ShopView = () => {
 
 	const router = useRoute();
 	let id = router.params;
-	console.log("====================================");
-	console.log("Rout id::::", router.params);
-	console.log("====================================");
 
 	const file = "";
 	const getMessage = async () => {
@@ -28,9 +25,7 @@ const ShopView = () => {
 			setMessages(data);
 			setSendingMsg("");
 		} catch (error) {
-			console.log("====================================");
 			console.log(error);
-			console.log("====================================");
 		}
 	};
 	const sendMessage = async () => {
@@ -42,9 +37,7 @@ const ShopView = () => {
 				setSendingMsg("");
 			}
 		} catch (error) {
-			console.log("====================================");
 			console.log(error);
-			console.log("====================================");
 		}
 	};
 	useEffect(() => {

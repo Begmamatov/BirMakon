@@ -1,4 +1,3 @@
-import { MarkedStar } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
@@ -7,7 +6,6 @@ import { StyleSheet, View } from "react-native";
 import { Rating } from "react-native-ratings";
 
 const ReviewBox = ({ percent, separate, rating }: any) => {
-	console.log(percent);
 
 	return (
 		<View style={styles.container}>

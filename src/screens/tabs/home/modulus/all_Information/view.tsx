@@ -16,9 +16,6 @@ const all_Information = () => {
 	let navigation = useNavigation();
 
 	let router = useRoute<any>();
-	console.log("====================================");
-	console.log("Router Value::", JSON.stringify(router, null, 2));
-	console.log("====================================");
 	return (
 		<SafeAreaView>
 			<View style={styles.container}>

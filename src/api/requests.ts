@@ -108,22 +108,18 @@ let requests = {
 			axios.get<{ data: string }>(`${url}/user/upload-photo`),
 		getTransaction: () => axios.get(`${url}/transaction`),
 	},
-
 	categories: {
 		getCategories: () => axios.get(`${url}/category?type=product`),
 		getSubCategories: (id: number) =>
 			axios.get(`${url}/category/sub-category?id=${id}`),
 	},
-
 	brands: {
 		getBrands: () => axios.get(`${url}/category?type=brand`),
 		getAllBrands: () => axios.get(`${url}/brand`),
 	},
-
 	shops: {
 		getShops: () => axios.get(`${url}/shop`),
 	},
-
 	frequentQuestions: {
 		getQuestions: () =>
 			axios.get<{ data: QuestionsResponse[] }>(`${url}/question`),

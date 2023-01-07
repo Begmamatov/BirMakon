@@ -68,8 +68,6 @@ const useResedSmsHook = () => {
 				setLoading(true);
 				let res = await requests.auth.resedSms(state);
 				const data = res.data.data;
-
-				console.log("data bu:", data);
 				!!data &&
 					Alert.alert(
 						"Ogoxlatirish",

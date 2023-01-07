@@ -18,9 +18,6 @@ const CatalogView = () => {
 	useEffect(() => {
 		effect();
 	}, []);
-	console.log("====================================");
-	console.log(JSON.stringify(categories, null, 2));
-	console.log("====================================");
 	return (
 		<View style={styles.container}>
 			<SearchHeader />

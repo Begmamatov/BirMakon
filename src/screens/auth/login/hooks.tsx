@@ -8,8 +8,8 @@ import axios, { AxiosError } from "axios";
 import { useState } from "react";
 
 export interface LoginState {
-	phone?: string;
-	password?: string;
+	phone: string;
+	password: string;
 	code?: string;
 }
 
@@ -19,8 +19,8 @@ const useLoginHook = () => {
 	let navigation = useNavigation();
 	//TODO remove initial value
 	const [state, setState] = useState<LoginState>({
-		password: "638723",
-		phone: "+998901951625",
+		password: "969909",
+		phone: "+998993103763",
 	});
 	const [error, setError] = useState("");
 	let [loading, setLoading] = useState<boolean>(false);
@@ -62,9 +62,9 @@ const useLoginHook = () => {
 		}
 	};
 
-	let onForgotPassNavigation = () => navigation.navigate(ROUTES.FORGOTPASSWORD);
+	let onForgotPassNavigation = () => navigation.navigate(ROUTES.FORGOTPASSWORD as never);
 
-	let onLoginNavigation = () => navigation.navigate(ROUTES.REGISTER);
+	let onLoginNavigation = () => navigation.navigate(ROUTES.REGISTER as never);
 
 	let onStateChange = (key: string) => (value: string) => {
 		setState({ ...state, [key]: value });

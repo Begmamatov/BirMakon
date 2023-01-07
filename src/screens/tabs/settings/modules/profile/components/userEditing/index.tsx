@@ -23,7 +23,7 @@ import DefaultButton from "@novomarkt/components/general/DefaultButton";
 export const UserEditingForm = () => {
 	const navigation = useNavigation();
 	const { params }: any = useRoute();
-	const [state, setState] = useState<LoginResponse>({
+	const [state, setState] = useState<any>({
 		gender: params?.gender ?? "",
 		name: params?.name ?? "",
 		phone: params?.phone ?? "",
@@ -46,7 +46,7 @@ export const UserEditingForm = () => {
 	let dateNow = new window.Date();
 
 	const changePhoto = async () => {
-		await launchImageLibrary({ mediaType: "photo" }, ({ assets }) => {
+		await launchImageLibrary({ mediaType: "photo" }, ({ assets }: any) => {
 			if (assets) {
 				setUrl(assets[0].uri);
 				setState({
@@ -78,13 +78,6 @@ export const UserEditingForm = () => {
 			console.log(error);
 		}
 	};
-	console.log("=================PersonalData===================");
-	console.log(
-		"++++++++++",
-		JSON.stringify(params, null, 2),
-		JSON.stringify(state, null, 2)
-	);
-	console.log("=================PersonalData===================");
 	return (
 		<View style={styles.container}>
 			<BackHeader style={styles.back} />
@@ -127,7 +120,7 @@ export const UserEditingForm = () => {
 						value={params?.name || ""}
 						defaultValue={state?.name}
 						onChangeText={onStateChange("name")}
-						// onChange={onStateChange("name")}d
+					// onChange={onStateChange("name")}d
 					/>
 					<TextInput
 						style={styles.input}

@@ -65,6 +65,9 @@ const ProductItem = ({
 		if (isInCart) {
 			try {
 				setAnimate(true);
+				let clear = await requests.products.removeItem({
+					product_id: id,
+				});
 				let cartGet = await requests.products.getCarts();
 				dispatch(loadCart(cartGet.data.data));
 				setAnimate(false);
@@ -85,7 +88,6 @@ const ProductItem = ({
 
 				setAnimate(false);
 			} catch (error) {
-				console.log("erorrs++++", JSON.stringify(error, null, 4));
 				alert(JSON.stringify(error, null, 4));
 			} finally {
 				setAnimate(false);

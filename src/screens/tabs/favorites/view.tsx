@@ -30,8 +30,6 @@ const FavoriteView = () => {
 		);
 	}
 
-	console.log("favorites", favorites);
-
 	return (
 		<>
 			<DefaultHeader name={STRINGS.favorites} />

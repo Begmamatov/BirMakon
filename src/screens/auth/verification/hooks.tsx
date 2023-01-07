@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 let timer = -1;
 
 const useVerificationHook = () => {
-	const route = useRoute();
+	const route: any = useRoute();
 	let dispatch = useAppDispatch();
 	let navigation = useNavigation();
 	const [timeLeft, setTimeLeft] = useState(10);
@@ -40,9 +40,11 @@ const useVerificationHook = () => {
 		if (validatePhoneNumber(state.phone)) {
 			try {
 				setLoading(true);
-				let res = await requests.auth.avtorizovatsya(state);
+				let res = await requests.auth.register(route.params?.state);
 			} catch (error) {
 				console.log(error);
+			} finally {
+				setLoading(false);
 			}
 		}
 	};

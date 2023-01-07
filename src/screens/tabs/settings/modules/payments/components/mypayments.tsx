@@ -34,9 +34,6 @@ const Mypayments = ({ onPress }: BlueButtonProps) => {
 	useEffect(() => {
 		transaction();
 	}, []);
-	console.log("====================================");
-	console.log(JSON.stringify(state, null, 2));
-	console.log("====================================");
 	return (
 		<View>
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>

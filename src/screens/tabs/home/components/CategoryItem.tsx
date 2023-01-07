@@ -23,7 +23,6 @@ const CategoryItem = ({
 	item,
 }: ListRenderItemInfo<CategoryItemProps>): ReactElement => {
 	const navigation: any = useNavigation();
-	console.log(item);
 
 	let { photo, name, id } = item || {};
 

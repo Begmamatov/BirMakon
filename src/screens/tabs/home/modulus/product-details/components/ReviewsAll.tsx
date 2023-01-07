@@ -20,7 +20,6 @@ import { STRINGS } from "@novomarkt/locales/strings";
 const ReviewsAll = () => {
 	const navigation = useNavigation();
 	const { params }: any = useRoute();
-	console.log("logo", JSON.stringify(params, null, 2));
 
 	return (
 		<View style={{ flex: 1, backgroundColor: COLORS.white }}>
