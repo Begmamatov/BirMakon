@@ -1,4 +1,5 @@
-import requests from "@novomarkt/api/requests";
+import requests, { appendUrl } from "@novomarkt/api/requests";
+import { LeftArrowIcon } from "@novomarkt/assets/icons/icons";
 import AllButton from "@novomarkt/components/general/AllButton";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
@@ -12,6 +13,7 @@ import {
 	StyleSheet,
 	TouchableOpacity,
 	View,
+	Image,
 } from "react-native";
 import Modal from "react-native-modal";
 import BrandItem from "./BrandItem";
@@ -52,14 +54,19 @@ const BrandsList = () => {
 					style={styles.modalStyle}
 				>
 					<View style={styles.modalInView}>
-						<TouchableOpacity onPress={toggleAllModalVisible}>
+						<TouchableOpacity
+							onPress={toggleAllModalVisible}
+							style={{ flexDirection: "row", alignItems: "center" }}
+						>
+							<LeftArrowIcon />
 							<Text style={styles.brandsText}>{STRINGS.brands}</Text>
 						</TouchableOpacity>
 						<View style={styles.view}>
 							<FlatList
 								data={brands}
-								renderItem={({ item: { id, name } }: any) => (
+								renderItem={({ item: { id, name, photo } }: any) => (
 									<TouchableOpacity
+										style={styles.item_container}
 										onPress={() => {
 											navigation.navigate(ROUTES.CATALOG_PRODUCTS, {
 												id,
@@ -69,7 +76,20 @@ const BrandsList = () => {
 											toggleAllModalVisible();
 										}}
 									>
-										<Text style={styles.brandsName}>{name}</Text>
+										<View
+											style={{
+												flexDirection: "row",
+												alignItems: "center",
+											}}
+										>
+											<View style={styles.imageContainer}>
+												<Image
+													source={{ uri: appendUrl(photo) }}
+													style={styles.image}
+												/>
+											</View>
+											<Text style={styles.brandsName}>{name}</Text>
+										</View>
 									</TouchableOpacity>
 								)}
 							/>
@@ -93,6 +113,26 @@ const BrandsList = () => {
 export default BrandsList;
 
 const styles = StyleSheet.create({
+	imageContainer: {
+		backgroundColor: COLORS.white,
+		marginTop: 10,
+		borderRadius: 8,
+		width: 80,
+		height: 50,
+		marginRight: 12,
+		flexDirection: "column",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	image: {
+		width: 50,
+		height: 30,
+		padding: 12,
+	},
+	item_container: {
+		borderBottomWidth: 1,
+		borderColor: "#999999",
+	},
 	title: {
 		color: COLORS.defaultBlack,
 		fontSize: 19,
@@ -125,13 +165,14 @@ const styles = StyleSheet.create({
 		color: COLORS.defaultBlack,
 		fontWeight: "600",
 		fontSize: 18,
+		marginLeft: 10,
 	},
 	view: {
 		marginTop: 20,
+		width: "100%",
 	},
 	brandsName: {
 		color: COLORS.defaultBlack,
 		fontSize: 16,
-		marginTop: 15,
 	},
 });

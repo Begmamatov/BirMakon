@@ -1,7 +1,8 @@
 import Text from "@novomarkt/components/general/Text";
+import BackHeader from "@novomarkt/components/navigation/BackHeader";
 import { STRINGS } from "@novomarkt/locales/strings";
 import React, { useEffect } from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import { BackHandler, ScrollView, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 import DefaultHeader from "./components/DefaultHeader";
 import Products from "./components/Products";
@@ -22,7 +23,7 @@ const FavoriteView = () => {
 	if (favorites?.length == 0) {
 		return (
 			<View style={styles.empty}>
-				<DefaultHeader name={STRINGS.favorites} />
+				<BackHeader name={STRINGS.favorites} />
 				<View style={styles.emptyBox}>
 					<Text style={styles.emptyText}>{STRINGS.favoritesIsEmpty}</Text>
 				</View>
@@ -32,7 +33,7 @@ const FavoriteView = () => {
 
 	return (
 		<>
-			<DefaultHeader name={STRINGS.favorites} />
+			<BackHeader name={STRINGS.favorites} />
 			<ScrollView style={styles.container}>
 				{/* <SelectableMenu /> */}
 				<SelectableItems onPress={toggleModal} headerText={modalText} />

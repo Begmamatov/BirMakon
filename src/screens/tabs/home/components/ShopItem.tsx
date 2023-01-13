@@ -8,6 +8,7 @@ import {
 	Image,
 	ListRenderItemInfo,
 	StyleSheet,
+	Text,
 	TouchableOpacity,
 	View,
 } from "react-native";
@@ -24,6 +25,7 @@ const ShopsItem = ({
 		>
 			<View style={styles.container}>
 				<Image source={{ uri: appendUrl(photo) }} style={styles.image} />
+				<Text style={styles.title}>{name}</Text>
 			</View>
 		</TouchableOpacity>
 	);
@@ -34,7 +36,7 @@ export default ShopsItem;
 const styles = StyleSheet.create({
 	container: {
 		width: 150,
-		height: 80,
+		height: 110,
 		elevation: 2,
 		shadowOpacity: 0.3,
 		shadowRadius: 3,
@@ -44,14 +46,18 @@ const styles = StyleSheet.create({
 		},
 		marginHorizontal: 6,
 		backgroundColor: COLORS.white,
-		justifyContent: "center",
+		flexDirection: "column",
+		justifyContent: "space-around",
 		alignItems: "center",
 		margin: 10,
 		borderRadius: 8,
 		fontSize: 20,
 	},
 	image: {
-		width: 100,
-		height: 60,
+		width: 120,
+		height: 70,
+	},
+	title: {
+		color: COLORS.black,
 	},
 });

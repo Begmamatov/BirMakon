@@ -58,7 +58,7 @@ const CatalogProductsView = ({}): ReactElement => {
 			<BackHeader hasSearch={true} style={styles.header} name={name} />
 			<View>
 				<Image
-					source={require("../../../../../assets/images/image 26.png")}
+					source={require("../../../../../assets/images/image26.png")}
 					style={styles.banner}
 				/>
 

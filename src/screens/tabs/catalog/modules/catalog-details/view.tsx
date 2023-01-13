@@ -5,7 +5,7 @@ import CatalogDetails from "./components/CatalogDetails";
 import useCatalogDetailsHook from "./hooks";
 import { styles } from "./style";
 
-let BannerURL = "../../../../../assets/images/image 26.png";
+let BannerURL = "../../../../../assets/images/image26.png";
 
 const CatalogDetailsView = () => {
 	let { details, title } = useCatalogDetailsHook();

@@ -30,7 +30,6 @@ const TabNavigation = () => {
 			return <Component fill={color} width={size} height={size} />;
 		};
 	}, []);
-
 	let total = useSelector(cartTotalSelector);
 	let favs = useSelector(favoriteArraySelector);
 

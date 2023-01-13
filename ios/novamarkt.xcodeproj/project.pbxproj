@@ -566,7 +566,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = HPB6QQ52WT;
+				DEVELOPMENT_TEAM = NYJKRL8H44;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = novamarkt/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Birmakon;
@@ -599,7 +599,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = HPB6QQ52WT;
+				DEVELOPMENT_TEAM = NYJKRL8H44;
 				INFOPLIST_FILE = novamarkt/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Birmakon;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";

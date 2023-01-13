@@ -35,7 +35,7 @@ export default CategoryItem;
 const styles = StyleSheet.create({
 	container: {
 		padding: 10,
-		backgroundColor: COLORS.darkBlue,
+		backgroundColor: COLORS.white,
 		elevation: 5,
 		shadowOpacity: 0.3,
 		shadowRadius: 5,

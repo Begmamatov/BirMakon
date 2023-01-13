@@ -1,18 +1,15 @@
-import requests, { appendUrl } from "@novomarkt/api/requests";
+import requests from "@novomarkt/api/requests";
 import { SendReviewProps } from "@novomarkt/api/types";
 import {
 	BasketIcon,
 	BlueBackIcon,
 	Checked,
-	CheckedItem,
 	MarkedStar,
 	MinusIcon,
 	NotMarkedStar,
 	PlusCounterIcon,
 	RightArrow,
 	RightBlueIcon,
-	ScrollViewIcon,
-	StarsIcon,
 } from "@novomarkt/assets/icons/icons";
 import DefaultButton from "@novomarkt/components/general/DefaultButton";
 import DefaultInput from "@novomarkt/components/general/DefaultInput";
@@ -22,20 +19,11 @@ import { ROUTES } from "@novomarkt/constants/routes";
 import { WINDOW_WIDTH } from "@novomarkt/constants/sizes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useAppSelector } from "@novomarkt/store/hooks";
-import { toggleLoading } from "@novomarkt/store/slices/appSettings";
-import { Shadow } from "react-native-shadow-2";
-import {
-	cartArraySelector,
-	cartSelector,
-	loadCart,
-} from "@novomarkt/store/slices/cartSlice";
-import { favoriteSelector } from "@novomarkt/store/slices/favoriteSlice";
+import { cartArraySelector, loadCart } from "@novomarkt/store/slices/cartSlice";
 import { useNavigation, useRoute } from "@react-navigation/core";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import {
 	Alert,
-	Dimensions,
-	Image,
 	LayoutAnimation,
 	ScrollView,
 	TouchableOpacity,
@@ -46,14 +34,13 @@ import { Rating } from "react-native-ratings";
 import Carousel, { Pagination } from "react-native-snap-carousel";
 import { useDispatch } from "react-redux";
 import ProductsList from "../../components/ProductsList";
-import BackHeaderDefault from "./components/BackHeaderDefault";
 import BackHeaderLimit from "./components/BackHeaderLimit";
 import CustomCarouselItem from "./components/CustomCarouselItem";
-import FavoritePrice from "./components/favoritePrice";
 import ReviewBox from "./components/ReviewBox";
+import FavoritePrice from "./components/favoritePrice";
 import { styles } from "./style";
 
-const ProductDetailsView = ({ }): ReactElement => {
+const ProductDetailsView = ({}): ReactElement => {
 	const [detailIdValue, setDetailIdValue] = useState<any>([]);
 	const [modalOpen, setModalOpen] = useState(false);
 	let {
@@ -184,7 +171,11 @@ const ProductDetailsView = ({ }): ReactElement => {
 		if (a === "add") {
 			setAdValue((c) => c + 1);
 		} else {
-			setAdValue((c) => c - 1);
+			if (adValue > 0) {
+				setAdValue((c) => c - 1);
+			} else {
+				setAdValue(0);
+			}
 		}
 	};
 

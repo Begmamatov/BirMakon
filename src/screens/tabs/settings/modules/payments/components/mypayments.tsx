@@ -5,9 +5,6 @@ import {
 	StyleSheet,
 	View,
 	Text,
-	ViewStyle,
-	StyleProp,
-	TouchableOpacity,
 	GestureResponderEvent,
 	ScrollView,
 	Image,
@@ -26,7 +23,7 @@ const Mypayments = ({ onPress }: BlueButtonProps) => {
 	const transaction = async () => {
 		try {
 			let res = await requests.profile.getTransaction();
-			setState(res.data);
+			setState(res.data.data.data);
 		} catch (error) {
 			console.log(error);
 		}
@@ -45,98 +42,31 @@ const Mypayments = ({ onPress }: BlueButtonProps) => {
 						<Text style={styles.titleText}> Способ оплаты</Text>
 						<Text style={styles.titleText}>Статус платежа</Text>
 					</View>
-					<View style={styles.sectionView}>
-						<View style={styles.row}>
-							<Text style={styles.text1}> №45</Text>
-							<Text style={styles.text2}>23.09.21</Text>
-							<Text style={styles.text3}>2000 Сум</Text>
-							<View
-								style={{
-									marginHorizontal: 60,
-									paddingHorizontal: 30,
-								}}
-							>
-								<Image
+					{state && (
+						<View style={styles.sectionView}>
+							<View style={styles.row}>
+								<Text style={styles.text1}> №45</Text>
+								<Text style={styles.text2}>23.09.21</Text>
+								<Text style={styles.text3}>2000 Сум</Text>
+								<View
 									style={{
-										width: 70,
-										height: 20,
-										justifyContent: "center",
+										marginHorizontal: 60,
+										paddingHorizontal: 30,
 									}}
-									source={require("../../../../../../assets/images/visa.png")}
-								/>
+								>
+									<Image
+										style={{
+											width: 70,
+											height: 20,
+											justifyContent: "center",
+										}}
+										source={require("../../../../../../assets/images/visa.png")}
+									/>
+								</View>
+								<Text style={styles.text3}>Исполнен</Text>
 							</View>
-							<Text style={styles.text3}>Исполнен</Text>
 						</View>
-					</View>
-					<View style={styles.sectionView}>
-						<View style={styles.row}>
-							<Text style={styles.text1}> №45</Text>
-							<Text style={styles.text2}>23.09.21</Text>
-							<Text style={styles.text3}>2000 Сум</Text>
-							<View
-								style={{
-									marginHorizontal: 60,
-									paddingHorizontal: 30,
-								}}
-							>
-								<Image
-									style={{
-										width: 70,
-										height: 20,
-										justifyContent: "center",
-									}}
-									source={require("../../../../../../assets/images/visa.png")}
-								/>
-							</View>
-							<Text style={styles.text3}>Не Исполнен</Text>
-						</View>
-					</View>
-					<View style={styles.sectionView}>
-						<View style={styles.row}>
-							<Text style={styles.text1}> №45</Text>
-							<Text style={styles.text2}>23.09.21</Text>
-							<Text style={styles.text3}>2000 Сум</Text>
-							<View
-								style={{
-									marginHorizontal: 60,
-									paddingHorizontal: 30,
-								}}
-							>
-								<Image
-									style={{
-										width: 70,
-										height: 20,
-										justifyContent: "center",
-									}}
-									source={require("../../../../../../assets/images/visa.png")}
-								/>
-							</View>
-							<Text style={styles.text3}>Исполнен</Text>
-						</View>
-					</View>
-					<View style={styles.sectionView}>
-						<View style={styles.row}>
-							<Text style={styles.text1}> №45</Text>
-							<Text style={styles.text2}>23.09.21</Text>
-							<Text style={styles.text3}>2000 Сум</Text>
-							<View
-								style={{
-									marginHorizontal: 60,
-									paddingHorizontal: 30,
-								}}
-							>
-								<Image
-									style={{
-										width: 70,
-										height: 20,
-										justifyContent: "center",
-									}}
-									source={require("../../../../../../assets/images/visa.png")}
-								/>
-							</View>
-							<Text style={styles.text3}>Не Исполнен</Text>
-						</View>
-					</View>
+					)}
 				</View>
 			</ScrollView>
 		</View>

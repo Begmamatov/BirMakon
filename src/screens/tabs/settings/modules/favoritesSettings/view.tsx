@@ -4,6 +4,7 @@ import { STRINGS } from "@novomarkt/locales/strings";
 import DefaultHeader from "@novomarkt/screens/tabs/favorites/components/DefaultHeader";
 import Products from "@novomarkt/screens/tabs/favorites/components/Products";
 import SelectableItems from "@novomarkt/screens/tabs/favorites/components/SelectableItems";
+import SelectableMenu from "@novomarkt/screens/tabs/favorites/components/SelectableMenu";
 import React, { useEffect } from "react";
 import { FlatList, ScrollView, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
@@ -32,7 +33,7 @@ const FavoritesSettings = () => {
 	return (
 		<ScrollView style={styles.container}>
 			<BackHeader name={STRINGS.favorites} style={styles.header} />
-			{/* <SelectableMenu /> */}
+
 			<SelectableItems onPress={toggleModal} headerText={modalText} />
 			{favorites?.map((item) => (
 				<Products item={item} />

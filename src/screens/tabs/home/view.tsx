@@ -16,6 +16,7 @@ import { styles } from "./style";
 
 const HomeView = () => {
 	let { setActiveSlide, activeSlide, slide } = useHomeScreenHooks();
+
 	return (
 		<>
 			<SearchHeader />

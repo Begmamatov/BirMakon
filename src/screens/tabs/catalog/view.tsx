@@ -21,10 +21,12 @@ const CatalogView = () => {
 	return (
 		<View style={styles.container}>
 			<SearchHeader />
+
 			<Image
-				source={require("../../../assets/images/image 26.png")}
-				style={{ width: "100%", height: 80 }}
+				source={require("../../../assets/images/image26.png")}
+				style={{ width: "100%" }}
 			/>
+
 			<FlatList
 				data={categories}
 				renderItem={(props) => <CategoryItem {...props} />}

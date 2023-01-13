@@ -250,6 +250,7 @@ export const styles = StyleSheet.create({
 	},
 	carousel: {
 		paddingVertical: 20,
+		minHeight: 300,
 	},
 	headerText: {
 		fontSize: 15,
