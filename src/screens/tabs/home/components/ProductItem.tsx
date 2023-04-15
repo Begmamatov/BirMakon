@@ -19,8 +19,7 @@ import {
 	loadFavorite,
 } from "@novomarkt/store/slices/favoriteSlice";
 import { useNavigation } from "@react-navigation/core";
-import { is } from "immer/dist/internal";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useState } from "react";
 import {
 	ActivityIndicator,
 	Image,
@@ -38,18 +37,7 @@ const ProductItem = ({
 }: ListRenderItemInfo<ProductItemResponse> & {
 	getProducts?: () => void;
 }): ReactElement => {
-	let {
-		photo,
-		brand,
-		shop,
-		category,
-		name,
-		price,
-		discount,
-		price_old,
-		id,
-		isFavorite,
-	} = item;
+	let { photo, category, name, price, discount, price_old, id } = item;
 
 	const dispatch = useDispatch();
 	let navigation = useNavigation();
@@ -159,30 +147,36 @@ const ProductItem = ({
 							</Text>
 						) : null}
 					</View>
-					<DefaultButton
-						containerStyle={styles.button}
-						secondary={isInCart}
-						onPress={onCartPress}
-					>
-						{animate ? (
-							<ActivityIndicator
-								size="small"
-								color={COLORS.red}
-								animating={animate}
-							/>
-						) : (
-							<View style={styles.buttonContainer}>
-								<Text
-									style={[isInCart ? styles.inactiveCartText : styles.cartText]}
-								>
-									{isInCart ? `${STRINGS.addToCart}е` : `${STRINGS.addToCart}у`}
-								</Text>
-								<BasketIcon
-									fill={isInCart ? COLORS.cartColor3 : COLORS.white}
+					<View>
+						<DefaultButton
+							containerStyle={styles.button}
+							secondary={isInCart}
+							onPress={onCartPress}
+						>
+							{animate ? (
+								<ActivityIndicator
+									size="small"
+									color={COLORS.red}
+									animating={animate}
 								/>
-							</View>
-						)}
-					</DefaultButton>
+							) : (
+								<View style={styles.buttonContainer}>
+									<Text
+										style={[
+											isInCart ? styles.inactiveCartText : styles.cartText,
+										]}
+									>
+										{isInCart
+											? `${STRINGS.addToCart}е`
+											: `${STRINGS.addToCart}у`}
+									</Text>
+									<BasketIcon
+										fill={isInCart ? COLORS.cartColor3 : COLORS.white}
+									/>
+								</View>
+							)}
+						</DefaultButton>
+					</View>
 				</View>
 			</View>
 		</TouchableWithoutFeedback>
@@ -239,6 +233,8 @@ const styles = StyleSheet.create({
 	row: {
 		flexDirection: "row",
 		justifyContent: "space-between",
+
+		minHeight: 30,
 	},
 	image: {
 		width: WINDOW_WIDTH / 2 - 20,

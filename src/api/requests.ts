@@ -2,7 +2,6 @@ import { LoginState } from "@novomarkt/screens/auth/login/hooks";
 import { OnResed } from "./types";
 import { RegisterState } from "@novomarkt/screens/auth/register/hooks";
 import { store } from "@novomarkt/store/configureStore";
-import { toggleLoading } from "@novomarkt/store/slices/appSettings";
 import { userLoggedOut } from "@novomarkt/store/slices/userSlice";
 import axios, { AxiosResponse } from "axios";
 import {
@@ -217,7 +216,10 @@ let requests = {
 		sendOrder: (credentials: OrderSend) =>
 			axios.post(`${url}/order/send`, credentials),
 		getOrders: () => axios.get<BaseResponse<OrderItemResponse>>(`${url}/order`),
+		octoSendOrder: (order_id: number) =>
+			axios.post(`${url}/octo`, { order_id }),
 	},
+
 	chat: {
 		sendAdminMessege: (sendingMsg: any, file: any) =>
 			axios.post(`${url}/chat/send`, {
@@ -237,7 +239,7 @@ let requests = {
 			}),
 		sendShopMessege: (sendingMsg: any, file: any, id: any) =>
 			axios.post(`${url}/chat/send`, {
-				getter_id: 101,
+				getter_id: 20,
 				message: sendingMsg,
 				file: file,
 				product_id: id,

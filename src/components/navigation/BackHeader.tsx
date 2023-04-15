@@ -1,4 +1,4 @@
-import { LeftArrow, SearchIcon } from "@novomarkt/assets/icons/icons";
+import { LeftArrow } from "@novomarkt/assets/icons/icons";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
@@ -6,7 +6,6 @@ import {
 	StyleProp,
 	StyleSheet,
 	TouchableOpacity,
-	TouchableWithoutFeedback,
 	View,
 	ViewStyle,
 } from "react-native";
@@ -19,11 +18,7 @@ export interface BackHeaderProps {
 	hasSearch?: boolean;
 }
 
-const BackHeader = ({
-	name = STRINGS.backHeaderName,
-	style,
-	hasSearch,
-}: BackHeaderProps) => {
+const BackHeader = ({ name = STRINGS.backHeaderName }: BackHeaderProps) => {
 	let navigation = useNavigation();
 	return (
 		<View

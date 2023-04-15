@@ -26,9 +26,10 @@ import { styles } from "./style";
 const SettingsView = ({}) => {
 	let { onLogOut } = useSettingsHook();
 	let navigation: any = useNavigation();
+
 	return (
 		<ScrollView style={styles.container}>
-			<Text style={styles.headerText}>Профиль</Text>
+			<Text style={styles.headerText}>Доброе утро</Text>
 			<View style={styles.itemsBox}>
 				<SettingsItem
 					onPress={() => navigation.navigate(ROUTES.ORDER)}
@@ -51,11 +52,11 @@ const SettingsView = ({}) => {
 					text={"Мои платежи"}
 					icon={() => <PaymentIcon fill={COLORS.defaultBlack} />}
 				/>
-				<SettingsItem
+				{/* <SettingsItem
 					text={"FAQ"}
 					onPress={() => navigation.navigate(ROUTES.QUESTIONS)}
 					icon={() => <QuestionMarkIcon fill={COLORS.defaultBlack} />}
-				/>
+				/> */}
 				<SettingsItem
 					onPress={() => navigation.navigate(ROUTES.PROFILE)}
 					text={"Мои данные"}
@@ -71,14 +72,7 @@ const SettingsView = ({}) => {
 					onPress={() => navigation.navigate(ROUTES.CHATS)}
 					icon={() => <ChatIcon fill={COLORS.defaultBlack} />}
 				/>
-				{/* <SettingsItem
-					text={"Позвонить"}
-					icon={() => <PhoneIcon stroke={COLORS.defaultBlack} />}
-				/> */}
-				{/* <SettingsItem
-					text={"Чат с поддержкой"}
-					icon={() => <MessageIcon stroke={COLORS.defaultBlack} />}
-				/> */}
+
 				<SettingsItem
 					onPress={() => navigation.navigate(ROUTES.LANGUAGE)}
 					text={"Язик"}

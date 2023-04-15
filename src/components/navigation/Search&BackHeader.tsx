@@ -75,5 +75,6 @@ const styles = StyleSheet.create({
 	input: {
 		paddingVertical: Platform.OS == "android" ? 10 : 12,
 		fontFamily: REGULAR_FONT_FAMILY,
+		width: "90%",
 	},
 });

@@ -18,8 +18,9 @@ import {
 	loadFavorite,
 } from "@novomarkt/store/slices/favoriteSlice";
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useState } from "react";
 import {
+	ActivityIndicator,
 	Image,
 	LayoutAnimation,
 	StyleSheet,
@@ -37,13 +38,13 @@ const Products = ({ item }: { item: ProductItemResponse }) => {
 	const favorite = useAppSelector(favoriteSelector);
 	let isInCart = !!cart[id];
 	let isInFavorite = !!favorite[id];
-
+	const [animate, setAnimate] = useState(false);
 	const navigation: any = useNavigation();
 
 	const onCartPress = async () => {
 		try {
 			if (isInCart) {
-				//TODO remove from cart
+				setAnimate(true);
 				try {
 					let res = await requests.products.removeItem({
 						product_id: id,
@@ -54,14 +55,17 @@ const Products = ({ item }: { item: ProductItemResponse }) => {
 					console.log(error);
 				} finally {
 					effect();
+					setAnimate(false);
 				}
 			} else {
+				setAnimate(true);
 				let res = await requests.products.addToCart({
 					amount: 1,
 					product_id: id,
 				});
 				let cartRes = await requests.products.getCarts();
 				dispatch(loadCart(cartRes.data.data));
+				setAnimate(false);
 			}
 		} catch (error) {
 			console.log(error);
@@ -105,54 +109,57 @@ const Products = ({ item }: { item: ProductItemResponse }) => {
 				<Image source={{ uri: appendUrl(photo) }} style={styles.image} />
 				<View style={styles.itemsContainer}>
 					<View style={styles.nameContainer}>
-						<Text style={styles.itemName}>{name ? name : ""}</Text>
-
-						<TouchableOpacity
-							onPress={onAddFavorite}
-							hitSlop={{ bottom: 10, top: 10, right: 10, left: 10 }}
-						>
-							{isFavorite === true ? (
-								<HeartIconRed fill={COLORS.red} />
-							) : (
-								<HeartIconBorder fill={COLORS.red} />
-							)}
-						</TouchableOpacity>
-					</View>
-					<View style={styles.priceContainer}>
-						{price_old ? (
-							<Text style={styles.oldPrice}>
-								{price_old ? price_old : ""} сум
-							</Text>
-						) : (
-							<Text style={styles.oldPrice}>0</Text>
-						)}
-						<Text style={styles.price}>{price} сум</Text>
-					</View>
-					<View style={styles.nameContainer}>
+						<View style={{ width: "85%" }}>
+							<Text style={styles.itemName}>{name ? name : ""}</Text>
+						</View>
 						{discount ? (
 							<View style={styles.discount}>
 								<Text style={styles.dscountText}>
-									{discount ? discount : "0"}%
+									-{discount ? discount : "0"}%
 								</Text>
 							</View>
-						) : (
-							<Text style={styles.dscountText}>0%</Text>
-						)}
+						) : null}
+					</View>
+
+					<View style={styles.nameContainer}>
+						<View style={styles.priceContainer}>
+							{price_old ? (
+								<Text style={styles.oldPrice}>
+									{price_old ? price_old : ""} сум
+								</Text>
+							) : (
+								<Text style={styles.oldPrice}>0</Text>
+							)}
+							<Text style={styles.price}>{price} сум</Text>
+						</View>
+
 						<DefaultButton
 							containerStyle={styles.button}
 							secondary={isInCart}
 							onPress={onCartPress}
 						>
-							<View style={styles.buttonContainer}>
-								<Text
-									style={[isInCart ? styles.inactiveCartText : styles.cartText]}
-								>
-									{isInCart ? `${STRINGS.addToCart}е` : `${STRINGS.addToCart}у`}
-								</Text>
-								<BasketIcon
-									fill={isInCart ? COLORS.cartColor3 : COLORS.white}
+							{animate ? (
+								<ActivityIndicator
+									size="small"
+									color={COLORS.red}
+									animating={animate}
 								/>
-							</View>
+							) : (
+								<View style={styles.buttonContainer}>
+									<Text
+										style={[
+											isInCart ? styles.inactiveCartText : styles.cartText,
+										]}
+									>
+										{isInCart
+											? `${STRINGS.addToCart}е`
+											: `${STRINGS.addToCart}у`}
+									</Text>
+									<BasketIcon
+										fill={isInCart ? COLORS.cartColor3 : COLORS.white}
+									/>
+								</View>
+							)}
 						</DefaultButton>
 					</View>
 				</View>
@@ -165,16 +172,17 @@ export default Products;
 
 const styles = StyleSheet.create({
 	container: {
-		padding: 10,
+		paddingHorizontal: 15,
 		flexDirection: "row",
-		borderBottomWidth: 1,
 		borderColor: "rgba(113, 113, 113, 0.3)",
+		borderTopWidth: 1,
+		paddingVertical: 10,
 		// borderColor: "red",
 	},
 
 	image: {
-		width: 100,
-		height: 120,
+		width: 66,
+		height: 72,
 		borderRadius: 10,
 		marginHorizontal: 10,
 	},
@@ -205,18 +213,28 @@ const styles = StyleSheet.create({
 
 	dscountText: {
 		fontSize: 12,
-		color: COLORS.red,
+		color: COLORS.textColor,
 	},
 
 	discount: {
 		borderRadius: 8,
 		padding: 4,
 		backgroundColor: COLORS.white,
+		shadowColor: COLORS.black,
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.1,
+		shadowRadius: 4,
+		elevation: 5,
 	},
 
 	price: {
 		fontSize: 16,
-		color: COLORS.red,
+		color: COLORS.textColor,
+		fontWeight: "500",
+		fontFamily: "Montserrat",
 	},
 
 	oldPrice: {
@@ -241,7 +259,7 @@ const styles = StyleSheet.create({
 	},
 
 	button: {
-		width: 120,
+		width: 130,
 		height: 40,
 		margin: 0,
 	},

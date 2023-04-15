@@ -9,7 +9,7 @@ import {
 	favoriteArraySelector,
 	loadFavorite,
 } from "@novomarkt/store/slices/favoriteSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export const useFavoritesHook = () => {

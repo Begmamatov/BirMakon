@@ -12,7 +12,6 @@ import { styles } from "./style";
 
 const OrderView = () => {
 	const [orders, setOrders] = useState<any>([]);
-	const [date, setDate] = useState<string>("");
 
 	const getOrders = async () => {
 		try {
@@ -26,14 +25,14 @@ const OrderView = () => {
 	useEffect(() => {
 		getOrders();
 	}, []);
+	// console.log(JSON.stringify(orders, null, 2));
+
 	return (
 		<View style={styles.container}>
 			<BackHeader name={STRINGS.myOrders} style={styles.header} />
-			<StatusBar />
+			<StatusBar orders={orders} />
 			<FlatList
 				data={orders}
-				renderItem={(props) => <OrderItem {...props} />}
-				showsVerticalScrollIndicator={false}
 				ListHeaderComponent={() => {
 					return (
 						<View style={styles.row}>
@@ -48,6 +47,8 @@ const OrderView = () => {
 						</View>
 					);
 				}}
+				renderItem={(props) => <OrderItem {...props} />}
+				showsVerticalScrollIndicator={false}
 				keyExtractor={(item: any) => item.id}
 			/>
 		</View>

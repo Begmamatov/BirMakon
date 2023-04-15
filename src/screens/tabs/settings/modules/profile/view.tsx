@@ -1,5 +1,5 @@
 import { appendUrl, assetUrl } from "@novomarkt/api/requests";
-import { LocationIcon } from "@novomarkt/assets/icons/icons";
+import { LocationIcon, PlusIcon } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
 import BackHeader from "@novomarkt/components/navigation/BackHeader";
 import { COLORS } from "@novomarkt/constants/colors";
@@ -44,41 +44,30 @@ const ProfileView = () => {
 					}}
 				>
 					<Text style={styles.header}>Мои данные</Text>
-					<TouchableOpacity
-						onPress={() =>
-							navigation.navigate(ROUTES.USER_EDITING, profileData)
-						}
-						style={{ marginTop: 20, marginHorizontal: 20 }}
-						hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
-					>
-						<Text style={{ color: COLORS.red }}>Редактировать</Text>
-					</TouchableOpacity>
 				</View>
 				<View style={styles.userData}>
-					<View
-						style={{ flexDirection: "row", justifyContent: "space-between" }}
-					>
-						<Image
-							source={{ uri: assetUrl + profileData?.photo }}
-							style={{ width: 80, height: 80 }}
-						/>
+					<View style={styles.userName}>
+						<View style={styles.imageBox}>
+							<Image
+								source={{ uri: assetUrl + profileData?.photo }}
+								style={styles.image}
+							/>
+							<TouchableOpacity style={styles.addImage}>
+								<PlusIcon fill={COLORS.white} />
+							</TouchableOpacity>
+						</View>
+						<View style={styles.userNameText}>
+							<Text
+								style={{
+									color: COLORS.defaultBlack,
+									marginVertical: 5,
+								}}
+							>
+								{profileData?.name}
+							</Text>
+						</View>
 					</View>
-					<View
-						style={{
-							flexDirection: "column",
-							marginVertical: 10,
-						}}
-					>
-						<Text>Имя</Text>
-						<Text
-							style={{
-								color: COLORS.defaultBlack,
-								marginVertical: 5,
-							}}
-						>
-							{profileData?.name}
-						</Text>
-					</View>
+
 					<View
 						style={{
 							flexDirection: "column",

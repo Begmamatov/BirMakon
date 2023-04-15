@@ -12,7 +12,10 @@ import { STRINGS } from "@novomarkt/locales/strings";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const StatusBar = () => {
+const StatusBar = ({ orders }: any) => {
+	const amount = orders?.length;
+	console.log(amount);
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.titleContainer}>
@@ -28,9 +31,11 @@ const StatusBar = () => {
 				<TouchableOpacity>
 					<View style={styles.view}>
 						<PaymentexpectedIcon />
-						<View style={styles.iconView}>
-							<Text style={styles.iconText}>1</Text>
-						</View>
+						{amount > 0 ? (
+							<View style={styles.iconView}>
+								<Text style={styles.iconText}>{amount}</Text>
+							</View>
+						) : null}
 						<Text style={styles.text}>{STRINGS.Paymentexpected}</Text>
 					</View>
 				</TouchableOpacity>
@@ -38,7 +43,7 @@ const StatusBar = () => {
 					<View style={styles.view}>
 						<SendingIcon />
 						<View style={styles.iconView}>
-							<Text style={styles.iconText}>1</Text>
+							<Text style={styles.iconText}></Text>
 						</View>
 						<Text style={styles.text}>{STRINGS.Shipmentexpected}</Text>
 					</View>
@@ -53,7 +58,7 @@ const StatusBar = () => {
 					<View style={styles.view}>
 						<SmsIcon />
 						<View style={styles.iconView}>
-							<Text style={styles.iconText}>1</Text>
+							<Text style={styles.iconText}></Text>
 						</View>
 						<Text style={styles.text}>{STRINGS.Reviewpending}</Text>
 					</View>

@@ -18,6 +18,8 @@ export const styles = StyleSheet.create({
 		color: COLORS.defaultBlack,
 		marginTop: 20,
 		marginHorizontal: 20,
+		fontWeight: "600",
+		fontFamily: "Montserrat",
 	},
 
 	shadowBox: {
@@ -207,5 +209,38 @@ export const styles = StyleSheet.create({
 		},
 		backgroundColor: COLORS.white,
 		marginVertical: 20,
+	},
+	userName: {
+		flexDirection: "row",
+		width: "100%",
+		alignItems: "center",
+	},
+	imageBox: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		width: 80,
+		height: 80,
+		borderRadius: 50,
+		position: "relative",
+		marginRight: 10,
+	},
+	image: {
+		width: "100%",
+		height: "100%",
+		borderRadius: 50,
+	},
+	addImage: {
+		position: "absolute",
+		width: "100%",
+		height: "100%",
+		borderRadius: 50,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	userNameText: {
+		flexDirection: "column",
+		marginVertical: 10,
+		borderWidth: 1,
+		width: "75%",
 	},
 });

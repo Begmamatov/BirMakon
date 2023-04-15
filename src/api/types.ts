@@ -1,4 +1,5 @@
 export interface LoginResponse {
+	last_address?: any;
 	lastName: any;
 	id?: number;
 	device_id?: string;

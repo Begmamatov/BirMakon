@@ -62,7 +62,8 @@ const useLoginHook = () => {
 		}
 	};
 
-	let onForgotPassNavigation = () => navigation.navigate(ROUTES.FORGOTPASSWORD as never);
+	let onForgotPassNavigation = () =>
+		navigation.navigate(ROUTES.FORGOTPASSWORD as never);
 
 	let onLoginNavigation = () => navigation.navigate(ROUTES.REGISTER as never);
 

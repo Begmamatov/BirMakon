@@ -3,6 +3,18 @@ import { useEffect, useState } from "react";
 
 const MyPaymentsHooks = () => {
 	const [payments, setPayments] = useState<any>([]);
+	const [state, setState] = useState();
+	const transaction = async () => {
+		try {
+			let res = await requests.profile.getTransaction();
+			setState(res.data.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
+		transaction();
+	}, []);
 
 	const getPayments = async () => {
 		try {
@@ -19,6 +31,7 @@ const MyPaymentsHooks = () => {
 
 	return {
 		payments,
+		state,
 	};
 };
 

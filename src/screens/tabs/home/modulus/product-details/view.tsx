@@ -154,11 +154,11 @@ const ProductDetailsView = ({}): ReactElement => {
 		per = percent.toString().substring(0, 3);
 	});
 
-	const basketAktev = () => {
-		setLoading(true);
-		navigation.navigate(ROUTES.CART);
-		setLoading(false);
-	};
+	// const basketAktev = () => {
+	// 	setLoading(true);
+	// 	navigation.navigate(ROUTES.CART);
+	// 	setLoading(false);
+	// };
 	const productCart = cart.filter((i) => i.product.id == item.id);
 	const massive = detailIdValue.gallery;
 

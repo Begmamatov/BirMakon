@@ -29,7 +29,9 @@ export const styles = StyleSheet.create({
 		borderColor: COLORS.red,
 		flexDirection: "row",
 		alignItems: "center",
-		padding: 10,
+		paddingVertical: 20,
+		paddingHorizontal: 10,
+
 		backgroundColor: COLORS.white,
 		elevation: 5,
 		shadowOpacity: 0.3,
@@ -55,7 +57,8 @@ export const styles = StyleSheet.create({
 			width: 0,
 			height: 0,
 		},
-		padding: 10,
+		paddingVertical: 20,
+		paddingHorizontal: 10,
 	},
 
 	border: {

@@ -25,7 +25,7 @@ let Tab = createBottomTabNavigator();
 const TabNavigation = () => {
 	let renderTabIcon = useCallback((Component: React.FC<SvgProps>) => {
 		return (props: { focused: boolean; color: string; size: number }) => {
-			let { color, focused, size } = props;
+			let { color, size } = props;
 
 			return <Component fill={color} width={size} height={size} />;
 		};

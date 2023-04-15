@@ -21,5 +21,6 @@ export const styles = StyleSheet.create({
 
 	columns: {
 		marginHorizontal: 10,
+		marginBottom: 200,
 	},
 });

@@ -17,20 +17,8 @@ export interface BlueButtonProps {
 }
 
 const Mypayments = ({ onPress }: BlueButtonProps) => {
-	const { payments } = MyPaymentsHooks();
+	const { payments, state } = MyPaymentsHooks();
 
-	const [state, setState] = useState();
-	const transaction = async () => {
-		try {
-			let res = await requests.profile.getTransaction();
-			setState(res.data.data.data);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-	useEffect(() => {
-		transaction();
-	}, []);
 	return (
 		<View>
 			<ScrollView horizontal showsHorizontalScrollIndicator={false}>

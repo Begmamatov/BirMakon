@@ -1,5 +1,6 @@
 import DefaultButton from "@novomarkt/components/general/DefaultButton";
 import Text from "@novomarkt/components/general/Text";
+import BackHeader from "@novomarkt/components/navigation/BackHeader";
 import { ROUTES } from "@novomarkt/constants/routes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import {
@@ -7,32 +8,26 @@ import {
 	cartTotalSelector,
 } from "@novomarkt/store/slices/cartSlice";
 import { useNavigation } from "@react-navigation/core";
-import React, { useEffect } from "react";
+import React from "react";
 import { ScrollView, View } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 import { useSelector } from "react-redux";
-import DefaultHeader from "../favorites/components/DefaultHeader";
 import ChooseItemNum from "./components/ChooseItemNum";
-import LocationBox from "./components/LocationBox";
 import OrderDetails from "./components/OrderDetails";
 import { useCartScreenHooks } from "./hooks";
 import { styles } from "./style";
-import { useRoute } from "@react-navigation/native";
 
 const CartView = () => {
-	let rout = useRoute();
-
 	let navigation: any = useNavigation();
-
 	let cart = useSelector(cartArraySelector);
-
 	let cartTotal = useSelector(cartTotalSelector);
-
-	let { onClearCart } = useCartScreenHooks();
+	let { onClearCart, loading } = useCartScreenHooks();
 
 	if (cart.length <= 0) {
 		return (
 			<View style={styles.empty}>
-				<DefaultHeader name={STRINGS.cart} />
+				{/* <DefaultHeader name={STRINGS.cart} /> */}
+				<BackHeader name={STRINGS.cart} />
 				<View style={styles.emptyBox}>
 					<Text style={styles.emptyText}>{STRINGS.cartIsEmpty}</Text>
 				</View>
@@ -41,7 +36,8 @@ const CartView = () => {
 	}
 	return (
 		<>
-			<DefaultHeader name={STRINGS.cart} />
+			{/* <DefaultHeader name={STRINGS.cart} /> */}
+			<BackHeader name={STRINGS.cart} />
 			<ScrollView style={styles.container}>
 				<OrderDetails total={cartTotal} />
 				{cart.map((e, index) => {
@@ -62,6 +58,7 @@ const CartView = () => {
 					textStyle={styles.buttonTxt}
 				/>
 			</ScrollView>
+			<Spinner visible={loading} textContent={""} textStyle={{}} />
 		</>
 	);
 };

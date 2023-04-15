@@ -1,31 +1,23 @@
 import requests from "@novomarkt/api/requests";
-import { toggleLoading } from "@novomarkt/store/slices/appSettings";
-import { cardListSuccess, loadCart } from "@novomarkt/store/slices/cartSlice";
-import { useEffect } from "react";
+import { loadCart } from "@novomarkt/store/slices/cartSlice";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 export const useCartScreenHooks = () => {
+	const [loading, setLoading] = useState(false);
 	const dispatch = useDispatch();
 	const onClearCart = async () => {
 		try {
+			setLoading(true);
 			let res = await requests.products.clearCart();
 			let cartGet = await requests.products.getCarts();
 			dispatch(loadCart(cartGet.data.data));
+			setLoading(false);
 		} catch (error) {
 			console.log(error);
 		} finally {
 		}
 	};
 
-	// const cartListReqest = async () => {
-	// 	try {
-	// 		const res = await requests.products.getCarts();
-	// 		const data = await res.data.data;
-	// 		dispatch(cardListSuccess(data));
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-
-	return { onClearCart };
+	return { onClearCart, loading };
 };

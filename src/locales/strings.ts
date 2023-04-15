@@ -117,5 +117,6 @@ export const STRINGS = new LocalizedStrings({
 		COURSE: "Курс",
 		ExpirationMonth: "Месяц истечения",
 		FullName: "ФИО",
+		address: "адрес",
 	},
 });

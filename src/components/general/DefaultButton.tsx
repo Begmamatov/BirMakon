@@ -24,6 +24,7 @@ export interface DefaultButtonProps {
 	children?: ReactElement | null;
 	loading?: boolean;
 	active?: boolean;
+	disabled?: boolean;
 }
 
 const DefaultButton = ({
@@ -34,9 +35,10 @@ const DefaultButton = ({
 	containerStyle = {},
 	textStyle,
 	loading,
+	disabled,
 }: DefaultButtonProps) => {
 	return (
-		<TouchableWithoutFeedback onPress={onPress}>
+		<TouchableWithoutFeedback onPress={onPress} disabled={disabled}>
 			<View style={[styles.container, containerStyle]}>
 				<View style={[styles.content, secondary && styles.inactiveContainer]}>
 					{loading ? (
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		padding: 1,
 		justifyContent: "center",
-		marginHorizontal: 25,
+
 		marginTop: 10,
 		borderRadius: 8,
 		shadowColor: "#000",

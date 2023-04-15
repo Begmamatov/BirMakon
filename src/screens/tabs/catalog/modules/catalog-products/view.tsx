@@ -7,6 +7,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { FlatList, Image, ScrollView, View } from "react-native";
 import SelectableFlter from "./components/SelectableFlter";
 import { styles } from "./style";
+import BottomHeight from "@novomarkt/components/BottomHeight";
 
 const CatalogProductsView = ({}): ReactElement => {
 	const [products, setProducts] = useState<ProductItemResponse[]>();

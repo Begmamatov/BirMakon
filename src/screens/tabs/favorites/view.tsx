@@ -36,7 +36,7 @@ const FavoriteView = () => {
 			<BackHeader name={STRINGS.favorites} />
 			<ScrollView style={styles.container}>
 				{/* <SelectableMenu /> */}
-				<SelectableItems onPress={toggleModal} headerText={modalText} />
+				{/* <SelectableItems onPress={toggleModal} headerText={modalText} /> */}
 				{favorites?.map((item) => (
 					<Products item={item} />
 				))}

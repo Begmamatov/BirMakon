@@ -4,15 +4,13 @@ import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useRoute } from "@react-navigation/native";
-import { fill } from "lodash";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, TextInput, View } from "react-native";
 import { styles } from "../style";
 
 const ShopView = () => {
 	const [sendingMsg, setSendingMsg] = useState("");
 	const [messages, setMessages] = useState();
-	const [messagesActive, setMessagesActive] = useState(true);
 
 	const router = useRoute();
 	let id = router.params;

@@ -2,7 +2,6 @@ import requests, { appendUrl } from "@novomarkt/api/requests";
 import { CartItemResponse } from "@novomarkt/api/types";
 import {
 	CrashIcon,
-	HeartIcon,
 	HeartIconBorder,
 	HeartIconRed,
 	MinusIcon,
@@ -44,7 +43,6 @@ export default function ChooseItemNum({
 	data: CartItemResponse;
 	index: number;
 }) {
-	const [shouldShow, setShouldShow] = useState(true);
 	const dispatch = useDispatch();
 
 	let id = data.product.id;

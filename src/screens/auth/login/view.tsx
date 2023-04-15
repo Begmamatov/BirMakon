@@ -5,7 +5,16 @@ import Text from "@novomarkt/components/general/Text";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { toggleLoading } from "@novomarkt/store/slices/appSettings";
 import React, { useEffect } from "react";
-import { Alert, Image, Keyboard, KeyboardAvoidingView, Platform, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import {
+	Alert,
+	Image,
+	Keyboard,
+	KeyboardAvoidingView,
+	Platform,
+	TouchableOpacity,
+	TouchableWithoutFeedback,
+	View,
+} from "react-native";
 import { useDispatch } from "react-redux";
 import useLoginHook from "./hooks";
 import { styles } from "./style";
@@ -28,10 +37,16 @@ const LoginView = () => {
 		dispatch(toggleLoading(false));
 	}, []);
 
-
 	return (
-		<KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"} keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}>
-			<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={{ flex: 1 }}>
+		<KeyboardAvoidingView
+			style={styles.container}
+			behavior={Platform.OS === "ios" ? "padding" : "height"}
+			keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}
+		>
+			<TouchableWithoutFeedback
+				onPress={() => Keyboard.dismiss()}
+				style={{ flex: 1 }}
+			>
 				<View style={styles.container}>
 					<Image
 						style={{

@@ -40,4 +40,5 @@ export const ROUTES = {
 	SHOPVIEW: "ShopView",
 	DELIVERY: "Delivery",
 	REVIEWSALL: "ReviewsAll",
+	WebView: "WebView",
 };
