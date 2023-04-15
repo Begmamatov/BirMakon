@@ -1,11 +1,11 @@
-import { appendUrl } from "@novomarkt/api/requests";
-import { LocationIcon } from "@novomarkt/assets/icons/icons";
+import { appendUrl, assetUrl } from "@novomarkt/api/requests";
+import { LocationIcon, PlusIcon } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
 import BackHeader from "@novomarkt/components/navigation/BackHeader";
 import { COLORS } from "@novomarkt/constants/colors";
 import { ROUTES } from "@novomarkt/constants/routes";
-import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import React, { useEffect } from "react";
 import { Image, ScrollView, TouchableOpacity, View } from "react-native";
 import CartSelectItem from "./components/cartItem/view";
 import useProfileHook from "./hooks";
@@ -21,14 +21,21 @@ export interface UserData {
 }
 
 const ProfileView = () => {
-	const navigation = useNavigation();
+	const navigation: any = useNavigation();
+
 	let { onTextChange, profileData, setProfileData, onFieldSubmit } =
 		useProfileHook();
 
+	const route = useRoute();
+
+	useEffect(() => {
+		profileData;
+	}, [route]);
+
 	return (
-		<>
+		<View style={styles.container}>
 			<BackHeader style={styles.left} />
-			<ScrollView style={styles.container}>
+			<ScrollView style={styles.container2}>
 				<View
 					style={{
 						flexDirection: "row",
@@ -37,41 +44,30 @@ const ProfileView = () => {
 					}}
 				>
 					<Text style={styles.header}>Мои данные</Text>
-					<TouchableOpacity
-						onPress={() =>
-							navigation.navigate(ROUTES.USER_EDITING, profileData)
-						}
-						style={{ marginTop: 20, marginHorizontal: 20 }}
-						hitSlop={{ top: 10, left: 10, right: 10, bottom: 10 }}
-					>
-						<Text style={{ color: COLORS.blue }}>Редактировать</Text>
-					</TouchableOpacity>
 				</View>
 				<View style={styles.userData}>
-					<View
-						style={{ flexDirection: "row", justifyContent: "space-between" }}
-					>
-						<Image
-							source={{ uri: appendUrl(profileData?.photo) }}
-							style={{ width: 80, height: 80 }}
-						/>
+					<View style={styles.userName}>
+						<View style={styles.imageBox}>
+							<Image
+								source={{ uri: assetUrl + profileData?.photo }}
+								style={styles.image}
+							/>
+							<TouchableOpacity style={styles.addImage}>
+								<PlusIcon fill={COLORS.white} />
+							</TouchableOpacity>
+						</View>
+						<View style={styles.userNameText}>
+							<Text
+								style={{
+									color: COLORS.defaultBlack,
+									marginVertical: 5,
+								}}
+							>
+								{profileData?.name}
+							</Text>
+						</View>
 					</View>
-					<View
-						style={{
-							flexDirection: "column",
-							marginVertical: 10,
-						}}
-					>
-						<Text>Имя</Text>
-						<Text
-							style={{
-								color: COLORS.defaultBlack,
-								marginVertical: 5,
-							}}
-						>
-							{profileData?.name}
-						</Text>
-					</View>
+
 					<View
 						style={{
 							flexDirection: "column",
@@ -139,7 +135,7 @@ const ProfileView = () => {
 				</View>
 				<View style={styles.shadowBoxTwo}>
 					<Text style={styles.bank}> Банковские карты </Text>
-					<CartSelectItem />
+					{/* <CartSelectItem /> */}
 				</View>
 				<View style={styles.locate}>
 					<Text style={styles.txt}>Адресa клиента</Text>
@@ -162,7 +158,7 @@ const ProfileView = () => {
 					</Text>
 				</View>
 			</ScrollView>
-		</>
+		</View>
 	);
 };
 

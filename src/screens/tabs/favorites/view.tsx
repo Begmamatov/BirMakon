@@ -1,13 +1,14 @@
 import Text from "@novomarkt/components/general/Text";
+import BackHeader from "@novomarkt/components/navigation/BackHeader";
 import { STRINGS } from "@novomarkt/locales/strings";
 import React, { useEffect } from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import { BackHandler, ScrollView, TouchableOpacity, View } from "react-native";
 import Modal from "react-native-modal";
 import DefaultHeader from "./components/DefaultHeader";
 import Products from "./components/Products";
 import ProductsListFav from "./components/ProductsListFav";
 import SelectableItems from "./components/SelectableItems";
-import SelectableMenu from "./components/SelectableMenu";
+
 import { useFavoritesHook } from "./hooks";
 import { styles } from "./style";
 
@@ -22,7 +23,7 @@ const FavoriteView = () => {
 	if (favorites?.length == 0) {
 		return (
 			<View style={styles.empty}>
-				<DefaultHeader name={STRINGS.favorites} />
+				<BackHeader name={STRINGS.favorites} />
 				<View style={styles.emptyBox}>
 					<Text style={styles.emptyText}>{STRINGS.favoritesIsEmpty}</Text>
 				</View>
@@ -32,30 +33,13 @@ const FavoriteView = () => {
 
 	return (
 		<>
-			<DefaultHeader name={STRINGS.favorites} />
+			<BackHeader name={STRINGS.favorites} />
 			<ScrollView style={styles.container}>
-				<SelectableMenu />
-				<SelectableItems onPress={toggleModal} headerText={modalText} />
-				{favorites?.map((e) => {
-					return (
-						<Products
-							brand={e.brand}
-							name={e.name}
-							photo={e.photo}
-							price={e.price}
-							id={e.id}
-							price_old={e.price_old}
-							category={e.category}
-							views={e.views}
-							rating={e.rating}
-							discount={e.discount}
-							isFavorite={e.isFavorite}
-							credit_label={e.credit_label}
-							shop={e.shop}
-							getProducts={getFavs}
-						/>
-					);
-				})}
+				{/* <SelectableMenu /> */}
+				{/* <SelectableItems onPress={toggleModal} headerText={modalText} /> */}
+				{favorites?.map((item) => (
+					<Products item={item} />
+				))}
 
 				<Text style={styles.text}>{STRINGS.advertBlock}</Text>
 				<ProductsListFav />

@@ -19,7 +19,7 @@ import {
 
 interface SearchProps {
 	autoFocus?: boolean;
-	onChange?: () => void;
+	onChange?: (valyu: string) => void;
 }
 
 const SearchBackHeader = ({ autoFocus, onChange }: SearchProps) => {
@@ -41,7 +41,7 @@ const SearchBackHeader = ({ autoFocus, onChange }: SearchProps) => {
 					autoCorrect={false}
 					onChangeText={onChange}
 					onFocus={() => {
-						navigation.navigate(ROUTES.SEARCH);
+						navigation.navigate(ROUTES.SEARCH as never);
 					}}
 				/>
 				<SearchIcon fill={COLORS.whiteGray} />
@@ -70,9 +70,11 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "space-between",
 		backgroundColor: COLORS.lightGray,
+		color: COLORS.whiteGray,
 	},
 	input: {
 		paddingVertical: Platform.OS == "android" ? 10 : 12,
 		fontFamily: REGULAR_FONT_FAMILY,
+		width: "90%",
 	},
 });

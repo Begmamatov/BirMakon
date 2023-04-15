@@ -19,45 +19,46 @@ export interface DefaultInputProps {
 	containerStyle?: ViewStyle;
 	inputStyle?: TextStyle;
 	textContentType?:
-		| "none"
-		| "URL"
-		| "addressCity"
-		| "addressCityAndState"
-		| "addressState"
-		| "countryName"
-		| "creditCardNumber"
-		| "emailAddress"
-		| "familyName"
-		| "fullStreetAddress"
-		| "givenName"
-		| "jobTitle"
-		| "location"
-		| "middleName"
-		| "name"
-		| "namePrefix"
-		| "nameSuffix"
-		| "nickname"
-		| "organizationName"
-		| "postalCode"
-		| "streetAddressLine1"
-		| "streetAddressLine2"
-		| "sublocality"
-		| "telephoneNumber"
-		| "username"
-		| "password"
-		| "newPassword"
-		| "oneTimeCode"
-		| undefined;
+	| "none"
+	| "URL"
+	| "addressCity"
+	| "addressCityAndState"
+	| "addressState"
+	| "countryName"
+	| "creditCardNumber"
+	| "emailAddress"
+	| "familyName"
+	| "fullStreetAddress"
+	| "givenName"
+	| "jobTitle"
+	| "location"
+	| "middleName"
+	| "name"
+	| "namePrefix"
+	| "nameSuffix"
+	| "nickname"
+	| "organizationName"
+	| "postalCode"
+	| "streetAddressLine1"
+	| "streetAddressLine2"
+	| "sublocality"
+	| "telephoneNumber"
+	| "username"
+	| "password"
+	| "newPassword"
+	| "oneTimeCode"
+	| undefined;
 	secureText?: boolean | undefined;
 	onChange?: (val: string) => void;
 	value?: string;
+	onFocus?: () => void;
 	keyboardType?:
-		| "default"
-		| "number-pad"
-		| "decimal-pad"
-		| "numeric"
-		| "email-address"
-		| "phone-pad";
+	| "default"
+	| "number-pad"
+	| "decimal-pad"
+	| "numeric"
+	| "email-address"
+	| "phone-pad";
 }
 
 const DefaultInput = ({
@@ -72,7 +73,9 @@ const DefaultInput = ({
 	value,
 	keyboardType,
 	autoFocus,
+	onFocus,
 }: DefaultInputProps) => {
+
 	return (
 		<View style={[styles.container, containerStyle]}>
 			<Text style={[styles.title, titleStyle]}>{title}</Text>
@@ -86,6 +89,7 @@ const DefaultInput = ({
 				value={value}
 				keyboardType={keyboardType}
 				autoFocus={autoFocus}
+				onFocus={onFocus}
 			/>
 		</View>
 	);
@@ -105,6 +109,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		width: WINDOW_WIDTH - 80,
 		fontFamily: "Montserrat-Medium",
+		color: COLORS.defaultBlack,
 	},
 	container: {
 		alignSelf: "center",

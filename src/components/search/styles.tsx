@@ -5,9 +5,13 @@ export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: COLORS.white,
+		marginBottom: 20,
+		marginHorizontal: 0,
+		alignItems: "center",
 	},
 
-	list: {
-		marginHorizontal: 15,
+	container2: {
+		marginBottom: 20,
+		marginHorizontal: 0,
 	},
 });

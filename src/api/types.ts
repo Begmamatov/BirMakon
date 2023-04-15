@@ -1,4 +1,6 @@
 export interface LoginResponse {
+	last_address?: any;
+	lastName: any;
 	id?: number;
 	device_id?: string;
 	token?: string;
@@ -16,6 +18,9 @@ export interface LoginResponse {
 export interface RegisterData {
 	code: string;
 	token: string;
+}
+export interface OnResed {
+	phone?: string;
 }
 
 export interface RegisterResponse {
@@ -109,6 +114,28 @@ export interface BaseResponse<T> {
 	_meta: Meta;
 }
 
+export interface OrderItemResponse {
+	index: number;
+	id: number;
+	payment: {};
+	delivery: {};
+	price: number;
+	amount: number;
+	receiver: number;
+	name: string;
+	lastname: string;
+	email: string;
+	phone: string;
+	address: string;
+	comment: string;
+	status: number;
+	status_payment: number;
+	status_logist: number;
+	logist: null | any;
+	date: string;
+	orderProducts: {};
+}
+
 export interface NewsItemResponse {
 	id: number;
 	name: string;
@@ -182,6 +209,13 @@ export interface ShopsItemResponse {
 	date: string;
 }
 
+export interface PaymentMethodResponse {
+	id: number;
+	name: string;
+	description: string;
+	photo: string;
+}
+
 export interface SendReviewProps {
 	product_id: number;
 	review: string;
@@ -189,6 +223,7 @@ export interface SendReviewProps {
 }
 
 export interface OrderSend {
+	// additionalPhone: string | undefined;
 	address: string;
 	comment: string;
 	payment_id: number;

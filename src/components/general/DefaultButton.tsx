@@ -6,6 +6,8 @@ import {
 	StyleProp,
 	StyleSheet,
 	TextStyle,
+	TouchableOpacity,
+	TouchableOpacityBase,
 	TouchableWithoutFeedback,
 	View,
 	ViewStyle,
@@ -22,6 +24,7 @@ export interface DefaultButtonProps {
 	children?: ReactElement | null;
 	loading?: boolean;
 	active?: boolean;
+	disabled?: boolean;
 }
 
 const DefaultButton = ({
@@ -32,20 +35,17 @@ const DefaultButton = ({
 	containerStyle = {},
 	textStyle,
 	loading,
+	disabled,
 }: DefaultButtonProps) => {
 	return (
-		<TouchableWithoutFeedback onPress={onPress}>
-			<LinearGradient
-				start={{ x: 0, y: 0 }}
-				end={{ x: 3, y: 0 }}
-				colors={GRADIENT_COLORS}
-				style={[styles.container, containerStyle]}
-			>
+		<TouchableWithoutFeedback onPress={onPress} disabled={disabled}>
+			<View style={[styles.container, containerStyle]}>
 				<View style={[styles.content, secondary && styles.inactiveContainer]}>
 					{loading ? (
 						//TODO Check color
 						<ActivityIndicator
-							color={secondary ? COLORS.blue : COLORS.white}
+							animating={loading}
+							color={COLORS.red}
 							size={"small"}
 						/>
 					) : (
@@ -62,7 +62,7 @@ const DefaultButton = ({
 						)
 					)}
 				</View>
-			</LinearGradient>
+			</View>
 		</TouchableWithoutFeedback>
 	);
 };
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		padding: 1,
 		justifyContent: "center",
-		// marginHorizontal: 25,
+
 		marginTop: 10,
 		borderRadius: 8,
 		shadowColor: "#000",
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 4.84,
-
 		elevation: 5,
+		backgroundColor: COLORS.darkBlue4,
 	},
 	text: {
 		color: COLORS.white,

@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
 
 	blueText: {
 		fontSize: 14,
-		color: "#0052FF",
+		color: COLORS.red,
 		textDecorationLine: "underline",
 		textDecorationStyle: "solid",
 	},

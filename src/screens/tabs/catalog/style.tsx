@@ -8,13 +8,13 @@ export const styles = StyleSheet.create({
 		backgroundColor: COLORS.white,
 	},
 
-    banner: {
-        width: WINDOW_WIDTH,
-        height: 85,
-        borderRadius: 5,
-    },
+	banner: {
+		width: WINDOW_WIDTH,
+		height: 85,
+		borderRadius: 5,
+	},
 
-    box: {
-        marginTop: 20,
-    }
+	box: {
+		marginTop: 20,
+	},
 });

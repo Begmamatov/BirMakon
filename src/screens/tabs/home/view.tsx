@@ -9,12 +9,14 @@ import CarouselItem from "./components/CarouselItem";
 import CategoriesList from "./components/CategoriesList";
 import NewsList from "./components/NewsList";
 import ProductsList from "./components/ProductsList";
+import RedItem from "./components/RedItem";
 import ShopsList from "./components/ShopsList";
 import { useHomeScreenHooks } from "./hooks";
 import { styles } from "./style";
 
 const HomeView = () => {
 	let { setActiveSlide, activeSlide, slide } = useHomeScreenHooks();
+
 	return (
 		<>
 			<SearchHeader />
@@ -36,10 +38,11 @@ const HomeView = () => {
 				<BrandsList />
 				<ShopsList />
 				<ProductsList />
-				<CategoriesList />
 				<ProductsList title={STRINGS.productsOnSale} />
 				<NewsList />
 				<ProductsList title={STRINGS.recentlyWatched} />
+				<RedItem />
+				<RedItem />
 			</ScrollView>
 		</>
 	);

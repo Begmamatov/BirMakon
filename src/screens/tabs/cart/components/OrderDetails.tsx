@@ -21,32 +21,19 @@ const OrderDetails = ({
 			<View style={styles.box}>
 				<View style={styles.row}>
 					<Text>
-						{STRINGS.items} ({total.count}){" "}
+						{STRINGS.items} ({total?.count}){" "}
 					</Text>
-					<Text style={styles.price}>{total.total} ₽</Text>
+					<Text style={styles.price}>{total.total} сум</Text>
 				</View>
 				<View style={styles.row}>
-					<View
-						style={{ flexDirection: "row", alignItems: "center" }}
-					>
-						<Text>{STRINGS.sale}</Text>
-						<Image source={MirImg} style={styles.image} />
-						<Image source={VisaImg} style={styles.image} />
+					<View style={{ flexDirection: "row", alignItems: "center" }}>
+						<Text>{STRINGS.Delivery}</Text>
 					</View>
-					<Text>-500 ₽</Text>
-				</View>
-				<View style={styles.row}>
-					<View
-						style={{ flexDirection: "row", alignItems: "center" }}
-					>
-						<Text>{STRINGS.sale}</Text>
-						<Image source={MastercardImg} style={styles.image} />
-					</View>
-					<Text>-50 ₽</Text>
+					<Text>-50 сум</Text>
 				</View>
 				<View style={styles.rowFooter}>
 					<Text style={styles.footerTxt}>{STRINGS.totalPrice}</Text>
-					<Text style={styles.total}> {total.total} ₽ </Text>
+					<Text style={styles.total}> {total?.total} сум </Text>
 				</View>
 			</View>
 		</View>
@@ -83,7 +70,7 @@ const styles = StyleSheet.create({
 
 	row: {
 		flexDirection: "row",
-		marginVertical: 2,
+		marginVertical: 5,
 		justifyContent: "space-between",
 	},
 
@@ -117,6 +104,6 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: "700",
 		letterSpacing: 0.5,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 });

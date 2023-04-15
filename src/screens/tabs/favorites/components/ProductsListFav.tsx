@@ -29,10 +29,8 @@ const ProductsListFav = ({
 			<FlatList
 				numColumns={2}
 				data={products}
-				style={styles.container}
 				showsHorizontalScrollIndicator={false}
 				renderItem={(props) => <ProductItem {...props} />}
-				contentContainerStyle={styles.contentContainerStyle}
 			/>
 		</View>
 	);
@@ -49,6 +47,5 @@ const styles = StyleSheet.create({
 		fontWeight: "700",
 		letterSpacing: 0.5,
 	},
-	container: { marginBottom: 20, marginHorizontal: 0 },
-	contentContainerStyle: { paddingHorizontal: 12 },
+	container: { marginBottom: 20, marginHorizontal: 0, alignItems: "center" },
 });

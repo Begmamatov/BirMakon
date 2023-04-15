@@ -23,9 +23,9 @@ const NewsDetailsView = ({
 		<View style={styles.container}>
 			<BackHeader name={STRINGS.back} style={styles.header} />
 			<Image source={{ uri: appendUrl(item.photo) }} style={styles.image} />
-			<Text style={styles.name}>{item.name}</Text>
+			<Text style={styles.name}>{item?.name}</Text>
 			<ScrollView showsVerticalScrollIndicator={true}>
-				<Text style={styles.description}>{item.description_mini}</Text>
+				<Text style={styles.description}>{item?.description_mini}</Text>
 			</ScrollView>
 		</View>
 	);

@@ -26,10 +26,12 @@ export const styles = StyleSheet.create({
 		marginVertical: 10,
 		borderWidth: 1,
 		borderRadius: 8,
-		borderColor: COLORS.blue,
+		borderColor: COLORS.red,
 		flexDirection: "row",
 		alignItems: "center",
-		padding: 10,
+		paddingVertical: 20,
+		paddingHorizontal: 10,
+
 		backgroundColor: COLORS.white,
 		elevation: 5,
 		shadowOpacity: 0.3,
@@ -55,7 +57,8 @@ export const styles = StyleSheet.create({
 			width: 0,
 			height: 0,
 		},
-		padding: 10,
+		paddingVertical: 20,
+		paddingHorizontal: 10,
 	},
 
 	border: {
@@ -70,7 +73,7 @@ export const styles = StyleSheet.create({
 
 	activeBorder: {
 		borderWidth: 1,
-		borderColor: COLORS.blue,
+		borderColor: COLORS.red,
 		width: 12,
 		height: 12,
 		borderRadius: 20,
@@ -89,7 +92,7 @@ export const styles = StyleSheet.create({
 		width: 6,
 		height: 6,
 		borderRadius: 10,
-		backgroundColor: COLORS.blue,
+		backgroundColor: COLORS.red,
 	},
 
 	textBox: {
@@ -127,7 +130,7 @@ export const styles = StyleSheet.create({
 
 	buttonTxt: {
 		fontSize: 16,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
 	pickupBox: {
@@ -221,11 +224,13 @@ export const styles = StyleSheet.create({
 		paddingVertical: Platform.OS == "android" ? 10 : 15,
 		backgroundColor: COLORS.lightGray,
 		borderColor: COLORS.whiteGray,
+		color: COLORS.defaultBlack,
+		fontSize: 16,
 	},
 
 	underline: {
 		marginTop: 10,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
 	recipButton: {

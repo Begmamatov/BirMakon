@@ -23,7 +23,6 @@ const CategoryItem = ({
 	item,
 }: ListRenderItemInfo<CategoryItemProps>): ReactElement => {
 	const navigation: any = useNavigation();
-	console.log(item);
 
 	let { photo, name, id } = item || {};
 
@@ -34,7 +33,7 @@ const CategoryItem = ({
 		>
 			<View style={styles.nameContainer}>
 				<Text numberOfLines={2} ellipsizeMode="tail" style={styles.text}>
-					{name}
+					{name ? name : ""}
 				</Text>
 			</View>
 			<Image style={styles.image} source={{ uri: appendUrl(photo) }} />

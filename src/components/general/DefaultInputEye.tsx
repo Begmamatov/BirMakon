@@ -20,45 +20,45 @@ export interface DefaultInputProps {
 	containerStyle?: ViewStyle;
 	inputStyle?: TextStyle;
 	textContentType?:
-		| "none"
-		| "URL"
-		| "addressCity"
-		| "addressCityAndState"
-		| "addressState"
-		| "countryName"
-		| "creditCardNumber"
-		| "emailAddress"
-		| "familyName"
-		| "fullStreetAddress"
-		| "givenName"
-		| "jobTitle"
-		| "location"
-		| "middleName"
-		| "name"
-		| "namePrefix"
-		| "nameSuffix"
-		| "nickname"
-		| "organizationName"
-		| "postalCode"
-		| "streetAddressLine1"
-		| "streetAddressLine2"
-		| "sublocality"
-		| "telephoneNumber"
-		| "username"
-		| "password"
-		| "newPassword"
-		| "oneTimeCode"
-		| undefined;
+	| "none"
+	| "URL"
+	| "addressCity"
+	| "addressCityAndState"
+	| "addressState"
+	| "countryName"
+	| "creditCardNumber"
+	| "emailAddress"
+	| "familyName"
+	| "fullStreetAddress"
+	| "givenName"
+	| "jobTitle"
+	| "location"
+	| "middleName"
+	| "name"
+	| "namePrefix"
+	| "nameSuffix"
+	| "nickname"
+	| "organizationName"
+	| "postalCode"
+	| "streetAddressLine1"
+	| "streetAddressLine2"
+	| "sublocality"
+	| "telephoneNumber"
+	| "username"
+	| "password"
+	| "newPassword"
+	| "oneTimeCode"
+	| undefined;
 	secureText?: boolean | undefined;
 	onChange?: (val: string) => void;
 	value?: string;
 	keyboardType?:
-		| "default"
-		| "number-pad"
-		| "decimal-pad"
-		| "numeric"
-		| "email-address"
-		| "phone-pad";
+	| "default"
+	| "number-pad"
+	| "decimal-pad"
+	| "numeric"
+	| "email-address"
+	| "phone-pad";
 }
 
 const DefaultInputEye = ({
@@ -73,7 +73,7 @@ const DefaultInputEye = ({
 	value,
 	keyboardType,
 }: DefaultInputProps) => {
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<View style={[styles.container, containerStyle]}>
 			<Text style={[styles.title, titleStyle]}>{title}</Text>
@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
 		// borderWidth: 1,
 		width: "90%",
 		fontFamily: "Montserrat-Medium",
+		color: COLORS.defaultBlack,
 	},
 	container: {
 		alignSelf: "center",

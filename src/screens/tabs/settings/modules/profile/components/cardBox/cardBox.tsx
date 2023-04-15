@@ -81,9 +81,7 @@ export const CardBox = () => {
 								justifyContent: "space-between",
 							}}
 						>
-							<Text style={styles.cardNumber}>
-								{e.card_number}
-							</Text>
+							<Text style={styles.cardNumber}>{e?.card_number}</Text>
 							<TouchableOpacity
 								hitSlop={{
 									left: 20,
@@ -100,9 +98,7 @@ export const CardBox = () => {
 							</TouchableOpacity>
 						</View>
 						<Text style={styles.cardExpiry}>{expiryDate}</Text>
-						<Text style={styles.cardName}>
-							{e.card_phone_number}
-						</Text>
+						<Text style={styles.cardName}>{e?.card_phone_number}</Text>
 					</ImageBackground>
 				);
 			})}

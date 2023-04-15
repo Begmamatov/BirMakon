@@ -19,9 +19,9 @@ import {
 	loadFavorite,
 } from "@novomarkt/store/slices/favoriteSlice";
 import { useNavigation } from "@react-navigation/core";
-import { is } from "immer/dist/internal";
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import {
+	ActivityIndicator,
 	Image,
 	ListRenderItemInfo,
 	StyleSheet,
@@ -37,52 +37,55 @@ const ProductItem = ({
 }: ListRenderItemInfo<ProductItemResponse> & {
 	getProducts?: () => void;
 }): ReactElement => {
-	let {
-		photo,
-		brand,
-		category,
-		name,
-		price,
-		discount,
-		price_old,
-		id,
-		isFavorite,
-	} = item;
+	let { photo, category, name, price, discount, price_old, id } = item;
+
 	const dispatch = useDispatch();
 	let navigation = useNavigation();
 	const cart = useAppSelector(cartSelector);
 	let isInCart = !!cart[id];
+
 	const fav = useAppSelector(favoriteSelector);
 	let isFav = !!fav[id];
 
+	const [animate, setAnimate] = useState(false);
+
 	const onCartPress = async () => {
-		try {
-			if (isInCart) {
-				dispatch(toggleLoading());
+		if (isInCart) {
+			try {
+				setAnimate(true);
 				let clear = await requests.products.removeItem({
 					product_id: id,
 				});
 				let cartGet = await requests.products.getCarts();
 				dispatch(loadCart(cartGet.data.data));
-				dispatch(toggleLoading());
-			} else {
-				dispatch(toggleLoading());
+				setAnimate(false);
+			} catch (error) {
+				console.log(error);
+				setAnimate(false);
+			}
+		} else {
+			try {
+				setAnimate(true);
 				let res = await requests.products.addToCart({
 					amount: 1,
 					product_id: id,
 				});
+
 				let cartRes = await requests.products.getCarts();
 				dispatch(loadCart(cartRes.data.data));
-				dispatch(toggleLoading());
+
+				setAnimate(false);
+			} catch (error) {
+				alert(JSON.stringify(error, null, 4));
+			} finally {
+				setAnimate(false);
 			}
-		} catch (error) {
-			console.log(error);
 		}
 	};
 
 	const onAddFavorite = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.favorites.addFavorite({
 				product_id: id,
 			});
@@ -91,7 +94,7 @@ const ProductItem = ({
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 		}
 	};
 
@@ -115,42 +118,65 @@ const ProductItem = ({
 							<HeartIconBorder fill={COLORS.red} stroke={COLORS.red} />
 						)}
 					</TouchableOpacity>
-					{discount && (
+					{discount ? (
 						<View style={styles.discount}>
-							<Text style={styles.dscountText}>{discount}%</Text>
+							<Text style={styles.dscountText}>
+								{discount ? discount : ""}%
+							</Text>
 						</View>
-					)}
+					) : null}
 				</View>
 				<View style={styles.details}>
 					<View style={styles.row}>
 						<Text style={styles.brand}>{category?.name}</Text>
-						<Text style={styles.brand}>{brand?.name}</Text>
+						{/* <Text style={styles.brand}>{shop?.name}</Text> */}
 					</View>
-					<Text style={styles.name}>{name}</Text>
+					<Text style={styles.name}>{name ? name : ""}</Text>
 					<View
 						style={{
-							flexDirection: "row",
-							alignItems: "center",
+							flexDirection: "column",
+							alignItems: "flex-start",
 							justifyContent: "space-between",
+							height: 60,
 						}}
 					>
-						<Text style={styles.price}>{price} ₽</Text>
-						<Text style={styles.oldPrice}>{price_old} ₽</Text>
-					</View>
-					<DefaultButton
-						containerStyle={styles.button}
-						secondary={isInCart}
-						onPress={onCartPress}
-					>
-						<View style={styles.buttonContainer}>
-							<Text
-								style={[isInCart ? styles.inactiveCartText : styles.cartText]}
-							>
-								{isInCart ? `${STRINGS.addToCart}е` : `${STRINGS.addToCart}у`}
+						<Text style={styles.price}>{price ? price : ""} сум</Text>
+						{price_old ? (
+							<Text style={styles.oldPrice}>
+								{price_old ? price_old : ""} сум
 							</Text>
-							<BasketIcon fill={isInCart ? COLORS.cartColor3 : COLORS.white} />
-						</View>
-					</DefaultButton>
+						) : null}
+					</View>
+					<View>
+						<DefaultButton
+							containerStyle={styles.button}
+							secondary={isInCart}
+							onPress={onCartPress}
+						>
+							{animate ? (
+								<ActivityIndicator
+									size="small"
+									color={COLORS.red}
+									animating={animate}
+								/>
+							) : (
+								<View style={styles.buttonContainer}>
+									<Text
+										style={[
+											isInCart ? styles.inactiveCartText : styles.cartText,
+										]}
+									>
+										{isInCart
+											? `${STRINGS.addToCart}е`
+											: `${STRINGS.addToCart}у`}
+									</Text>
+									<BasketIcon
+										fill={isInCart ? COLORS.cartColor3 : COLORS.white}
+									/>
+								</View>
+							)}
+						</DefaultButton>
+					</View>
 				</View>
 			</View>
 		</TouchableWithoutFeedback>
@@ -160,11 +186,11 @@ const ProductItem = ({
 export default ProductItem;
 
 const styles = StyleSheet.create({
-	dscountText: { fontSize: 12, color: COLORS.defaultBlack },
+	dscountText: { fontSize: 12, color: COLORS.defaultBlack, fontWeight: "700" },
 	discount: {
 		borderRadius: 8,
 		padding: 4,
-		backgroundColor: COLORS.white,
+		backgroundColor: COLORS.discountRed,
 	},
 	absolute: {
 		position: "absolute",
@@ -188,7 +214,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 0,
 	},
 	price: {
-		color: COLORS.blue,
+		color: COLORS.red,
 		fontSize: 15,
 		marginVertical: 10,
 		fontWeight: "700",
@@ -207,6 +233,8 @@ const styles = StyleSheet.create({
 	row: {
 		flexDirection: "row",
 		justifyContent: "space-between",
+
+		minHeight: 30,
 	},
 	image: {
 		width: WINDOW_WIDTH / 2 - 20,

@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
 		// textDecorationStyle: 'solid',
 		// textDecorationColor: COLORS.blue,
 		borderBottomWidth: 1,
-		borderBottomColor: COLORS.blue,
+		borderBottomColor: COLORS.red,
 		marginLeft: 10,
 		fontSize: 14,
 	},

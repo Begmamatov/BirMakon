@@ -1,12 +1,14 @@
 export { default as CartScreen } from "./controller";
 import React from "react";
 import CartView from "./view";
-import { ROUTES } from "@novomarkt/constants/routes";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CheckoutScreen } from "./checkout";
-import { CheckoutPointScreen } from "./checkout-point";
-import { FilterScreen } from "./filter";
+// import {CheckoutPointScreen} from './checkout-point';
+
 import { LocationScreen } from "./location";
+import { ROUTES } from "@novomarkt/constants/routes";
+import { FilterScreen } from "./filter";
 
 const Stack = createNativeStackNavigator();
 

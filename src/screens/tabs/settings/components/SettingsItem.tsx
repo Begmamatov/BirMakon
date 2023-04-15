@@ -13,13 +13,24 @@ export interface SettingsItemProps {
 	icon?: (props: SvgProps) => JSX.Element;
 	text?: string;
 	onPress?: (event: GestureResponderEvent) => void;
+	focus?: boolean;
 }
 
-const SettingsItem = ({ icon: Icon, text, onPress }: SettingsItemProps) => {
+const SettingsItem = ({
+	icon: Icon,
+	text,
+	onPress,
+	focus,
+}: SettingsItemProps) => {
 	return (
 		<TouchableWithoutFeedback onPress={onPress}>
-			<View style={styles.container}>
-				<View style={styles.icon}>{Icon && <Icon />}</View>
+			<View
+				style={[
+					styles.container,
+					{ backgroundColor: focus ? COLORS.lightBlack : COLORS.white },
+				]}
+			>
+				<View style={styles.icon}>{Icon ? <Icon /> : null}</View>
 				<Text style={styles.text}>{text}</Text>
 			</View>
 		</TouchableWithoutFeedback>
@@ -33,8 +44,9 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		paddingHorizontal: 20,
 		borderBottomWidth: 1,
-		borderBottomColor: COLORS.lightGray,
-		paddingVertical: 10,
+		borderBottomColor: "rgba(113, 113, 113, 0.3)",
+		paddingVertical: 12,
+		backgroundColor: "#131E3D",
 	},
 
 	text: {
@@ -44,6 +56,6 @@ const styles = StyleSheet.create({
 	},
 
 	icon: {
-		width: 30
-	}
+		width: 30,
+	},
 });

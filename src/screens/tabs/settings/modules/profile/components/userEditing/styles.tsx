@@ -5,8 +5,12 @@ import { Platform, StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingHorizontal: 20,
 		backgroundColor: COLORS.white,
+	},
+	buttonTxt: {
+		color: COLORS.white,
+		fontSize: 16,
+		marginHorizontal: 20,
 	},
 
 	userImg: {
@@ -14,10 +18,15 @@ export const styles = StyleSheet.create({
 		marginVertical: 10,
 		flexDirection: "column",
 		alignItems: "center",
+		paddingHorizontal: 20,
 	},
 
 	changeTxt: {
 		marginVertical: 5,
+	},
+	back: {
+		marginTop: 20,
+		marginBottom: 10,
 	},
 
 	inputLabel: {
@@ -35,5 +44,6 @@ export const styles = StyleSheet.create({
 		borderWidth: 0,
 		borderBottomWidth: 1,
 		margin: 0,
+		zIndex: 999,
 	},
 });

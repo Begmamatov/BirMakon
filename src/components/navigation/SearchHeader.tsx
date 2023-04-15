@@ -5,7 +5,13 @@ import { ROUTES } from "@novomarkt/constants/routes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Platform, StyleSheet, TextInput, View } from "react-native";
+import {
+	Platform,
+	StyleSheet,
+	TextInput,
+	TouchableOpacity,
+	View,
+} from "react-native";
 
 interface SearchProps {
 	autoFocus?: boolean;
@@ -25,12 +31,22 @@ const SearchHeader = ({ autoFocus, onChange }: SearchProps) => {
 					autoCorrect={false}
 					onChange={onChange}
 					onFocus={() => {
-						navigation.navigate(ROUTES.SEARCH);
+						navigation.navigate(ROUTES.SEARCH as never);
 					}}
 				/>
-				<SearchIcon fill={COLORS.whiteGray} />
+				<SearchIcon
+					fill={COLORS.whiteGray}
+					style={{ width: 120, height: 120 }}
+				/>
 			</View>
-			<DeliveryIcon fill={COLORS.whiteGray} />
+			<TouchableOpacity
+				onPress={() => navigation.navigate(ROUTES.DELIVERY as never)}
+			>
+				<DeliveryIcon
+					fill={COLORS.whiteGray}
+					style={{ width: 120, height: 120 }}
+				/>
+			</TouchableOpacity>
 		</View>
 	);
 };

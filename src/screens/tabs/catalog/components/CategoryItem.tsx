@@ -1,4 +1,4 @@
-import { appendUrl } from "@novomarkt/api/requests";
+import { appendUrl, assetUrl } from "@novomarkt/api/requests";
 import { Category } from "@novomarkt/api/types";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
@@ -23,8 +23,8 @@ const CategoryItem = ({
 			onPress={() => navigation.navigate(ROUTES.CATALOG_DETAILS, { id, name })}
 		>
 			<View style={styles.container}>
-				<Image style={styles.image} source={{ uri: appendUrl(photo as any) }} />
-				<Text style={styles.text}>{name}</Text>
+				<Image style={styles.image} source={{ uri: assetUrl + photo }} />
+				<Text style={styles.text}>{name ? name : ""}</Text>
 			</View>
 		</TouchableWithoutFeedback>
 	);

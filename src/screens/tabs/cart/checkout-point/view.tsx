@@ -56,11 +56,11 @@ const CheckoutPoint = () => {
 				</LinearGradient>
 			</TouchableOpacity>
 			<View style={styles.inputBox}>
-				<SearchIcon fill={COLORS.blue} />
+				<SearchIcon fill={COLORS.red} />
 				<TextInput placeholder={"Улица,  метро"} style={styles.input} />
 			</View>
 			<TouchableOpacity style={styles.button} onPress={OnMyLocationPress}>
-				<GeoIcon fill={COLORS.blue} />
+				<GeoIcon fill={COLORS.red} />
 			</TouchableOpacity>
 		</View>
 	);

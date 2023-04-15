@@ -16,7 +16,7 @@ import { SvgProps } from "react-native-svg";
 import { useSelector } from "react-redux";
 import CartStack from "./cart";
 import CatalogStack from "./catalog";
-import { FavoriteScreen } from "./favorites";
+import FavoritesScreen from "./favorites";
 import { HomeStack } from "./home";
 import { SettingsStack } from "./settings";
 
@@ -25,12 +25,11 @@ let Tab = createBottomTabNavigator();
 const TabNavigation = () => {
 	let renderTabIcon = useCallback((Component: React.FC<SvgProps>) => {
 		return (props: { focused: boolean; color: string; size: number }) => {
-			let { color, focused, size } = props;
+			let { color, size } = props;
 
 			return <Component fill={color} width={size} height={size} />;
 		};
 	}, []);
-
 	let total = useSelector(cartTotalSelector);
 	let favs = useSelector(favoriteArraySelector);
 
@@ -38,9 +37,13 @@ const TabNavigation = () => {
 		<Tab.Navigator
 			screenOptions={{
 				headerShown: false,
-				tabBarActiveTintColor: COLORS.blue,
+				tabBarActiveTintColor: COLORS.red,
 				tabBarInactiveTintColor: COLORS.gray,
 				tabBarHideOnKeyboard: true,
+				tabBarStyle: {
+					height: 70,
+					paddingBottom: 15,
+				},
 			}}
 		>
 			<Tab.Screen
@@ -49,6 +52,7 @@ const TabNavigation = () => {
 				options={{
 					tabBarIcon: renderTabIcon(HomeIcon),
 					tabBarLabel: STRINGS.home,
+					tabBarLabelStyle: { fontSize: 14 },
 				}}
 			/>
 			<Tab.Screen
@@ -57,6 +61,7 @@ const TabNavigation = () => {
 				options={{
 					tabBarIcon: renderTabIcon(CatalogIcon),
 					tabBarLabel: STRINGS.categories,
+					tabBarLabelStyle: { fontSize: 14 },
 				}}
 			/>
 			<Tab.Screen
@@ -66,15 +71,17 @@ const TabNavigation = () => {
 					tabBarIcon: renderTabIcon(BasketIcon),
 					tabBarBadge: total.count == 0 ? undefined : total.count,
 					tabBarLabel: STRINGS.cart,
+					tabBarLabelStyle: { fontSize: 14 },
 				}}
 			/>
 			<Tab.Screen
 				name={ROUTES.FAVORITES}
-				component={FavoriteScreen}
+				component={FavoritesScreen}
 				options={{
 					tabBarIcon: renderTabIcon(HeartIcon),
 					tabBarLabel: STRINGS.favorites,
 					tabBarBadge: favs?.length == 0 ? undefined : favs.length,
+					tabBarLabelStyle: { fontSize: 14 },
 				}}
 			/>
 			<Tab.Screen
@@ -83,6 +90,7 @@ const TabNavigation = () => {
 				options={{
 					tabBarIcon: renderTabIcon(PersonIcon),
 					tabBarLabel: STRINGS.login,
+					tabBarLabelStyle: { fontSize: 14 },
 				}}
 			/>
 		</Tab.Navigator>

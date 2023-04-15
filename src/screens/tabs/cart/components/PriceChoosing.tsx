@@ -17,7 +17,7 @@ const PriceChoosing = () => {
 						placeholder="256"
 						placeholderTextColor={COLORS.defaultBlack}
 					/>
-					<Text>₽</Text>
+					<Text>сум</Text>
 				</View>
 				<View style={styles.inputBox}>
 					<Text>{STRINGS.till}</Text>
@@ -27,7 +27,7 @@ const PriceChoosing = () => {
 						keyboardType={"numeric"}
 						placeholderTextColor={COLORS.defaultBlack}
 					/>
-					<Text>₽</Text>
+					<Text>сум</Text>
 				</View>
 			</View>
 		</View>

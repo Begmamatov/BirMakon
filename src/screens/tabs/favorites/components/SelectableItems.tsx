@@ -19,8 +19,8 @@ const SelectableItems = ({ onPress, headerText }: SelectableItemsProps) => {
 	return (
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.row} onPress={onPress}>
-				<Text style={styles.text}>{headerText}</Text>
-				<BottomArrow fill={COLORS.blue} />
+				<Text style={styles.text}>{headerText ? headerText : ""}</Text>
+				<BottomArrow fill={COLORS.red} />
 			</TouchableOpacity>
 		</View>
 	);
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 	},
 	text: {
-		color: COLORS.blue,
+		color: COLORS.red,
 		marginRight: 6,
 		fontSize: 16,
 	},

@@ -2,7 +2,6 @@ import requests, { appendUrl } from "@novomarkt/api/requests";
 import { CartItemResponse } from "@novomarkt/api/types";
 import {
 	CrashIcon,
-	HeartIcon,
 	HeartIconBorder,
 	HeartIconRed,
 	MinusIcon,
@@ -37,16 +36,22 @@ export let ProductsData = {
 	price: "1400  ₽",
 };
 
-export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
-	const [shouldShow, setShouldShow] = useState(true);
+export default function ChooseItemNum({
+	data,
+	index,
+}: {
+	data: CartItemResponse;
+	index: number;
+}) {
 	const dispatch = useDispatch();
+
 	let id = data.product.id;
 	const fav = useAppSelector(favoriteSelector);
 	let isFav = !!fav[id];
 
 	const onAddItem = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.products.increaseItem({
 				amount: 1,
 				product_id: id,
@@ -56,13 +61,13 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 		}
 	};
 
 	const onDecreaseItem = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.products.decreaseItem({
 				product_id: id,
 			});
@@ -71,13 +76,13 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 		}
 	};
 
 	const onRemoveItem = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.products.removeItem({
 				product_id: id,
 			});
@@ -86,14 +91,14 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 			LayoutAnimation.configureNext(LayoutAnimation.Presets.linear);
 		}
 	};
 
 	const onAddFavorite = async () => {
 		try {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(true));
 			let res = await requests.favorites.addFavorite({
 				product_id: id,
 			});
@@ -102,12 +107,12 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 		} catch (error) {
 			console.log(error);
 		} finally {
-			dispatch(toggleLoading());
+			dispatch(toggleLoading(false));
 		}
 	};
 
 	return (
-		<View style={styles.container}>
+		<View key={index} style={styles.container}>
 			<View>
 				<Image
 					style={styles.leftImage}
@@ -115,42 +120,36 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 				/>
 			</View>
 			<View style={styles.textBox}>
-				<Text style={styles.headerTxt}>{data.product.name}</Text>
+				<Text style={styles.headerTxt}>{data?.product?.name}</Text>
 				<Text style={styles.itemTxt}>
 					{STRINGS.color}
-					<Text> Белый</Text>
+					<Text> {data.product.color.name}</Text>
 				</Text>
 				<Text style={styles.itemTxt}>
 					{STRINGS.size}
-					<Text> XXL - 44</Text>
+					<Text> {data.product.size ?? 36}</Text>
 				</Text>
 				<View style={styles.rowTxt}>
-					<Text style={styles.blueTxt}>{data.product.price} ₽</Text>
-					<Text style={styles.lineThrough}>{data.product.price_old} ₽</Text>
+					<Text style={styles.blueTxt}>{data?.product?.price} сум</Text>
+					{data.product.price_old ? (
+						<Text style={styles.lineThrough}>
+							{data?.product?.price_old} сум
+						</Text>
+					) : null}
 				</View>
 				<View style={styles.counter}>
-					<TouchableOpacity onPress={onDecreaseItem}>
-						<LinearGradient
-							start={{ x: 0, y: 0 }}
-							end={{ x: 3, y: 0 }}
-							colors={GRADIENT_COLORS}
-							style={styles.minus}
-						>
+					<TouchableOpacity onPress={onDecreaseItem} style={styles.minus}>
+						<View style={styles.minus}>
 							<MinusIcon fill={COLORS.white} />
-						</LinearGradient>
+						</View>
 					</TouchableOpacity>
 					<View style={styles.topBottom}>
-						<Text>{data.amount} шт</Text>
+						<Text>{data?.amount} шт</Text>
 					</View>
-					<TouchableOpacity onPress={onAddItem}>
-						<LinearGradient
-							start={{ x: 0, y: 0 }}
-							end={{ x: 3, y: 0 }}
-							colors={GRADIENT_COLORS}
-							style={styles.plus}
-						>
+					<TouchableOpacity onPress={onAddItem} style={styles.plus}>
+						<View style={styles.plus}>
 							<PlusCounterIcon fill={COLORS.white} />
-						</LinearGradient>
+						</View>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -178,12 +177,13 @@ export default function ChooseItemNum({ data }: { data: CartItemResponse }) {
 
 const styles = StyleSheet.create({
 	container: {
-		// borderWidth: 1,
-		// padding: 10,
 		marginHorizontal: 20,
 		marginVertical: 10,
 		flexDirection: "row",
 		justifyContent: "space-between",
+		borderBottomColor: COLORS.gray,
+		borderBottomWidth: 1,
+		paddingBottom: 10,
 	},
 
 	leftImage: {
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
 	blueTxt: {
 		fontSize: 15,
 		fontWeight: "700",
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
 	lineThrough: {
@@ -243,19 +243,20 @@ const styles = StyleSheet.create({
 	},
 
 	minus: {
-		paddingVertical: 10,
-		paddingHorizontal: 15,
+		paddingVertical: 5,
+		paddingHorizontal: 5,
 		borderTopLeftRadius: 5,
 		borderBottomLeftRadius: 5,
+		backgroundColor: COLORS.orange,
 	},
 
 	plus: {
-		padding: 10,
-		paddingHorizontal: 15,
+		paddingVertical: 5,
+		paddingHorizontal: 5,
 		borderTopRightRadius: 5,
 		borderBottomRightRadius: 5,
+		backgroundColor: COLORS.lightBlack,
 	},
-
 	topBottom: {
 		// height: "100%",
 		width: 50,

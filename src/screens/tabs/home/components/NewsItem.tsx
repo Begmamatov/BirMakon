@@ -4,7 +4,7 @@ import DefaultButton from "@novomarkt/components/general/DefaultButton";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import { ROUTES } from "@novomarkt/constants/routes";
-import { WINDOW_WIDTH } from "@novomarkt/constants/sizes";
+import { WINDOW_HEIGHT, WINDOW_WIDTH } from "@novomarkt/constants/sizes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useNavigation } from "@react-navigation/native";
 import React, { ReactElement } from "react";
@@ -34,8 +34,8 @@ const NewsItem = ({
 		<View style={styles.container}>
 			<Image source={{ uri: appendUrl(photo) }} style={styles.image} />
 			<View style={styles.content}>
-				<Text style={styles.text}>{name}</Text>
-				<Text style={styles.dateStyle}>{day}</Text>
+				<Text style={styles.text}>{name ? name : ""}</Text>
+				<Text style={styles.dateStyle}>{day ? day : ""}</Text>
 				<View style={styles.row}>
 					<DefaultButton
 						onPress={() =>
@@ -45,9 +45,6 @@ const NewsItem = ({
 						containerStyle={styles.buttonContainer}
 						text={STRINGS.detailed}
 					/>
-					{/* <View style={{ alignItems: "flex-end" }}>
-						<Text style={styles.dateStyle}>{day}</Text>
-					</View> */}
 				</View>
 			</View>
 		</View>
@@ -60,9 +57,10 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 12,
 		color: COLORS.defaultBlack,
+		height: 65,
 	},
 	dateStyle: {
-		color: COLORS.gray,
+		color: COLORS.red,
 		fontSize: 12,
 		alignSelf: "flex-end",
 		marginTop: 10,

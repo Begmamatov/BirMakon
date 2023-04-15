@@ -1,4 +1,4 @@
-import { LeftArrow, SearchIcon } from "@novomarkt/assets/icons/icons";
+import { LeftArrow } from "@novomarkt/assets/icons/icons";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useNavigation } from "@react-navigation/core";
 import React from "react";
@@ -6,7 +6,6 @@ import {
 	StyleProp,
 	StyleSheet,
 	TouchableOpacity,
-	TouchableWithoutFeedback,
 	View,
 	ViewStyle,
 } from "react-native";
@@ -19,24 +18,25 @@ export interface BackHeaderProps {
 	hasSearch?: boolean;
 }
 
-const BackHeader = ({
-	name = STRINGS.backHeaderName,
-	style,
-	hasSearch,
-}: BackHeaderProps) => {
+const BackHeader = ({ name = STRINGS.backHeaderName }: BackHeaderProps) => {
 	let navigation = useNavigation();
 	return (
-		<View style={[styles.container, style]}>
-			<View style={styles.row}>
-				<TouchableOpacity
-					hitSlop={{ bottom: 20, top: 20, left: 20, right: 20 }}
-					onPress={() => navigation.goBack()}
-				>
-					<LeftArrow />
-				</TouchableOpacity>
+		<View
+			style={{
+				backgroundColor: COLORS.white,
+				paddingTop: 20,
+				paddingBottom: 20,
+				paddingHorizontal: 15,
+			}}
+		>
+			<TouchableOpacity
+				hitSlop={{ bottom: 20, top: 20, left: 20, right: 20 }}
+				onPress={() => navigation.goBack()}
+				style={styles.row}
+			>
+				<LeftArrow style={{ width: 120, height: 120 }} />
 				<Text style={styles.text}>{name}</Text>
-			</View>
-			{hasSearch && <SearchIcon fill={COLORS.blue} />}
+			</TouchableOpacity>
 		</View>
 	);
 };
@@ -44,13 +44,6 @@ const BackHeader = ({
 export default BackHeader;
 
 const styles = StyleSheet.create({
-	container: {
-		flexDirection: "row",
-		alignItems: "center",
-		justifyContent: "space-between",
-		// marginHorizontal: 20,
-	},
-
 	text: {
 		marginLeft: 10,
 		fontSize: 20,

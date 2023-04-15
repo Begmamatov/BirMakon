@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 let timer = -1;
 
 const useVerificationHook = () => {
-	const route = useRoute();
+	const route: any = useRoute();
 	let dispatch = useAppDispatch();
 	let navigation = useNavigation();
 	const [timeLeft, setTimeLeft] = useState(10);
@@ -37,6 +37,16 @@ const useVerificationHook = () => {
 
 	let resendCode = async () => {
 		setTimeLeft(10);
+		if (validatePhoneNumber(state.phone)) {
+			try {
+				setLoading(true);
+				let res = await requests.auth.register(route.params?.state);
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setLoading(false);
+			}
+		}
 	};
 
 	let onVerificate = async () => {
@@ -45,17 +55,13 @@ const useVerificationHook = () => {
 			//send data to remote
 			try {
 				setLoading(true);
-				let res = await requests.auth.verify(
-					state,
-					route.params?.token
-				);
+				let res = await requests.auth.verify(state, route.params?.token);
 				dispatch(userLoggedIn(res.data.data));
 			} catch (error) {
 				// console.warn(error.toJSON());
 				// console.warn(error.response.data);
 			} finally {
 				setLoading(false);
-				navigation.navigate(ROUTES.TABS);
 			}
 		}
 	};

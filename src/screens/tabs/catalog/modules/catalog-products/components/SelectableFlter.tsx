@@ -2,21 +2,48 @@ import { BottomArrow, FilterIcon } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
-import React from "react";
-import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
+import Modal from "react-native-modal";
+import React, { useState } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import requests from "@novomarkt/api/requests";
 
-const SelectableFlter = () => {
+type Props = {
+	id: number;
+	setProducts: (products: any) => void;
+};
+
+const SelectableFlter = ({ id, setProducts }: Props) => {
+	const [isModalVisible, setModalVisible] = useState(false);
+	const [title, setTitle] = useState("");
+
+	const toggleModal = () => {
+		setModalVisible(!isModalVisible);
+	};
+
+	const handlePress = (sort: string, sortName: string) => {
+		setTitle(sortName);
+		const getSorting = async () => {
+			try {
+				let res = await requests.sort.getSort({ sort, id });
+				setProducts(res.data.data);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+		getSorting();
+		toggleModal();
+	};
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={styles.row}>
-				<Text style={styles.text}>Популярные</Text>
-				<BottomArrow fill={COLORS.blue} />
+			<TouchableOpacity style={styles.row} onPress={toggleModal}>
+				<Text style={styles.text}>{title ? title : "Сортировка"}</Text>
+				<BottomArrow fill={COLORS.red} style={{ width: 120, height: 120 }} />
 			</TouchableOpacity>
 			<TouchableOpacity style={styles.row}>
 				<Text style={styles.text}>Фильтры</Text>
-				<FilterIcon fill={COLORS.blue} />
+				<FilterIcon fill={COLORS.red} style={{ width: 120, height: 120 }} />
 			</TouchableOpacity>
-			{/* <Modal
+			<Modal
 				style={styles.view}
 				isVisible={isModalVisible}
 				onSwipeComplete={toggleModal}
@@ -24,23 +51,33 @@ const SelectableFlter = () => {
 				swipeDirection={["up", "left", "right", "down"]}
 			>
 				<View style={styles.modal}>
-					<TouchableOpacity onPress={toggleModal}>
+					<TouchableOpacity
+						onPress={() => handlePress("recently", STRINGS.recentlyAdded)}
+					>
 						<Text style={styles.modalText}>{STRINGS.recentlyAdded}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={toggleModal}>
+					<TouchableOpacity
+						onPress={() => handlePress("popular", STRINGS.popular)}
+					>
 						<Text style={styles.modalText}>{STRINGS.popular}</Text>
 					</TouchableOpacity>
-					<TouchableOpacity onPress={toggleModal}>
-						<Text style={styles.modalText}>{STRINGS.firstCheap}</Text>
-					</TouchableOpacity>
-					<TouchableOpacity onPress={toggleModal}>
-						<Text style={styles.modalText}>{STRINGS.firsExpensive}</Text>
-					</TouchableOpacity>
-					<TouchableOpacity onPress={toggleModal}>
+					<TouchableOpacity
+						onPress={() => handlePress("new", STRINGS.newAdded)}
+					>
 						<Text style={styles.modalText}>{STRINGS.newAdded}</Text>
 					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => handlePress("price_up", STRINGS.firsExpensive)}
+					>
+						<Text style={styles.modalText}>{STRINGS.firsExpensive}</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => handlePress("price_down", STRINGS.firstCheap)}
+					>
+						<Text style={styles.modalText}>{STRINGS.firstCheap}</Text>
+					</TouchableOpacity>
 				</View>
-			</Modal> */}
+			</Modal>
 		</View>
 	);
 };
@@ -57,12 +94,44 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 	},
 	text: {
-		color: COLORS.blue,
+		color: COLORS.red,
 		marginRight: 5,
 		fontSize: 16,
 	},
 	row: {
 		flexDirection: "row",
 		alignItems: "center",
+	},
+	view: {
+		justifyContent: "flex-end",
+		margin: 0,
+	},
+
+	modal: {
+		padding: 20,
+		borderTopLeftRadius: 8,
+		borderTopRightRadius: 8,
+		backgroundColor: COLORS.white,
+	},
+
+	modalText: {
+		fontSize: 16,
+		marginVertical: 15,
+		color: COLORS.defaultBlack,
+	},
+
+	empty: {
+		flex: 1,
+		backgroundColor: COLORS.white,
+	},
+
+	emptyBox: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+
+	emptyText: {
+		fontSize: 22,
 	},
 });

@@ -13,7 +13,7 @@ const FilterHeader = () => {
 		<View style={styles.container}>
 			<View style={styles.row}>
 				<CancelIcon
-					fill={COLORS.blue}
+					fill={COLORS.red}
 					hitSlop={{ left: 20, right: 20, top: 20, bottom: 20 }}
 					onPress={() => navigation.goBack()}
 				/>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
 
 	blueTxt: {
 		fontSize: 14,
-		color: COLORS.blue,
+		color: COLORS.red,
 		alignSelf: "center",
 	},
 });

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
 	},
 
 	blueTxt: {
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
 	brands: {

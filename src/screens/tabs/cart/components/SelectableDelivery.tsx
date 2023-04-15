@@ -41,8 +41,8 @@ const SelectableDelivery = () => {
 								></View>
 							</View>
 							<View style={styles.textBox}>
-								<Text style={styles.text}>{item.name}</Text>
-								<Text style={styles.comment}>{item.description}</Text>
+								<Text style={styles.text}>{item?.name}</Text>
+								<Text style={styles.comment}>{item?.description}</Text>
 							</View>
 						</TouchableOpacity>
 					</>
@@ -55,6 +55,9 @@ const SelectableDelivery = () => {
 export default SelectableDelivery;
 
 const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+	},
 	deliveryContainer: {
 		marginHorizontal: 20,
 	},
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
 		marginVertical: 10,
 		borderWidth: 1,
 		borderRadius: 8,
-		borderColor: COLORS.blue,
+		borderColor: COLORS.red,
 		flexDirection: "row",
 		alignItems: "center",
 		padding: 10,
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
 
 	activeBorder: {
 		borderWidth: 1,
-		borderColor: COLORS.blue,
+		borderColor: COLORS.red,
 		width: 12,
 		height: 12,
 		borderRadius: 20,
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
 		width: 6,
 		height: 6,
 		borderRadius: 10,
-		backgroundColor: COLORS.blue,
+		backgroundColor: COLORS.red,
 	},
 
 	textBox: {

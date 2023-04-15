@@ -10,14 +10,11 @@ import { styles } from "./style";
 const QuestionsView = () => {
 	return (
 		<>
-			<BackHeader name={STRINGS.faq} style={styles.header} />
 			<ScrollView style={styles.container}>
+				<BackHeader name={STRINGS.faq} style={styles.header} />
 				<Text style={styles.headerTxt}>Часто задаемевые вопросы</Text>
 				<HandlingTextBox />
-				<QuestionBox
-					title={"У вас есть вопросы?"}
-					button={"Отправить отзыв"}
-				/>
+				<QuestionBox title={"У вас есть вопросы?"} button={"Отправить отзыв"} />
 			</ScrollView>
 		</>
 	);

@@ -1,23 +1,28 @@
-import { MarkedStar } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { Rating } from "react-native-ratings";
 
-const ReviewBox = ({ percent }) => {
+const ReviewBox = ({ percent, separate, rating }: any) => {
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.box1}>
 				<Text style={styles.bigger}>{percent ? percent : 0}</Text>
 				<Text style={styles.reviewTxt}>{STRINGS.withReviews}</Text>
-				<View style={styles.stars}>
-					<MarkedStar fill={COLORS.blue} />
-					<MarkedStar fill={COLORS.blue} />
-					<MarkedStar fill={COLORS.blue} />
-					<MarkedStar fill={COLORS.blue} />
-					<MarkedStar fill={COLORS.blue} />
-				</View>
+
+				<Rating
+					type="custom"
+					ratingCount={5}
+					imageSize={18}
+					ratingColor="#EE4927"
+					ratingBackgroundColor="#313131"
+					readonly={true}
+					startingValue={rating}
+					style={{ backgroundColor: COLORS.lightGray }}
+				/>
 			</View>
 			<View>
 				<View style={styles.diagram}>
@@ -111,7 +116,7 @@ const styles = StyleSheet.create({
 		// width: 100,
 		paddingHorizontal: 50,
 		borderBottomWidth: 2,
-		borderColor: COLORS.blue,
+		borderColor: COLORS.red,
 	},
 
 	gray: {

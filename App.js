@@ -16,11 +16,6 @@ if (Platform.OS === "android") {
 }
 
 const App = () => {
-	useEffect(() => {
-		if (store.getState().appSettings.loading) {
-			store.dispatch(toggleLoading());
-		}
-	}, []);
 	return (
 		<SafeAreaProvider>
 			<Provider store={store}>

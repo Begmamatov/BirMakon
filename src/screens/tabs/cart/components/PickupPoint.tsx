@@ -1,63 +1,178 @@
-import { appendUrl } from "@novomarkt/api/requests";
-import DefaultInput from "@novomarkt/components/general/DefaultInput";
-import Text from "@novomarkt/components/general/Text";
+import { Platform, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
 import { COLORS } from "@novomarkt/constants/colors";
-import { WINDOW_WIDTH } from "@novomarkt/constants/sizes";
-import { STRINGS } from "@novomarkt/locales/strings";
-import { useNavigation } from "@react-navigation/core";
-import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import SelectDropdown from "react-native-select-dropdown";
+import { NewTopArrowIcon2 } from "@novomarkt/assets/icons/icons";
 
-const PickupPoint = ({ items }) => {
-	let navigation = useNavigation();
+type typeProps = {
+	onStateChange: any;
+	typePayment: {
+		[key: string]: any;
+	};
+};
+
+// Тип оплаты
+const dataOrderType = [
+	{
+		id: 1,
+		name: "Самовывоз",
+		value: "pickup",
+	},
+	{
+		id: 2,
+		name: "Доставка курьером",
+		value: "delivery",
+	},
+];
+
+const PickupPoints = (props: typeProps) => {
 	return (
-		<View style={styles.container}>
-			<Text style={styles.headerTxt}>{STRINGS.pickupPoint}*</Text>
-			<DefaultInput
-				inputStyle={{ width: WINDOW_WIDTH - 40, padding: 10 }}
-				containerStyle={{ marginBottom: 0 }}
-				placeholder={"Tashkent, Uzbekistan"}
+		<View>
+			<Text
+				style={{
+					fontWeight: "500",
+					fontSize: 16,
+					lineHeight: 40,
+					color: "#3F3535",
+				}}
+			>
+				Тип оплаты
+			</Text>
+			<SelectDropdown
+				data={props?.typePayment ? props?.typePayment : dataOrderType}
+				onSelect={(selectedItem: any) => {
+					props.onStateChange("payment_id")(selectedItem.id);
+				}}
+				buttonTextAfterSelection={(selectedItem: any, index: any) => {
+					return selectedItem.name;
+				}}
+				rowTextForSelection={(item: any, index: any) => {
+					return item.name;
+				}}
+				buttonStyle={styles.dropdown2BtnStyle}
+				buttonTextStyle={{
+					color: "#3F3535",
+					fontSize: 16,
+				}}
+				renderDropdownIcon={() => {
+					return <NewTopArrowIcon2 />;
+				}}
+				dropdownIconPosition="right"
+				rowTextStyle={{
+					color: "#3F3535",
+					fontSize: 16,
+				}}
+				defaultButtonText="Выберите тип оплаты"
 			/>
-			<View style={styles.box}>
-				<Text style={styles.boxTxt}>
-					Срок доставки будет расчитан после выбора пункт самовывоза
-				</Text>
-				<View
-					style={{
-						flexDirection: "row",
-						flexWrap: "wrap",
-					}}
-				>
-					{items.map((e) => {
-						return (
-							<View style={styles.boxNum}>
-								<Image
-									source={{ uri: appendUrl(e.product.photo) }}
-									style={styles.boxImage}
-								/>
-								{e.amount && (
-									<View style={styles.imageNum}>
-										<Text style={styles.num}>{e.amount}</Text>
-									</View>
-								)}
-							</View>
-						);
-					})}
-				</View>
-			</View>
 		</View>
 	);
 };
 
-export default PickupPoint;
+export default PickupPoints;
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: COLORS.white,
+	},
+
+	backHeader: {
+		marginVertical: 20,
+		marginHorizontal: 20,
+	},
+	deliveryContainer: {
+		marginHorizontal: 20,
+	},
+
+	headerTxt: {
+		fontSize: 16,
+		color: "#757575",
+		fontWeight: "600",
+		letterSpacing: 0.5,
+		lineHeight: 40,
+	},
+
+	activeBox: {
+		marginVertical: 10,
+		borderWidth: 1,
+		borderRadius: 8,
+		borderColor: "#84A9C0",
+		flexDirection: "row",
+		alignItems: "center",
+		paddingHorizontal: 12,
+		paddingVertical: 22,
+	},
+
+	box: {
+		marginVertical: 10,
+		borderWidth: 1,
+		borderColor: COLORS.white,
+		borderRadius: 8,
+		alignItems: "center",
+		flexDirection: "row",
+		backgroundColor: COLORS.white,
+		elevation: 5,
+		shadowOpacity: 0.3,
+		shadowRadius: 5,
+		shadowOffset: {
+			width: 0,
+			height: 0,
+		},
+		padding: 10,
+	},
+
+	border: {
+		borderWidth: 1,
+		borderColor: COLORS.whiteGray,
+		width: 12,
+		height: 12,
+		borderRadius: 20,
+		alignItems: "center",
+		justifyContent: "center",
+	},
+
+	activeBorder: {
+		borderWidth: 1,
+		borderColor: "#84A9C0",
+		width: 26,
+		height: 26,
+		borderRadius: 20,
+		alignItems: "center",
+		justifyContent: "center",
+	},
+
+	dot: {
+		width: 6,
+		height: 6,
+		borderRadius: 10,
+		backgroundColor: COLORS.white,
+	},
+
+	activeDot: {
+		width: 19,
+		height: 19,
+		borderRadius: 10,
+		backgroundColor: "#84A9C0",
+	},
+
+	textBox: {
+		marginHorizontal: 10,
+	},
+
+	text: {
+		fontSize: 16,
+		color: COLORS.defaultBlack,
+	},
+
+	comment: {
+		fontSize: 12,
+	},
 	pickupContainer: {
 		marginVertical: 10,
 		marginHorizontal: 20,
 	},
 
-	headerTxt: {
+	pickupHeaderTxt: {
 		color: COLORS.defaultBlack,
 		fontSize: 19,
 		fontWeight: "700",
@@ -75,16 +190,15 @@ const styles = StyleSheet.create({
 
 	buttonTxt: {
 		fontSize: 16,
-		color: COLORS.blue,
+		color: COLORS.red,
 	},
 
-	box: {
-		marginVertical: 20,
+	pickupBox: {
 		padding: 15,
 		backgroundColor: COLORS.white,
 		borderRadius: 8,
 		elevation: 5,
-		shadowOpacity: 0.3,
+		shadowOpacity: 0.1,
 		shadowRadius: 5,
 		shadowOffset: {
 			width: 0,
@@ -94,7 +208,7 @@ const styles = StyleSheet.create({
 
 	boxTxt: {
 		fontSize: 13,
-		color: COLORS.defaultBlack,
+		color: "#C8C8C8",
 	},
 
 	boxImage: {
@@ -124,5 +238,87 @@ const styles = StyleSheet.create({
 	num: {
 		fontSize: 12,
 		color: COLORS.white,
+	},
+
+	recipientContainer: {
+		marginHorizontal: 20,
+	},
+
+	recipHeaderTxt: {
+		fontSize: 19,
+		color: COLORS.defaultBlack,
+		fontWeight: "700",
+		letterSpacing: 0.5,
+	},
+
+	recipBox: {
+		padding: 15,
+		borderRadius: 8,
+		elevation: 5,
+		shadowOpacity: 0.05,
+		shadowRadius: 5,
+		shadowOffset: {
+			width: 0,
+			height: 0,
+		},
+		marginVertical: 20,
+		backgroundColor: COLORS.white,
+	},
+
+	switch: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-between",
+	},
+
+	notMe: {
+		fontSize: 14,
+	},
+
+	input: {
+		borderWidth: 1,
+		borderRadius: 8,
+		marginVertical: 10,
+		paddingHorizontal: 10,
+		paddingVertical: Platform.OS == "android" ? 10 : 15,
+		backgroundColor: COLORS.lightGray,
+		borderColor: COLORS.whiteGray,
+		color: COLORS.defaultBlack,
+		fontSize: 16,
+	},
+
+	underline: {
+		marginTop: 10,
+		color: "#84A9C0",
+		marginBottom: 10,
+	},
+
+	recipButton: {
+		marginHorizontal: 0,
+		marginBottom: 40,
+	},
+	adButton: {
+		flexDirection: "column",
+		paddingHorizontal: 15,
+	},
+	many: {
+		position: "relative",
+		flexDirection: "row",
+		borderRadius: 45,
+		paddingHorizontal: 20,
+		paddingVertical: 17,
+		backgroundColor: "#FAFAFA",
+		marginTop: 15,
+		marginBottom: 15,
+		justifyContent: "space-between",
+	},
+	dropdown2BtnStyle: {
+		width: "100%",
+		height: 50,
+		borderRadius: 45,
+		paddingHorizontal: 20,
+		backgroundColor: "#FAFAFA",
+		marginTop: 15,
+		marginBottom: 15,
 	},
 });

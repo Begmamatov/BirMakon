@@ -5,18 +5,15 @@ import ProductItem from "@novomarkt/screens/tabs/home/components/ProductItem";
 import { useRoute } from "@react-navigation/native";
 import React, { ReactElement, useEffect, useState } from "react";
 import { FlatList, Image, ScrollView, View } from "react-native";
-import ScrollableMenu from "./components/ScrollableMenu";
 import SelectableFlter from "./components/SelectableFlter";
 import { styles } from "./style";
-
-let BannerURL =
-	"https://lh4.googleusercontent.com/mEIPzmkL2ezY8H55Ib7dyT7gUPQRnDSxyu_SM458KWgKAkOWD0X9VmkIw7hBQdgecLARQOUT97qOtLxf2OHysWaByiq-HbLPzrMA5Sb9hsUP3Xrml-BPjUTBQP_YR1ZTOsm14Doh";
+import BottomHeight from "@novomarkt/components/BottomHeight";
 
 const CatalogProductsView = ({}): ReactElement => {
 	const [products, setProducts] = useState<ProductItemResponse[]>();
 
 	let {
-		params: { id, name },
+		params: { id, name, type },
 	}: any = useRoute();
 
 	let effect = async () => {
@@ -36,19 +33,37 @@ const CatalogProductsView = ({}): ReactElement => {
 			console.log(error);
 		}
 	};
+	let shopEffect = async () => {
+		try {
+			let res = await requests.products.getProductWithShopID(id);
+			setProducts(res.data.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	useEffect(() => {
-		effect();
-		brandsEffect();
+		if (type === "brand") {
+			brandsEffect();
+		}
+		if (type === "category") {
+			effect();
+		}
+		if (type === "shop") {
+			shopEffect();
+		}
 	}, []);
 
 	return (
 		<View style={styles.container}>
 			<BackHeader hasSearch={true} style={styles.header} name={name} />
-			<ScrollView>
-				<Image source={{ uri: BannerURL }} style={styles.banner} />
-				<ScrollableMenu />
-				<SelectableFlter />
+			<View>
+				<Image
+					source={require("../../../../../assets/images/image26.png")}
+					style={styles.banner}
+				/>
+
+				<SelectableFlter id={id} setProducts={setProducts} />
 				<FlatList
 					showsVerticalScrollIndicator={false}
 					style={styles.columns}
@@ -56,7 +71,7 @@ const CatalogProductsView = ({}): ReactElement => {
 					numColumns={2}
 					renderItem={(props) => <ProductItem {...props} />}
 				/>
-			</ScrollView>
+			</View>
 		</View>
 	);
 };
