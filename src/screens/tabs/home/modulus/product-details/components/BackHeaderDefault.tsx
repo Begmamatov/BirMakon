@@ -23,10 +23,10 @@ import {
 } from "react-native";
 import { useDispatch } from "react-redux";
 
-const BackHeaderDefault = ({ }): ReactElement => {
+const BackHeaderDefault = ({}): ReactElement => {
 	let {
-		params: { item, id }
-	} = useRoute<any>()
+		params: { item, id },
+	} = useRoute<any>();
 	let navigation = useNavigation();
 	const dispatch = useDispatch();
 	const favorite = useAppSelector(favoriteSelector);

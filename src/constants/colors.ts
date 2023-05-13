@@ -30,6 +30,8 @@ export const COLORS = {
 	lightgray: "#D9D9D9",
 	black: "#000000",
 	textColor1: "#023047",
+	activeButtonBgColor: "#84A9C0",
+	checkboxTextColor: "#3F3535",
 };
 
 export const CART_COLORS = [

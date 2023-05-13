@@ -53,6 +53,8 @@ const useResedSmsHook = () => {
 		if (validatePhoneNumber(state.phone)) {
 			try {
 				let res = await requests.auth.forgetPassword(state);
+				console.log(res);
+
 				dispatch(userLoggedIn(res));
 			} catch (error) {
 				console.log(error);

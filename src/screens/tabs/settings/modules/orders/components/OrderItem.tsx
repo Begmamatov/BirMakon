@@ -1,11 +1,5 @@
-//@ts-ignore
 import { appendUrl, assetUrl } from "@novomarkt/api/requests";
-//@ts-ignore
-import MasterCard from "@novomarkt/assets/images/mastercard.png";
-//@ts-ignore
-import MirCard from "@novomarkt/assets/images/mir.png";
-//@ts-ignore
-import VisaCard from "@novomarkt/assets/images/visa.png";
+
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
 
@@ -13,7 +7,7 @@ import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 const OrderItem = ({ item }: any) => {
-	console.log(JSON.stringify(item, null, 2));
+	// console.log(JSON.stringify(item, null, 2));
 
 	return (
 		<View style={styles.shadowBox}>
@@ -34,13 +28,13 @@ const OrderItem = ({ item }: any) => {
 				<Text style={styles.items}>
 					Способ оплаты:{" "}
 					<View style={styles.row}>
-						<Image style={styles.cards} source={MirCard} />
+						{/* <Image style={styles.cards} source={MirCard} />
 						<Image style={styles.cardsV} source={VisaCard} />
-						<Image style={styles.cardsM} source={MasterCard} />
+						<Image style={styles.cardsM} source={MasterCard} /> */}
 					</View>
 				</Text>
 				<Text style={styles.items}>
-					{STRINGS.delivery} {item.delivery.name}
+					{STRINGS.delivery} {item?.delivery?.name}
 				</Text>
 			</View>
 		</View>

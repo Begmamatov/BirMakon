@@ -8,7 +8,7 @@ import {
 	PlusCounterIcon,
 } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
-import { COLORS, GRADIENT_COLORS } from "@novomarkt/constants/colors";
+import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useAppSelector } from "@novomarkt/store/hooks";
 import { toggleLoading } from "@novomarkt/store/slices/appSettings";
@@ -17,7 +17,7 @@ import {
 	favoriteSelector,
 	loadFavorite,
 } from "@novomarkt/store/slices/favoriteSlice";
-import React, { useState } from "react";
+import React from "react";
 import {
 	Image,
 	LayoutAnimation,
@@ -25,7 +25,7 @@ import {
 	TouchableOpacity,
 	View,
 } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
+
 import { useDispatch } from "react-redux";
 
 export let imageURL =

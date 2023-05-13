@@ -23,8 +23,12 @@ const CategoryItem = ({
 			onPress={() => navigation.navigate(ROUTES.CATALOG_DETAILS, { id, name })}
 		>
 			<View style={styles.container}>
-				<Image style={styles.image} source={{ uri: assetUrl + photo }} />
-				<Text style={styles.text}>{name ? name : ""}</Text>
+				<View style={styles.imageBox}>
+					<Image style={styles.image} source={{ uri: assetUrl + photo }} />
+				</View>
+				<View style={styles.textBox}>
+					<Text style={styles.text}>{name ? name : ""}</Text>
+				</View>
 			</View>
 		</TouchableWithoutFeedback>
 	);
@@ -48,16 +52,23 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		textAlign: "center",
 	},
-
-	image: {
+	imageBox: {
 		width: (Dimensions.get("window").width - 108) / 2,
 		height: (Dimensions.get("window").width - 108) / 2,
+		resizeMode: "cover",
+	},
+
+	image: {
+		width: "100%",
+		height: "100%",
 	},
 
 	text: {
 		fontSize: 14,
 		color: COLORS.defaultBlack,
-		maxWidth: 110,
 		textAlign: "center",
+	},
+	textBox: {
+		maxWidth: 110,
 	},
 });

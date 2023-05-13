@@ -19,8 +19,8 @@ const useLoginHook = () => {
 	let navigation = useNavigation();
 	//TODO remove initial value
 	const [state, setState] = useState<LoginState>({
-		password: "969909",
-		phone: "+998993103763",
+		password: "",
+		phone: "",
 	});
 	const [error, setError] = useState("");
 	let [loading, setLoading] = useState<boolean>(false);

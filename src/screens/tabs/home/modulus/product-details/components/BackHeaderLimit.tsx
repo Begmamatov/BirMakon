@@ -19,6 +19,8 @@ import { useNavigation } from "@react-navigation/native";
 import { NewsItemProps } from "../../../components/NewsItem";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { ROUTES } from "@novomarkt/constants/routes";
+import { useAppSelector } from "@novomarkt/store/hooks";
+import { selectUser } from "@novomarkt/store/slices/userSlice";
 
 export interface BackHeaderLimitType {
 	image?: string;
@@ -26,10 +28,16 @@ export interface BackHeaderLimitType {
 	date?: string;
 	name?: string;
 	id?: Number;
+	detailIdValue?: any;
 }
 
-const BackHeaderLimit: FC<BackHeaderLimitType> = ({ name, id }) => {
+const BackHeaderLimit: FC<BackHeaderLimitType> = ({
+	name,
+	id,
+	detailIdValue,
+}) => {
 	let navigation = useNavigation();
+	const userToken = useAppSelector(selectUser);
 	return (
 		<View style={styles.row}>
 			<TouchableOpacity onPress={navigation.goBack}>
@@ -39,11 +47,22 @@ const BackHeaderLimit: FC<BackHeaderLimitType> = ({ name, id }) => {
 				/>
 			</TouchableOpacity>
 			<Text style={styles.logoText}>{name ? name : ""}</Text>
-			<TouchableOpacity
-				onPress={() => navigation.navigate(ROUTES.SHOPVIEW as never)}
-			>
-				<GroupIcon style={{ width: 120, height: 120 }} />
-			</TouchableOpacity>
+			{detailIdValue?.shop && userToken.token ? (
+				<TouchableOpacity
+					onPress={() =>
+						navigation.navigate(
+							//@ts-ignore
+							ROUTES.CHATPRODUCTS as never,
+							{
+								idShop: detailIdValue?.shop?.id,
+								idProduct: detailIdValue.id,
+							} as never
+						)
+					}
+				>
+					<GroupIcon style={{ width: 120, height: 120 }} />
+				</TouchableOpacity>
+			) : null}
 		</View>
 	);
 };

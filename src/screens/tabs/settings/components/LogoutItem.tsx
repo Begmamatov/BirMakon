@@ -10,16 +10,24 @@ export interface SettingsItemProps {
 	focus?: boolean;
 }
 
-const SettingsItem = ({ icon: Icon, text, onPress }: SettingsItemProps) => {
+const LogoutItem = ({ icon: Icon, text, onPress }: SettingsItemProps) => {
 	const [onActive, setOnActive] = useState(false);
+	const onPresActive = () => {
+		setTimeout(() => setOnActive(true), 100);
+	};
 
 	return (
 		<TouchableWithoutFeedback
 			onPress={() => {
-				onPress();
+				onPresActive(), onPress();
 			}}
 		>
-			<View style={[styles.container, { backgroundColor: COLORS.white }]}>
+			<View
+				style={[
+					styles.container,
+					{ backgroundColor: onActive === true ? "#131E3D" : COLORS.white },
+				]}
+			>
 				<View style={styles.icon}>{Icon ? <Icon /> : null}</View>
 				<Text style={styles.text}>{text}</Text>
 			</View>
@@ -27,16 +35,14 @@ const SettingsItem = ({ icon: Icon, text, onPress }: SettingsItemProps) => {
 	);
 };
 
-export default SettingsItem;
+export default LogoutItem;
 
 const styles = StyleSheet.create({
 	container: {
+		backgroundColor: COLORS.white,
 		flexDirection: "row",
 		paddingHorizontal: 20,
-		borderBottomWidth: 1,
-		borderBottomColor: "rgba(113, 113, 113, 0.3)",
 		paddingVertical: 12,
-		// backgroundColor: "#131E3D",
 	},
 
 	text: {

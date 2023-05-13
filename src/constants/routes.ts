@@ -41,4 +41,5 @@ export const ROUTES = {
 	DELIVERY: "Delivery",
 	REVIEWSALL: "ReviewsAll",
 	WebView: "WebView",
+	CHATPRODUCTS: "ChatProducts",
 };

@@ -3,10 +3,12 @@ import { SaveIconMessage, TelegramIcon } from "@novomarkt/assets/icons/icons";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
-import { useRoute } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { FlatList, TextInput, View } from "react-native";
+import { FlatList, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "../style";
+import BackHeader from "@novomarkt/components/navigation/BackHeader";
+import { ROUTES } from "@novomarkt/constants/routes";
 
 const ShopView = () => {
 	const [sendingMsg, setSendingMsg] = useState("");
@@ -16,16 +18,7 @@ const ShopView = () => {
 	let id = router.params;
 
 	const file = "";
-	const getMessage = async () => {
-		try {
-			let res = await requests.chat.sendShopMessege(sendingMsg, file, id);
-			let data = await res.data.data;
-			setMessages(data);
-			setSendingMsg("");
-		} catch (error) {
-			console.log(error);
-		}
-	};
+
 	const sendMessage = async () => {
 		try {
 			if (!!sendingMsg) {
@@ -38,16 +31,17 @@ const ShopView = () => {
 			console.log(error);
 		}
 	};
-	useEffect(() => {
-		getMessage();
-	}, []);
+	const navigation = useNavigation();
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.box}>
-				<View style={styles.top}>
+				<TouchableOpacity
+					style={styles.top}
+					onPress={() => navigation.goBack()}
+				>
 					<Text style={styles.topText}>Чат поддержки</Text>
-				</View>
+				</TouchableOpacity>
 				<View style={styles.inner}>
 					<FlatList
 						data={messages}

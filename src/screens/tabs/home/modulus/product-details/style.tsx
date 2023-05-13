@@ -67,13 +67,13 @@ export const styles = StyleSheet.create({
 	oldView: {
 		width: WINDOW_WIDTH / 5,
 		maxWidth: 90,
-		height: 46,
+		height: 40,
 		backgroundColor: "#131E3D",
 		borderRadius: 7,
 		alignItems: "center",
 		justifyContent: "center",
 		marginTop: 10,
-		marginRight: -8,
+		marginRight: 8,
 		paddingHorizontal: 5,
 	},
 	oldText: {

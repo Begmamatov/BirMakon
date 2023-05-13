@@ -97,7 +97,8 @@ let requests = {
 		getProfile: () => axios.get<{ data: LoginResponse }>(`${url}/user/profile`),
 		editProfile: (data: Partial<LoginResponse>) =>
 			axios.post<any, any, FormData>(`${url}/user/update`, formData(data)),
-		addCard: (creds: AddCardRequest) => axios.post(`${url}/card/send`, creds),
+		addCard: (creds: any) => axios.post(`${url}/card/send`, creds),
+		codeCart: (data: any) => axios.post(`${url}/card/send-verify-code`, data),
 		getCardTypes: () =>
 			axios.get<{ data: CardTypeItem[] }>(`${url}/category?type=card`),
 		getCards: () => axios.get<{ data: CardItem[] }>(`${url}/user/cards`),
@@ -106,12 +107,18 @@ let requests = {
 		getUploadPhoto: () =>
 			axios.get<{ data: string }>(`${url}/user/upload-photo`),
 		getTransaction: () => axios.get(`${url}/transaction`),
+		removAcount: () => axios.post(`${url}/user/remove-account`),
 	},
 	categories: {
 		getCategories: () => axios.get(`${url}/category?type=product`),
 		getSubCategories: (id: number) =>
 			axios.get(`${url}/category/sub-category?id=${id}`),
+		getRegions: () => axios.get(`${url}/category?type=region`),
+		getLogistSort: (params: any) => axios.get(`${url}/logist/sort`, { params }),
+		storeAddresses: (shop_id?: number) =>
+			axios.get(`${url}/category/addresses?shop_id=${shop_id}`),
 	},
+
 	brands: {
 		getBrands: () => axios.get(`${url}/category?type=brand`),
 		getAllBrands: () => axios.get(`${url}/brand`),
@@ -215,13 +222,14 @@ let requests = {
 	order: {
 		sendOrder: (credentials: OrderSend) =>
 			axios.post(`${url}/order/send`, credentials),
-		getOrders: () => axios.get<BaseResponse<OrderItemResponse>>(`${url}/order`),
+		getOrders: (params?: any) =>
+			axios.get<BaseResponse<OrderItemResponse>>(`${url}/order`, { params }),
 		octoSendOrder: (order_id: number) =>
 			axios.post(`${url}/octo`, { order_id }),
 	},
 
 	chat: {
-		sendAdminMessege: (sendingMsg: any, file: any) =>
+		sendAdminMessege: (sendingMsg?: any, file?: any) =>
 			axios.post(`${url}/chat/send`, {
 				getter_id: 1,
 				message: sendingMsg,
@@ -239,12 +247,32 @@ let requests = {
 			}),
 		sendShopMessege: (sendingMsg: any, file: any, id: any) =>
 			axios.post(`${url}/chat/send`, {
-				getter_id: 20,
+				getter_id: 114,
 				message: sendingMsg,
 				file: file,
 				product_id: id,
 				type_user: "shop",
 			}),
+		shopGetProduct: () => axios.get(`${url}/chat/users?type_user=shop`),
+	},
+	filter: {
+		catalogFilter: (id: number) =>
+			axios.get(`${url}/category/filter?category_id=${id}`),
+		productFilter: (
+			filter: any,
+			priceMin: any,
+			priceMax: any,
+			categoryId: any
+		) =>
+			axios.get(
+				`${url}/product/by-filter?filter[${filter}]=${filter}&price_min=${priceMin}&price_max=${priceMax}&category_id=${categoryId} `
+			),
+	},
+	chek: {
+		createCheck: (order_id: number) =>
+			axios.post(`${url}/order/set-receipt`, order_id),
+		payaCheck: (order_receipt_id: number, card_id: number) =>
+			axios.post(`${url}/order/pay-receipt`, { order_receipt_id, card_id }),
 	},
 };
 export default requests;

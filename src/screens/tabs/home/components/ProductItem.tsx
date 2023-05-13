@@ -106,77 +106,82 @@ const ProductItem = ({
 			}
 		>
 			<View style={styles.container}>
-				<Image source={{ uri: appendUrl(photo) }} style={styles.image} />
-				<View style={styles.absolute}>
-					<TouchableOpacity
-						onPress={onAddFavorite}
-						hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}
-					>
-						{isFav ? (
-							<HeartIconRed fill={COLORS.red} />
-						) : (
-							<HeartIconBorder fill={COLORS.red} stroke={COLORS.red} />
-						)}
-					</TouchableOpacity>
-					{discount ? (
-						<View style={styles.discount}>
-							<Text style={styles.dscountText}>
-								{discount ? discount : ""}%
-							</Text>
-						</View>
-					) : null}
-				</View>
-				<View style={styles.details}>
-					<View style={styles.row}>
-						<Text style={styles.brand}>{category?.name}</Text>
-						{/* <Text style={styles.brand}>{shop?.name}</Text> */}
-					</View>
-					<Text style={styles.name}>{name ? name : ""}</Text>
-					<View
-						style={{
-							flexDirection: "column",
-							alignItems: "flex-start",
-							justifyContent: "space-between",
-							height: 60,
-						}}
-					>
-						<Text style={styles.price}>{price ? price : ""} сум</Text>
-						{price_old ? (
-							<Text style={styles.oldPrice}>
-								{price_old ? price_old : ""} сум
-							</Text>
+				<View style={styles.imageBox}>
+					<Image source={{ uri: appendUrl(photo) }} style={styles.image} />
+					<View style={styles.absolute}>
+						<TouchableOpacity
+							onPress={onAddFavorite}
+							hitSlop={{
+								left: 10,
+								right: 10,
+								top: 10,
+								bottom: 10,
+							}}
+						>
+							{isFav ? (
+								<HeartIconRed fill={COLORS.red} />
+							) : (
+								<HeartIconBorder fill={COLORS.red} stroke={COLORS.red} />
+							)}
+						</TouchableOpacity>
+						{discount ? (
+							<View style={styles.discount}>
+								<Text style={styles.dscountText}>
+									{discount ? discount : ""}%
+								</Text>
+							</View>
 						) : null}
 					</View>
-					<View>
-						<DefaultButton
-							containerStyle={styles.button}
-							secondary={isInCart}
-							onPress={onCartPress}
+				</View>
+				<View style={styles.details}>
+					<View style={styles.nameAndPrice}>
+						<View style={styles.row}>
+							<Text style={styles.brand}>{category?.name}</Text>
+							{/* <Text style={styles.brand}>{shop?.name}</Text> */}
+						</View>
+						<Text style={styles.name}>
+							{name.length > 20 ? name.slice(0, 20) + "..." : name}
+						</Text>
+						<View
+							style={{
+								flexDirection: "column",
+								alignItems: "flex-start",
+								justifyContent: "space-between",
+							}}
 						>
-							{animate ? (
-								<ActivityIndicator
-									size="small"
-									color={COLORS.red}
-									animating={animate}
-								/>
-							) : (
-								<View style={styles.buttonContainer}>
-									<Text
-										style={[
-											isInCart ? styles.inactiveCartText : styles.cartText,
-										]}
-									>
-										{isInCart
-											? `${STRINGS.addToCart}е`
-											: `${STRINGS.addToCart}у`}
-									</Text>
-									<BasketIcon
-										fill={isInCart ? COLORS.cartColor3 : COLORS.white}
-									/>
-								</View>
-							)}
-						</DefaultButton>
+							<Text style={styles.price}>{price ? price : ""} сум</Text>
+							{price_old ? (
+								<Text style={styles.oldPrice}>
+									{price_old ? price_old : ""} сум
+								</Text>
+							) : null}
+						</View>
 					</View>
+
+					<DefaultButton
+						containerStyle={styles.button}
+						secondary={isInCart}
+						onPress={onCartPress}
+					>
+						{animate ? (
+							<ActivityIndicator
+								size="small"
+								color={COLORS.red}
+								animating={animate}
+							/>
+						) : (
+							<View style={styles.buttonContainer}>
+								<Text
+									style={[isInCart ? styles.inactiveCartText : styles.cartText]}
+								>
+									{isInCart ? `${STRINGS.addToCart}е` : `${STRINGS.addToCart}у`}
+								</Text>
+								<BasketIcon
+									fill={isInCart ? COLORS.cartColor3 : COLORS.white}
+								/>
+							</View>
+						)}
+					</DefaultButton>
 				</View>
 			</View>
 		</TouchableWithoutFeedback>
@@ -194,7 +199,7 @@ const styles = StyleSheet.create({
 	},
 	absolute: {
 		position: "absolute",
-		right: 10,
+		right: 0,
 		top: 10,
 		justifyContent: "space-between",
 		height: 162,
@@ -218,13 +223,11 @@ const styles = StyleSheet.create({
 		fontSize: 15,
 		marginVertical: 10,
 		fontWeight: "700",
-		letterSpacing: 0.5,
 	},
 	name: {
 		color: COLORS.defaultBlack,
 		fontSize: 13,
 		fontWeight: "700",
-		letterSpacing: 0.5,
 	},
 	brand: {
 		color: COLORS.gray,
@@ -233,33 +236,40 @@ const styles = StyleSheet.create({
 	row: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-
-		minHeight: 30,
 	},
 	image: {
-		width: WINDOW_WIDTH / 2 - 20,
+		width: "100%",
 		height: 180,
 		borderTopLeftRadius: 8,
 		borderTopRightRadius: 8,
 	},
+	imageBox: {
+		width: "100%",
+		height: 180,
+		borderTopLeftRadius: 8,
+		borderTopRightRadius: 8,
+		position: "relative",
+		resizeMode: "cover",
+	},
 	container: {
-		backgroundColor: COLORS.white,
+		borderWidth: 1,
+		borderColor: COLORS.white,
 		borderRadius: 8,
-		elevation: 2,
-		shadowOpacity: 0.3,
+		backgroundColor: COLORS.white,
+		elevation: 5,
+		shadowOpacity: 0.1,
 		shadowRadius: 5,
 		shadowOffset: {
 			width: 0,
 			height: 0,
 		},
 		width: WINDOW_WIDTH / 2 - 20,
-		marginVertical: 15,
 		marginHorizontal: 5,
+		marginVertical: 4,
 	},
 	details: {
 		paddingHorizontal: 8,
-		paddingBottom: 24,
-		paddingTop: 8,
+		paddingBottom: 23,
 	},
 	buttonContainer: {
 		flexDirection: "row",
@@ -268,5 +278,8 @@ const styles = StyleSheet.create({
 	oldPrice: {
 		color: COLORS.gray,
 		textDecorationLine: "line-through",
+	},
+	nameAndPrice: {
+		height: 100,
 	},
 });

@@ -57,6 +57,7 @@ export interface Shop {
 }
 
 export interface ProductItemResponse {
+	index: string;
 	id: number;
 	name: string;
 	price: number;
@@ -233,4 +234,6 @@ export interface OrderSend {
 	lastName: string;
 	email: string;
 	phone: string;
+	logist_id: any;
+	shop_address_id: number;
 }

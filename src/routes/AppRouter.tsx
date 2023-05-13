@@ -14,6 +14,8 @@ import { selectAppSettings } from "@novomarkt/store/slices/appSettings";
 import AnimatedLottieView from "lottie-react-native";
 import { COLORS } from "@novomarkt/constants/colors";
 import Text from "@novomarkt/components/general/Text";
+import { CheckoutScreen } from "@novomarkt/screens/tabs/cart/checkout";
+import ChatProducts from "@novomarkt/screens/tabs/settings/modules/messages/ChatProduct/ChatProduct";
 
 let Stack = createNativeStackNavigator();
 
@@ -44,19 +46,15 @@ const AppRouter = () => {
 							/>
 							<Stack.Screen name={ROUTES.AUTH} component={AuthStack} />
 							<Stack.Screen name={ROUTES.SEARCH} component={Search} />
+							<Stack.Screen name={ROUTES.CHECKOUT} component={CheckoutScreen} />
+							<Stack.Screen
+								name={ROUTES.CHATPRODUCTS}
+								component={ChatProducts}
+							/>
 						</>
 					)}
 				</Stack.Navigator>
 			</NavigationContainer>
-			{/* {appSettings.loading && (
-				<View style={styles.animation}>
-					<AnimatedLottieView
-						source={require("@novomarkt/assets/animations/loading-animation")}
-						autoPlay
-						loop
-					/>
-				</View>
-			)} */}
 		</View>
 	);
 };

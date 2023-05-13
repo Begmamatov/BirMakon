@@ -36,16 +36,14 @@ const LoginView = () => {
 	useEffect(() => {
 		dispatch(toggleLoading(false));
 	}, []);
+	console.log(state);
 
 	return (
-		<KeyboardAvoidingView
-			style={styles.container}
-			behavior={Platform.OS === "ios" ? "padding" : "height"}
-			keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}
-		>
-			<TouchableWithoutFeedback
-				onPress={() => Keyboard.dismiss()}
-				style={{ flex: 1 }}
+		<View style={{ flex: 1 }}>
+			<KeyboardAvoidingView
+				style={styles.container}
+				behavior={Platform.OS === "ios" ? "padding" : "height"}
+				keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}
 			>
 				<View style={styles.container}>
 					<Image
@@ -61,7 +59,6 @@ const LoginView = () => {
 					<View style={styles.inputBox}>
 						<DefaultInput
 							containerStyle={styles.input}
-							inputStyle={styles.inputStyle}
 							title={STRINGS.number}
 							placeholder={STRINGS.yourNumber}
 							onChange={onStateChange("phone")}
@@ -75,7 +72,6 @@ const LoginView = () => {
 						/>
 						<DefaultInputEye
 							containerStyle={styles.input}
-							inputStyle={styles.inputStyle}
 							title={STRINGS.password}
 							placeholder={STRINGS.yourPassword}
 							textContentType={"password"}
@@ -117,8 +113,8 @@ const LoginView = () => {
 						/>
 					</View>
 				</View>
-			</TouchableWithoutFeedback>
-		</KeyboardAvoidingView>
+			</KeyboardAvoidingView>
+		</View>
 	);
 };
 

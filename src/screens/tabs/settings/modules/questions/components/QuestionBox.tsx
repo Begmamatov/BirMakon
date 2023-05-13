@@ -4,7 +4,8 @@ import DefaultButton from "@novomarkt/components/general/DefaultButton";
 import Text from "@novomarkt/components/general/Text";
 import { COLORS } from "@novomarkt/constants/colors";
 import React, { useState } from "react";
-import { Platform, StyleSheet, TextInput, View } from "react-native";
+import { Alert, Platform, StyleSheet, TextInput, View } from "react-native";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 
 export interface QuestionBoxProps {
 	title?: string;
@@ -13,22 +14,30 @@ export interface QuestionBoxProps {
 
 const QuestionBox = ({ title, button }: QuestionBoxProps) => {
 	const [question, setQuestion] = useState<SendQuestionValue>();
+	const [loading, setLoading] = useState(false);
 	const onSubmit = async () => {
+		setLoading(true);
 		try {
 			let res = await requests.frequentQuestions.sendQuestion({
 				name: question?.name as string,
 				email: question?.email as string,
 				message: question?.message as string,
 			});
+			let data = res.data.data;
+			!!data && Alert.alert("", `Спасибо, ваше письмо успешно отправлено`);
+			console.log(JSON.stringify(res.data.data, null, 2));
 			console.log("success");
 			setQuestion({});
 		} catch (error) {
 			alert("errroooor");
 			console.log(error);
+		} finally {
+			setLoading(false);
 		}
 	};
 	return (
 		<View style={{ backgroundColor: COLORS.white }}>
+			<Spinner visible={loading} />
 			<View style={styles.footer}>
 				<Text style={styles.footerTxt}>{title ? title : ""}</Text>
 				<TextInput

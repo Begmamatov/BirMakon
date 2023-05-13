@@ -124,7 +124,6 @@ export const styles = StyleSheet.create({
 		},
 		backgroundColor: COLORS.white,
 		marginHorizontal: 20,
-		paddingRight: 50,
 	},
 
 	bank: {
@@ -220,6 +219,7 @@ export const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		width: 80,
 		height: 80,
+
 		borderRadius: 50,
 		position: "relative",
 		marginRight: 10,
@@ -238,9 +238,14 @@ export const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	userNameText: {
-		flexDirection: "column",
 		marginVertical: 10,
-		borderWidth: 1,
 		width: "75%",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
+		paddingRight: 20,
+	},
+	birthday: {
+		flexDirection: "row",
 	},
 });

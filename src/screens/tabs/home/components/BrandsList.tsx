@@ -39,63 +39,8 @@ const BrandsList = () => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.allButtonsView}>
-				<TouchableOpacity>
-					<Text style={styles.title}>{STRINGS.brands}</Text>
-				</TouchableOpacity>
+				<Text style={styles.title}>{STRINGS.brands}</Text>
 
-				<Modal
-					isVisible={allModalVisible}
-					testID={"modal"}
-					swipeDirection={["right", "left", "down"]}
-					swipeThreshold={Dimensions.get("window").width / 2}
-					onSwipeComplete={() => {
-						setAllModalVisible(false);
-					}}
-					style={styles.modalStyle}
-				>
-					<View style={styles.modalInView}>
-						<TouchableOpacity
-							onPress={toggleAllModalVisible}
-							style={{ flexDirection: "row", alignItems: "center" }}
-						>
-							<LeftArrowIcon />
-							<Text style={styles.brandsText}>{STRINGS.brands}</Text>
-						</TouchableOpacity>
-						<View style={styles.view}>
-							<FlatList
-								data={brands}
-								renderItem={({ item: { id, name, photo } }: any) => (
-									<TouchableOpacity
-										style={styles.item_container}
-										onPress={() => {
-											navigation.navigate(ROUTES.CATALOG_PRODUCTS, {
-												id,
-												name,
-												type: "brand",
-											});
-											toggleAllModalVisible();
-										}}
-									>
-										<View
-											style={{
-												flexDirection: "row",
-												alignItems: "center",
-											}}
-										>
-											<View style={styles.imageContainer}>
-												<Image
-													source={{ uri: appendUrl(photo) }}
-													style={styles.image}
-												/>
-											</View>
-											<Text style={styles.brandsName}>{name}</Text>
-										</View>
-									</TouchableOpacity>
-								)}
-							/>
-						</View>
-					</View>
-				</Modal>
 				<AllButton onPress={toggleAllModalVisible} />
 			</View>
 			<FlatList
@@ -106,6 +51,62 @@ const BrandsList = () => {
 				style={styles.container}
 				contentContainerStyle={styles.contentContainerStyle}
 			/>
+			<Modal
+				isVisible={allModalVisible}
+				testID={"modal"}
+				swipeDirection={["right", "left", "down"]}
+				swipeThreshold={Dimensions.get("window").width / 2}
+				onSwipeComplete={() => {
+					toggleAllModalVisible;
+				}}
+				style={styles.modalStyle}
+				onSwipeCancel={() => {
+					toggleAllModalVisible;
+				}}
+			>
+				<View style={styles.modalInView}>
+					<TouchableOpacity
+						onPress={toggleAllModalVisible}
+						style={{ flexDirection: "row", alignItems: "center" }}
+					>
+						<LeftArrowIcon />
+						<Text style={styles.brandsText}>{STRINGS.brands}</Text>
+					</TouchableOpacity>
+					<View style={styles.view}>
+						<FlatList
+							data={brands}
+							renderItem={({ item: { id, name, photo } }: any) => (
+								<TouchableOpacity
+									style={styles.item_container}
+									onPress={() => {
+										navigation.navigate(ROUTES.CATALOG_PRODUCTS, {
+											id,
+											name,
+											type: "brand",
+										});
+										toggleAllModalVisible();
+									}}
+								>
+									<View
+										style={{
+											flexDirection: "row",
+											alignItems: "center",
+										}}
+									>
+										<View style={styles.imageContainer}>
+											<Image
+												source={{ uri: appendUrl(photo) }}
+												style={styles.image}
+											/>
+										</View>
+										<Text style={styles.brandsName}>{name}</Text>
+									</View>
+								</TouchableOpacity>
+							)}
+						/>
+					</View>
+				</View>
+			</Modal>
 		</View>
 	);
 };

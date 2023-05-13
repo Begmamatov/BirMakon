@@ -7,6 +7,7 @@ import Svg, {
 	Ellipse,
 	G,
 	LinearGradient,
+	Mask,
 	Path,
 	Pattern,
 	Rect,
@@ -83,6 +84,25 @@ export function PenIcon(props: SvgProps) {
 				clipRule="evenodd"
 				d="M11.144 2.29L9.3.278a.842.842 0 00-1.252 0L.224 8.809v3.375h3.09l7.824-8.53c.341-.379.341-.986 0-1.365h.006zm-8.293 8.675H1.342V9.32l5.276-5.758 1.514 1.652-5.281 5.751zm4.554-8.262L8.92 4.354l1.268-1.383-1.514-1.65-1.269 1.382z"
 				fill={props.fill}
+			/>
+		</Svg>
+	);
+}
+export function RightArrowIcon(props: SvgProps) {
+	return (
+		<Svg
+			width="21"
+			height="19"
+			viewBox="0 0 21 19"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<Path
+				d="M11.6875 18L20 9.5L11.6875 1M20 9.5L1 9.5"
+				stroke={props.fill}
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
 			/>
 		</Svg>
 	);
@@ -1507,6 +1527,40 @@ export const NewTopArrowIcon2 = (props: SvgProps) => {
 			viewBox="0 0 16 9"
 			fill="none"
 			style={{ transform: [{ rotate: "180deg" }] }}
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<Path
+				d="M13.7143 9L8 3.375L2.28571 9L0 7.875L8 0L16 7.875L13.7143 9Z"
+				fill="#3F3535"
+			/>
+		</Svg>
+	);
+};
+export const AddTextIcon = (props: SvgProps) => {
+	return (
+		<Svg
+			width="16"
+			height="16"
+			viewBox="0 0 16 16"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+			{...props}
+		>
+			<Path
+				d="M5.25583 14.4224L13 6.67827L9.32167 2.99994L1.5775 10.7441C1.47089 10.8509 1.39515 10.9845 1.35833 11.1308L0.5 15.4999L4.86833 14.6416C5.015 14.6049 5.14917 14.5291 5.25583 14.4224ZM15.5 4.17827C15.8125 3.86573 15.988 3.44188 15.988 2.99994C15.988 2.558 15.8125 2.13415 15.5 1.82161L14.1783 0.49994C13.8658 0.187489 13.4419 0.0119629 13 0.0119629C12.5581 0.0119629 12.1342 0.187489 11.8217 0.49994L10.5 1.82161L14.1783 5.49994L15.5 4.17827Z"
+				fill="#313131"
+			/>
+		</Svg>
+	);
+};
+export const NewTopArrowIcon = (props: SvgProps & { rotateValue: string }) => {
+	return (
+		<Svg
+			width="16"
+			height="10"
+			viewBox="0 0 16 9"
+			fill="none"
+			style={{ transform: [{ rotate: props.rotateValue }] }}
 			xmlns="http://www.w3.org/2000/svg"
 		>
 			<Path

@@ -15,6 +15,7 @@ let initialState: InitialState = {
 	token: "",
 	email: "",
 	gender: 0,
+	lastName: undefined,
 };
 
 const userSlice = createSlice({

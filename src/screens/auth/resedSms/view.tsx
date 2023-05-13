@@ -2,7 +2,15 @@ import DefaultButton from "@novomarkt/components/general/DefaultButton";
 import DefaultInput from "@novomarkt/components/general/DefaultInput";
 import { STRINGS } from "@novomarkt/locales/strings";
 import React from "react";
-import { Image, Keyboard, KeyboardAvoidingView, Platform, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import {
+	Image,
+	Keyboard,
+	KeyboardAvoidingView,
+	Platform,
+	TouchableOpacity,
+	TouchableWithoutFeedback,
+	View,
+} from "react-native";
 import Text from "../../../components/general/Text";
 
 import useResedSmsHook from "./hooks";
@@ -20,8 +28,15 @@ const ResedSmsView = () => {
 	} = useResedSmsHook();
 
 	return (
-		<KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"} keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}>
-			<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={{ flex: 1 }}>
+		<KeyboardAvoidingView
+			style={styles.container}
+			behavior={Platform.OS === "ios" ? "padding" : "height"}
+			keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}
+		>
+			<TouchableWithoutFeedback
+				onPress={() => Keyboard.dismiss()}
+				style={{ flex: 1 }}
+			>
 				<View style={styles.container}>
 					<Image
 						style={{
@@ -36,8 +51,8 @@ const ResedSmsView = () => {
 					<View style={styles.inputBox}>
 						<View style={styles.textView}>
 							<Text style={styles.endText}>
-								Мы отправили код на <Text style={styles.txt}>{state.phone}</Text>{" "}
-								номер
+								Мы отправили код на{" "}
+								<Text style={styles.txt}>{state.phone}</Text> номер
 							</Text>
 							<TouchableOpacity onPress={onChangePhoneNumber}>
 								<Text style={styles.blueEnd}>{state.phone}</Text>
@@ -45,7 +60,6 @@ const ResedSmsView = () => {
 						</View>
 						<DefaultInput
 							containerStyle={styles.input}
-							inputStyle={styles.inputStyle}
 							title={STRINGS.code}
 							placeholder={STRINGS.yourCode}
 							titleStyle={styles.title}

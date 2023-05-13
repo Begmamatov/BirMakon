@@ -15,7 +15,7 @@ const OrderModal = ({ orderValyu, onClose }: any) => {
 		try {
 			let res = await requests.order.octoSendOrder(order_id);
 			setOctoValyu(res.data);
-			console.log("res ishladi-------", JSON.stringify(res.data, null, 2));
+			// console.log("res ishladi-------", JSON.stringify(res.data, null, 2));
 		} catch (error) {
 			console.log("====================================");
 			console.log(error);
@@ -25,13 +25,10 @@ const OrderModal = ({ orderValyu, onClose }: any) => {
 	useEffect(() => {
 		orderSendHandler();
 	}, [order_id]);
-	const navigation = useNavigation();
-	console.log("octoValyu-=======", octoValyu);
 
 	let url = octoValyu?.octo_pay_url;
 	const OnsedLinkgin = () => {
-		// onClose();
-		navigation.navigate(ROUTES.WebView as never, url as never);
+		onClose();
 	};
 
 	return (

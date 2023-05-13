@@ -16,7 +16,7 @@ export default function CartStack() {
 	return (
 		<Stack.Navigator screenOptions={{ headerShown: false }}>
 			<Stack.Screen name={ROUTES.CART} component={CartView} />
-			<Stack.Screen name={ROUTES.CHECKOUT} component={CheckoutScreen} />
+			{/* <Stack.Screen name={ROUTES.CHECKOUT} component={CheckoutScreen} /> */}
 			<Stack.Screen name={ROUTES.FILTER} component={FilterScreen} />
 			<Stack.Screen name={ROUTES.LOCATION} component={LocationScreen} />
 		</Stack.Navigator>

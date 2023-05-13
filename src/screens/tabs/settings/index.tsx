@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 
 import SettingsController from "./controller";
-import ChatsView from "./modules/chats/view";
+import ChatsView from "./modules/messages/chats/view";
 import CommentView from "./modules/comments/view";
 import ContactsView from "./modules/contacts/view";
 import Cource from "./modules/Cource/view";

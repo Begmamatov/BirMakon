@@ -31,6 +31,7 @@ const ProductsListFav = ({
 				data={products}
 				showsHorizontalScrollIndicator={false}
 				renderItem={(props) => <ProductItem {...props} />}
+				keyExtractor={(item: any) => item.id}
 			/>
 		</View>
 	);

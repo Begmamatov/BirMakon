@@ -9,18 +9,25 @@ import {
 } from "@novomarkt/assets/icons/icons";
 import { COLORS } from "@novomarkt/constants/colors";
 import { STRINGS } from "@novomarkt/locales/strings";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const StatusBar = ({ orders }: any) => {
+const StatusBar = ({ orders, setFilter, filter }: any) => {
 	const amount = orders?.length;
-	console.log(amount);
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.titleContainer}>
 				<Text style={styles.textTitle}>{STRINGS.myOrders}</Text>
-				<TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => {
+						let newFilter = {
+							...filter,
+							status: 5,
+						};
+						setFilter(newFilter);
+					}}
+				>
 					<View style={styles.textContainer}>
 						<Text style={styles.textOrder}>{STRINGS.CompletedOrders}</Text>
 						<RightIcon fill={COLORS.gray} />
@@ -28,10 +35,18 @@ const StatusBar = ({ orders }: any) => {
 				</TouchableOpacity>
 			</View>
 			<View style={styles.containerBox}>
-				<TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => {
+						let newFilter = {
+							...filter,
+							status: 6,
+						};
+						setFilter(newFilter);
+					}}
+				>
 					<View style={styles.view}>
 						<PaymentexpectedIcon />
-						{amount > 0 ? (
+						{amount > 0 && filter.status === 6 ? (
 							<View style={styles.iconView}>
 								<Text style={styles.iconText}>{amount}</Text>
 							</View>
@@ -39,27 +54,60 @@ const StatusBar = ({ orders }: any) => {
 						<Text style={styles.text}>{STRINGS.Paymentexpected}</Text>
 					</View>
 				</TouchableOpacity>
-				<TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => {
+						let newFilter = {
+							...filter,
+							status: 2,
+						};
+						setFilter(newFilter);
+					}}
+				>
 					<View style={styles.view}>
 						<SendingIcon />
-						<View style={styles.iconView}>
-							<Text style={styles.iconText}></Text>
-						</View>
+						{amount > 0 && filter.status === 2 ? (
+							<View style={styles.iconView}>
+								<Text style={styles.iconText}>{amount}</Text>
+							</View>
+						) : null}
 						<Text style={styles.text}>{STRINGS.Shipmentexpected}</Text>
 					</View>
 				</TouchableOpacity>
-				<TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => {
+						let newFilter = {
+							...filter,
+							status: 4,
+						};
+						setFilter(newFilter);
+					}}
+				>
 					<View style={styles.view}>
 						<OrderIcon />
+						{amount > 0 && filter.status === 4 ? (
+							<View style={styles.iconView}>
+								<Text style={styles.iconText}>{amount}</Text>
+							</View>
+						) : null}
 						<Text style={styles.text}>{STRINGS.Theorderhasbeensent}</Text>
 					</View>
 				</TouchableOpacity>
-				<TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => {
+						let newFilter = {
+							...filter,
+							status: 9,
+						};
+						setFilter(newFilter);
+					}}
+				>
 					<View style={styles.view}>
 						<SmsIcon />
-						<View style={styles.iconView}>
-							<Text style={styles.iconText}></Text>
-						</View>
+						{amount > 0 && filter.status === 9 ? (
+							<View style={styles.iconView}>
+								<Text style={styles.iconText}>{amount}</Text>
+							</View>
+						) : null}
 						<Text style={styles.text}>{STRINGS.Reviewpending}</Text>
 					</View>
 				</TouchableOpacity>

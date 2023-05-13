@@ -19,46 +19,46 @@ export interface DefaultInputProps {
 	containerStyle?: ViewStyle;
 	inputStyle?: TextStyle;
 	textContentType?:
-	| "none"
-	| "URL"
-	| "addressCity"
-	| "addressCityAndState"
-	| "addressState"
-	| "countryName"
-	| "creditCardNumber"
-	| "emailAddress"
-	| "familyName"
-	| "fullStreetAddress"
-	| "givenName"
-	| "jobTitle"
-	| "location"
-	| "middleName"
-	| "name"
-	| "namePrefix"
-	| "nameSuffix"
-	| "nickname"
-	| "organizationName"
-	| "postalCode"
-	| "streetAddressLine1"
-	| "streetAddressLine2"
-	| "sublocality"
-	| "telephoneNumber"
-	| "username"
-	| "password"
-	| "newPassword"
-	| "oneTimeCode"
-	| undefined;
+		| "none"
+		| "URL"
+		| "addressCity"
+		| "addressCityAndState"
+		| "addressState"
+		| "countryName"
+		| "creditCardNumber"
+		| "emailAddress"
+		| "familyName"
+		| "fullStreetAddress"
+		| "givenName"
+		| "jobTitle"
+		| "location"
+		| "middleName"
+		| "name"
+		| "namePrefix"
+		| "nameSuffix"
+		| "nickname"
+		| "organizationName"
+		| "postalCode"
+		| "streetAddressLine1"
+		| "streetAddressLine2"
+		| "sublocality"
+		| "telephoneNumber"
+		| "username"
+		| "password"
+		| "newPassword"
+		| "oneTimeCode"
+		| undefined;
 	secureText?: boolean | undefined;
 	onChange?: (val: string) => void;
 	value?: string;
 	onFocus?: () => void;
 	keyboardType?:
-	| "default"
-	| "number-pad"
-	| "decimal-pad"
-	| "numeric"
-	| "email-address"
-	| "phone-pad";
+		| "default"
+		| "number-pad"
+		| "decimal-pad"
+		| "numeric"
+		| "email-address"
+		| "phone-pad";
 }
 
 const DefaultInput = ({
@@ -75,14 +75,13 @@ const DefaultInput = ({
 	autoFocus,
 	onFocus,
 }: DefaultInputProps) => {
-
 	return (
 		<View style={[styles.container, containerStyle]}>
 			<Text style={[styles.title, titleStyle]}>{title}</Text>
 			<TextInput
 				textContentType={textContentType}
 				secureTextEntry={secureText}
-				style={[styles.input, inputStyle]}
+				style={[!!inputStyle ? inputStyle : styles.input]}
 				placeholder={placeholder}
 				placeholderTextColor={COLORS.gray}
 				onChangeText={onChange}
@@ -101,7 +100,6 @@ const styles = StyleSheet.create({
 	title: {
 		color: COLORS.defaultBlack,
 		fontSize: 16,
-		lineHeight: 27,
 	},
 	input: {
 		borderColor: COLORS.darkBorder,

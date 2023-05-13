@@ -4,7 +4,14 @@ import DefaultInput from "@novomarkt/components/general/DefaultInput";
 import DefaultInputEye from "@novomarkt/components/general/DefaultInputEye";
 import { STRINGS } from "@novomarkt/locales/strings";
 import React from "react";
-import { Image, Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, View } from "react-native";
+import {
+	Image,
+	Keyboard,
+	KeyboardAvoidingView,
+	Platform,
+	TouchableWithoutFeedback,
+	View,
+} from "react-native";
 import Text from "../../../components/general/Text";
 import useRegisterHook from "./hooks";
 import { styles } from "./style";
@@ -19,10 +26,15 @@ const RegisterView = () => {
 		setConfirmPassword,
 		confirmPassword,
 	} = useRegisterHook();
+	console.log(JSON.stringify(state, null, 2));
 
 	return (
-		<KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"} keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}>
-			<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={{ flex: 1 }}>
+		<View style={{ flex: 1 }}>
+			<KeyboardAvoidingView
+				style={styles.container}
+				behavior={Platform.OS === "ios" ? "padding" : "height"}
+				keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}
+			>
 				<View style={styles.container}>
 					<Image
 						style={{
@@ -37,7 +49,6 @@ const RegisterView = () => {
 					<View style={[styles.inputBox, styles.elevation]}>
 						<DefaultInput
 							containerStyle={styles.input}
-							inputStyle={styles.inputStyle}
 							title={STRINGS.name}
 							placeholder={STRINGS.yourName}
 							onChange={onStateChange("name")}
@@ -45,7 +56,6 @@ const RegisterView = () => {
 						/>
 						<DefaultInput
 							containerStyle={styles.input}
-							inputStyle={styles.inputStyle}
 							title={STRINGS.number}
 							placeholder={STRINGS.yourNumber}
 							onChange={onStateChange("phone")}
@@ -59,7 +69,6 @@ const RegisterView = () => {
 						/>
 						<DefaultInputEye
 							containerStyle={styles.input}
-							inputStyle={styles.inputStyle}
 							title={STRINGS.password}
 							placeholder={STRINGS.yourPassword}
 							onChange={onStateChange("password")}
@@ -68,7 +77,6 @@ const RegisterView = () => {
 						/>
 						<DefaultInputEye
 							containerStyle={styles.input}
-							inputStyle={styles.inputStyle}
 							title={STRINGS.confirmPassword}
 							placeholder={STRINGS.yourConfirmPassword}
 							onChange={setConfirmPassword}
@@ -87,8 +95,8 @@ const RegisterView = () => {
 						/>
 					</View>
 				</View>
-			</TouchableWithoutFeedback>
-		</KeyboardAvoidingView>
+			</KeyboardAvoidingView>
+		</View>
 	);
 };
 

@@ -37,8 +37,8 @@ const FavoriteView = () => {
 			<ScrollView style={styles.container}>
 				{/* <SelectableMenu /> */}
 				{/* <SelectableItems onPress={toggleModal} headerText={modalText} /> */}
-				{favorites?.map((item) => (
-					<Products item={item} />
+				{favorites?.map((item, index) => (
+					<Products item={item} key={index} />
 				))}
 
 				<Text style={styles.text}>{STRINGS.advertBlock}</Text>

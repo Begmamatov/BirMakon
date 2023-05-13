@@ -5,7 +5,15 @@ import { ROUTES } from "@novomarkt/constants/routes";
 import { STRINGS } from "@novomarkt/locales/strings";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Image, Keyboard, KeyboardAvoidingView, Platform, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import {
+	Image,
+	Keyboard,
+	KeyboardAvoidingView,
+	Platform,
+	TouchableOpacity,
+	TouchableWithoutFeedback,
+	View,
+} from "react-native";
 import { ResendHook } from "./hooks";
 import { styles } from "./styles";
 
@@ -14,8 +22,15 @@ const ForgotPassView = () => {
 	let { onChange, OnPress, error, loading, state } = ResendHook();
 
 	return (
-		<KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"} keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}>
-			<TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} style={{ flex: 1 }}>
+		<KeyboardAvoidingView
+			style={styles.container}
+			behavior={Platform.OS === "ios" ? "padding" : "height"}
+			keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}
+		>
+			<TouchableWithoutFeedback
+				onPress={() => Keyboard.dismiss()}
+				style={{ flex: 1 }}
+			>
 				<View style={styles.container}>
 					<Image
 						style={{
@@ -33,7 +48,6 @@ const ForgotPassView = () => {
 							<Text style={styles.title}>{STRINGS.forgotPassword}</Text>
 							<DefaultInput
 								containerStyle={styles.input}
-								inputStyle={styles.inputStyle}
 								placeholder={STRINGS.yourNumber}
 								onChange={onChange}
 								value={state.phone}

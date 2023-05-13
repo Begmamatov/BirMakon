@@ -7,6 +7,7 @@ import { styles } from "./style";
 import userView from "./components/userView";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { COLORS } from "@novomarkt/constants/colors";
+import ChatsView from "./chats/view";
 
 const Tab = createMaterialTopTabNavigator();
 function MessageView() {
@@ -21,8 +22,7 @@ function MessageView() {
 				}}
 				style={{ backgroundColor: COLORS.white }}
 			>
-				<Tab.Screen name="Пользователю" component={userView} />
-				<Tab.Screen name="Mагазину" component={ShopView} />
+				<Tab.Screen name="Mагазину" component={ChatsView} />
 				<Tab.Screen name="Администратору" component={AdminView} />
 			</Tab.Navigator>
 		</>

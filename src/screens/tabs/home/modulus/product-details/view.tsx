@@ -39,9 +39,12 @@ import CustomCarouselItem from "./components/CustomCarouselItem";
 import ReviewBox from "./components/ReviewBox";
 import FavoritePrice from "./components/favoritePrice";
 import { styles } from "./style";
+import { toggleLoading } from "@novomarkt/store/slices/appSettings";
+import Spinner from "react-native-loading-spinner-overlay/lib";
 
 const ProductDetailsView = ({}): ReactElement => {
 	const [detailIdValue, setDetailIdValue] = useState<any>([]);
+
 	const [modalOpen, setModalOpen] = useState(false);
 	let {
 		params: { item, id },
@@ -71,11 +74,23 @@ const ProductDetailsView = ({}): ReactElement => {
 	const dispatch = useDispatch();
 	let navigation: any = useNavigation();
 
-	let isInCart = !!cart[id];
 	const [animate, setAnimate] = useState(false);
+	const [adValue, setAdValue] = useState(0);
+
+	const adHandler = (a: string) => {
+		if (a === "add") {
+			setAdValue((c) => c + 1);
+		} else {
+			if (adValue > 0) {
+				setAdValue((c) => c - 1);
+			} else {
+				setAdValue(0);
+			}
+		}
+	};
 
 	const onCartPress = async () => {
-		if (isInCart) {
+		if (isActive) {
 			try {
 				setAnimate(true);
 				let clear = await requests.products.removeItem({
@@ -84,6 +99,7 @@ const ProductDetailsView = ({}): ReactElement => {
 				let cartGet = await requests.products.getCarts();
 				dispatch(loadCart(cartGet.data.data));
 				setAnimate(false);
+				setAdValue(0);
 			} catch (error) {
 				console.log(error);
 				setAnimate(false);
@@ -106,6 +122,35 @@ const ProductDetailsView = ({}): ReactElement => {
 			} finally {
 				setAnimate(false);
 			}
+		}
+	};
+	const onDecreaseItem = async () => {
+		try {
+			dispatch(toggleLoading(true));
+			let res = await requests.products.decreaseItem({
+				product_id: id,
+			});
+			let cartRes = await requests.products.getCarts();
+			dispatch(loadCart(cartRes.data.data));
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch(toggleLoading(false));
+		}
+	};
+	const onAddItem = async () => {
+		try {
+			dispatch(toggleLoading(true));
+			let res = await requests.products.increaseItem({
+				amount: 1,
+				product_id: id,
+			});
+			let cartRes = await requests.products.getCarts();
+			dispatch(loadCart(cartRes.data.data));
+		} catch (error) {
+			console.log(error);
+		} finally {
+			dispatch(toggleLoading(false));
 		}
 	};
 
@@ -154,34 +199,25 @@ const ProductDetailsView = ({}): ReactElement => {
 		per = percent.toString().substring(0, 3);
 	});
 
-	// const basketAktev = () => {
-	// 	setLoading(true);
-	// 	navigation.navigate(ROUTES.CART);
-	// 	setLoading(false);
-	// };
 	const productCart = cart.filter((i) => i.product.id == item.id);
-	const massive = detailIdValue.gallery;
+
+	const chaeckountAdd = () => {
+		if (isActive) {
+			navigation.navigate(ROUTES.CHECKOUT, productCart);
+		} else {
+			Alert.alert("Ошибка", "Вы должны заказать заранее");
+		}
+	};
 
 	useEffect(() => {
 		getReviews();
 		getDetailId();
 	}, []);
-	const [adValue, setAdValue] = useState(0);
-	const adHandler = (a: string) => {
-		if (a === "add") {
-			setAdValue((c) => c + 1);
-		} else {
-			if (adValue > 0) {
-				setAdValue((c) => c - 1);
-			} else {
-				setAdValue(0);
-			}
-		}
-	};
 
 	return (
 		<View style={styles.container}>
-			<BackHeaderLimit name={item.name} id={id} />
+			<BackHeaderLimit name={item.name} id={id} detailIdValue={detailIdValue} />
+			<Spinner visible={animate} />
 			<ScrollView
 				showsVerticalScrollIndicator={false}
 				contentContainerStyle={{ paddingBottom: 50 }}
@@ -230,7 +266,14 @@ const ProductDetailsView = ({}): ReactElement => {
 				/>
 
 				<View style={styles.counter}>
-					<TouchableOpacity onPress={() => adHandler("remov")}>
+					<TouchableOpacity
+						onPress={() => {
+							adHandler("remov");
+							if (isActive) {
+								onDecreaseItem();
+							}
+						}}
+					>
 						<View style={styles.minus}>
 							<MinusIcon
 								style={{ width: 120, height: 120 }}
@@ -240,13 +283,21 @@ const ProductDetailsView = ({}): ReactElement => {
 					</TouchableOpacity>
 					<View style={styles.topBottom}>
 						<Text>
-							{/* {cart.filter((i) => i.product.id == item.id).length
-								? cart.filter((i) => i.product.id == item.id)[0].amount
-								: 0} */}
-							{adValue}
+							{isActive
+								? cart.filter((i) => i.product.id == item.id).length
+									? cart.filter((i) => i.product.id == item.id)[0].amount
+									: 0
+								: adValue}
 						</Text>
 					</View>
-					<TouchableOpacity onPress={() => adHandler("add")}>
+					<TouchableOpacity
+						onPress={() => {
+							adHandler("add");
+							if (isActive) {
+								onAddItem();
+							}
+						}}
+					>
 						<View style={styles.plus}>
 							<PlusCounterIcon
 								style={{ width: 120, height: 120 }}
@@ -260,9 +311,7 @@ const ProductDetailsView = ({}): ReactElement => {
 				</View>
 				{/* amount */}
 				<View style={styles.oldContainer}>
-					<TouchableOpacity
-						onPress={() => navigation.navigate(ROUTES.CHECKOUT, productCart)}
-					>
+					<TouchableOpacity onPress={chaeckountAdd}>
 						<View style={styles.oldView}>
 							<Text style={styles.oldText}>Купить</Text>
 						</View>

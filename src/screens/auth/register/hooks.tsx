@@ -40,31 +40,30 @@ const useRegisterHook = () => {
 				try {
 					setLoading(true);
 					let res = await requests.auth.register(state);
+					console.log(res);
+
+					//@ts-ignore
 					navigation.navigate(ROUTES.VERIFICATION as never, {
 						phone: state.phone,
 						token: res.data.data.token,
 						state,
-					} as never);
+					});
 					dispatch(userLoggedIn(res));
 				} catch (error) {
+					Alert.alert("xato", `${error}`);
 					let err = error as AxiosError<RegisterResponseErrors>;
 					if (axios.isAxiosError(err)) {
-						// Access to config, request, and response
-						// err.response?.data.errors[0].phone;
 						let errText = err.response?.data.errors.phone.join(", ");
 						setErrTxt(errText || "");
 					} else {
-						// Just a stock error
 					}
 				} finally {
 					setLoading(false);
 				}
 			} else {
-				//TODO warn that passwords are not equal
 				Alert.alert("Пароли не совпадают");
 			}
 		} else {
-			//TODO warn that data is incorrect
 			console.log("INCORRECT PHONE NUMBER");
 		}
 	};
